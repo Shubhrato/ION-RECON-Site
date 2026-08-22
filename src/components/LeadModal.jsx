@@ -97,7 +97,7 @@ export default function LeadModal({ isOpen, onClose, triggerSource, trackEvent, 
               <label className={`block text-xs font-bold mb-1 ${isLight ? 'text-slate-700' : 'text-slate-300'}`}>Email Address</label>
               <input
                 type="email"
-                placeholder="info@ionrecon.co.in"
+                placeholder="info@ionrecon.info"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className={`w-full px-3.5 py-2.5 rounded-xl text-sm ${

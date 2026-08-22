@@ -176,7 +176,7 @@ export default function ContactFormSection({ trackEvent, onFormSuccess, theme })
                 }`}
               >
                 <option value="₹29 Lakhs - ₹32 Lakhs">₹29 Lakhs - ₹32 Lakhs (30 BPM)</option>
-                <option value="₹34 Lakhs - ₹37 Lakhs">₹34 Lakhs - ₹37 Lakhs (40 BPM)</option>
+                <option value="₹32 Lakhs - ₹36 Lakhs">₹32 Lakhs - ₹36 Lakhs (40 BPM)</option>
                 <option value="₹50 Lakhs - ₹84 Lakhs">₹50 Lakhs - ₹84 Lakhs (60 BPM)</option>
                 <option value="₹1.0 Crore - ₹1.2 Crore">₹1.0 Crore - ₹1.2 Crore (90 BPM)</option>
                 <option value="₹1.6 Crore - ₹1.8 Crore">₹1.6 Crore - ₹1.8 Crore (120 BPM)</option>

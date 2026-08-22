@@ -82,7 +82,8 @@ export default function ProductsGrid({ onOpenQuoteModal, onSelectProduct, trackE
               <div className="relative h-60 overflow-hidden bg-slate-100 dark:bg-slate-950">
                 <img 
                   src={product.image} 
-                  alt={product.title}
+                  alt={`${product.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-machine-ion-recon`}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
@@ -136,17 +137,19 @@ export default function ProductsGrid({ onOpenQuoteModal, onSelectProduct, trackE
 
                 {/* Card Action Buttons */}
                 <div className="grid grid-cols-2 gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
-                  <button
-                    onClick={() => {
+                  <a
+                    href={`/${product.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
                       onSelectProduct(product);
                       trackEvent(`Product Learn More: ${product.title}`, 'product_click');
                     }}
-                    className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all text-center ${
+                    className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all text-center block ${
                       isLight ? 'bg-slate-100 hover:bg-slate-200 text-slate-800' : 'bg-slate-800 hover:bg-slate-700 text-slate-200'
                     }`}
                   >
                     Learn More
-                  </button>
+                  </a>
 
                   <button
                     onClick={() => {

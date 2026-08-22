@@ -36,34 +36,39 @@ export default function Footer({ setCurrentTab, onOpenQuoteModal, theme }) {
             <h4 className="text-sm font-bold text-white uppercase tracking-wider">Turnkey Solutions</h4>
             <ul className="space-y-2">
               <li>
-                <button onClick={() => setCurrentTab('40-bpm-mineral-water-plant')} className="hover:text-cyan-400 transition-colors">
+                <a href="/40-bpm-mineral-water-plant" onClick={(e) => { e.preventDefault(); setCurrentTab('40-bpm-mineral-water-plant'); }} className="hover:text-cyan-400 transition-colors">
                   40 BPM Mineral Water Plant (Bestseller)
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => setCurrentTab('bottle-filling-machine')} className="hover:text-cyan-400 transition-colors">
+                <a href="/bottle-filling-machine" onClick={(e) => { e.preventDefault(); setCurrentTab('bottle-filling-machine'); }} className="hover:text-cyan-400 transition-colors">
                   RFC Monoblock Filling Machine
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => setCurrentTab('ss-ro-plant')} className="hover:text-cyan-400 transition-colors">
+                <a href="/ss-ro-plant" onClick={(e) => { e.preventDefault(); setCurrentTab('ss-ro-plant'); }} className="hover:text-cyan-400 transition-colors">
                   Industrial SS RO Water Plant
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => setCurrentTab('jar-filling-machine')} className="hover:text-cyan-400 transition-colors">
+                <a href="/jar-filling-machine" onClick={(e) => { e.preventDefault(); setCurrentTab('jar-filling-machine'); }} className="hover:text-cyan-400 transition-colors">
                   Automatic 20 Litre Jar Plant
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => setCurrentTab('pet-blowing-machine')} className="hover:text-cyan-400 transition-colors">
+                <a href="/pet-blowing-machine" onClick={(e) => { e.preventDefault(); setCurrentTab('pet-blowing-machine'); }} className="hover:text-cyan-400 transition-colors">
                   PET Blow Molding Machine
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => setCurrentTab('roi-calculator')} className="hover:text-cyan-400 transition-colors">
+                <a href="/blog" onClick={(e) => { e.preventDefault(); setCurrentTab('blog'); }} className="hover:text-cyan-400 font-bold text-cyan-400 transition-colors">
+                  Blog & Industrial Setup Guides
+                </a>
+              </li>
+              <li>
+                <a href="/roi-calculator" onClick={(e) => { e.preventDefault(); setCurrentTab('roi-calculator'); }} className="hover:text-cyan-400 transition-colors">
                   Plant Capacity & ROI Simulator
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -102,27 +107,50 @@ export default function Footer({ setCurrentTab, onOpenQuoteModal, theme }) {
             </div>
           </div>
 
-          {/* Col 4: High Intent Google Ads Keywords */}
-          <div className="space-y-3">
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider">Ion Recon Google Ads Targets</h4>
-            <div className="flex flex-wrap gap-1.5 text-[10px]">
-              {[
-                "Mineral Water Plant Manufacturer Ghaziabad",
-                "40 BPM Package Water Plant",
-                "Ion Recon Bottling Line",
-                "Packaged Drinking Water Machine",
-                "Bottle Filling Machine Ghaziabad",
-                "SS RO Plant Manufacturer UP",
-                "20L Jar Filling Plant",
-                "Turnkey Water Plant Sahibabad"
-              ].map((kw, i) => (
-                <span key={i} className="bg-slate-950 px-2 py-1 rounded text-slate-300 border border-slate-800">
-                  {kw}
-                </span>
-              ))}
-            </div>
-          </div>
+        </div>
 
+        {/* Target Locations Served SEO Interlinking Directory */}
+        <div className="border-t border-slate-800/80 pt-6">
+          <div className="mb-3">
+            <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+              Mineral Water Plant Setup Locations (North, Central, West, East & NE India)
+            </h4>
+            <a 
+              href="/locations"
+              onClick={(e) => { e.preventDefault(); setCurrentTab('locations'); }}
+              className="text-xs text-cyan-400 hover:underline font-semibold"
+            >
+              View All City & State Pages →
+            </a>
+          </div>
+          <div className="flex flex-wrap gap-2 text-[11px]">
+            {[
+              { label: "Uttar Pradesh", slug: "mineral-water-plant-manufacturer-in-uttar-pradesh" },
+              { label: "Delhi NCR", slug: "mineral-water-plant-manufacturer-in-delhi-ncr" },
+              { label: "Rajasthan", slug: "mineral-water-plant-manufacturer-in-rajasthan" },
+              { label: "Madhya Pradesh", slug: "mineral-water-plant-manufacturer-in-madhya-pradesh" },
+              { label: "Bihar", slug: "mineral-water-plant-manufacturer-in-bihar" },
+              { label: "Punjab", slug: "mineral-water-plant-manufacturer-in-punjab" },
+              { label: "Haryana", slug: "mineral-water-plant-manufacturer-in-haryana" },
+              { label: "Gujarat", slug: "mineral-water-plant-manufacturer-in-gujarat" },
+              { label: "Maharashtra", slug: "mineral-water-plant-manufacturer-in-maharashtra" },
+              { label: "West Bengal", slug: "mineral-water-plant-manufacturer-in-west-bengal" },
+              { label: "Odisha", slug: "mineral-water-plant-manufacturer-in-odisha" },
+              { label: "Chhattisgarh", slug: "mineral-water-plant-manufacturer-in-chhattisgarh" },
+              { label: "Uttarakhand", slug: "mineral-water-plant-manufacturer-in-uttarakhand" },
+              { label: "Himachal Pradesh", slug: "mineral-water-plant-manufacturer-in-himachal-pradesh" },
+              { label: "Assam & NE", slug: "mineral-water-plant-manufacturer-in-assam-northeast" }
+            ].map((loc, i) => (
+              <a 
+                key={i} 
+                href={`/${loc.slug}`}
+                onClick={(e) => { e.preventDefault(); setCurrentTab(loc.slug); }}
+                className="text-slate-400 hover:text-cyan-400 transition-colors"
+              >
+                {loc.label} •
+              </a>
+            ))}
+          </div>
         </div>
 
         {/* Bottom Bar */}

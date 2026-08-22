@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
+import SeoContent from './components/SeoContent';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import TrustBar from './components/TrustBar';
@@ -17,14 +19,20 @@ import VideoModal from './components/VideoModal';
 import ContactFormSection from './components/ContactFormSection';
 
 import ProductDetailPage from './components/ProductDetailPage';
+import LocationPage from './components/LocationPage';
+import LocationDirectory from './components/LocationDirectory';
+import BlogSection from './components/BlogSection';
+import CaseStudiesSection from './components/CaseStudiesSection';
 import Footer from './components/Footer';
 import { PLANT_DATA } from './data/plantData';
+import { getLocationBySlug } from './data/locationData';
 import { GOOGLE_APPS_SCRIPT_CODE, getSheetUrl, setCustomSheetUrl } from './utils/googleSheets';
 import { CheckCircle2, FileSpreadsheet, Copy, Check, Link } from 'lucide-react';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState('home');
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState(null);
   
   // Theme state: DEFAULT IS LIGHT MODE ('light')
   const [theme, setTheme] = useState('light');
@@ -32,6 +40,29 @@ export default function App() {
   const toggleTheme = () => {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
+
+  // Check URL on initial mount for SEO location slug (e.g. /mineral-water-plant-manufacturer-in-uttar-pradesh)
+  useEffect(() => {
+    const hash = window.location.hash.replace('#/', '').replace('#', '');
+    const searchParams = new URLSearchParams(window.location.search);
+    const locParam = searchParams.get('location');
+    const path = window.location.pathname.replace(/^\//, '');
+
+    const slugToTest = locParam || hash || path;
+    if (slugToTest) {
+      if (slugToTest.startsWith('blog')) {
+        setCurrentTab('blog');
+      } else {
+        const locObj = getLocationBySlug(slugToTest);
+        if (locObj) {
+          setSelectedLocation(locObj);
+          setCurrentTab(locObj.slug);
+        } else if (['40-bpm-mineral-water-plant', '60-bpm-mineral-water-plant', 'bottle-filling-machine', 'pet-blowing-machine', 'ss-ro-plant', 'jar-filling-machine', 'bopp-labeling-machine', 'shrink-wrapping-machine', 'csd-project', 'rts-juice-dairy-plant', 'water-pouch-packing-machine', 'locations', 'roi-calculator', 'faqs'].includes(slugToTest)) {
+          setCurrentTab(slugToTest);
+        }
+      }
+    }
+  }, []);
 
   // Modals state
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
@@ -82,35 +113,40 @@ export default function App() {
     setTimeout(() => setUrlSaved(false), 2500);
   };
 
-  // Scroll to section when tab changes or reset view
+  // Scroll to top when tab changes or reset view and update pushState URL
   useEffect(() => {
-    if (['40-bpm-mineral-water-plant', '60-bpm-mineral-water-plant', 'bottle-filling-machine', 'pet-blowing-machine', 'ss-ro-plant', 'jar-filling-machine', 'bopp-labeling-machine', 'shrink-wrapping-machine', 'csd-project', 'rts-juice-dairy-plant', 'water-pouch-packing-machine'].includes(currentTab)) {
+    const targetPath = currentTab === 'home' ? '/' : `/${currentTab}`;
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({}, '', targetPath);
+    }
+
+    const locObj = getLocationBySlug(currentTab);
+    if (locObj) {
+      setSelectedLocation(locObj);
+      setSelectedProduct(null);
+    } else if (['40-bpm-mineral-water-plant', '60-bpm-mineral-water-plant', 'bottle-filling-machine', 'pet-blowing-machine', 'ss-ro-plant', 'jar-filling-machine', 'bopp-labeling-machine', 'shrink-wrapping-machine', 'csd-project', 'rts-juice-dairy-plant', 'water-pouch-packing-machine'].includes(currentTab)) {
       const match = PLANT_DATA.products.find(p => p.id === currentTab);
       if (match) {
         setSelectedProduct(match);
       }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setSelectedLocation(null);
     } else {
       setSelectedProduct(null);
-      setTimeout(() => {
-        if (currentTab === 'roi-calculator' || currentTab === 'faqs') {
-          const element = document.getElementById(currentTab);
-          if (element) {
-            const yOffset = -80; // Offset for sticky navbar
-            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-            window.scrollTo({ top: y, behavior: 'smooth' });
-          }
-        } else {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-      }, 0);
+      setSelectedLocation(null);
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentTab]);
 
   return (
     <div className={`min-h-screen flex flex-col font-sans relative selection:bg-cyan-500 selection:text-slate-950 transition-colors ${
       theme === 'light' ? 'light-mode bg-slate-50 text-slate-900' : 'dark-mode bg-slate-950 text-slate-100'
     }`}>
+      <Helmet>
+        <title>Ion Recon | Mineral Water Plant Manufacturer & Bottling Machine Ghaziabad</title>
+        <meta name="description" content="Ion Recon Ghaziabad is India's leading Mineral Water Plant Manufacturer & Turnkey Solutions Supplier. 40 BPM 30 BPM 60 BPM packaged drinking water plants, RFC monoblock filling machines, SS RO plants & PET blow molding machinery." />
+        <meta name="keywords" content="Ion Recon, Ion Recon Ghaziabad, Ion Recon Industries, Mineral Water Plant Manufacturer, Packaged Drinking Water Plant Setup, 40 BPM Mineral Water Plant, 30 BPM Mineral Water Plant, 60 BPM Mineral Water Plant, 90 BPM Bottling Line, 120 BPM Automatic Water Plant, Turnkey Mineral Water Plant Manufacturer, RFC Monoblock Bottle Filling Machine, 3 in 1 Automatic Bottle Filling Machine, Rinser Filler Capper Monoblock, 20 Litre Jar Filling Machine, Automatic 20L Water Jar Washing Filling Capping Machine, PET Bottle Making Machine, PET Stretch Blow Molding Machine, BOPP Hot Melt Bottle Labeling Machine, Automatic Web Sealer Shrink Wrapping Machine, Industrial SS RO Water Treatment Plant, 1000 LPH RO Water Plant, 2000 LPH SS RO System, Commercial RO Plant Manufacturer, Automatic Water Pouch Packing Machine, Carbonated Soft Drink CSD Plant, RTS Fruit Juice Line, Mineral Water Plant Setup Cost in India, 40 BPM Mineral Water Plant Price, BIS ISI License Setup, Mineral Water Plant Profit Margin, Mineral Water Plant Manufacturer in Ghaziabad Delhi NCR UP" />
+        <link rel="canonical" href={currentTab === 'home' ? 'https://ionrecon.info/' : `https://ionrecon.info/${currentTab}`} />
+      </Helmet>
       
       {/* Sticky Header Navbar with Theme Switcher */}
       <Navbar
@@ -131,10 +167,56 @@ export default function App() {
               setSelectedProduct(null);
               setCurrentTab('home');
             }}
+            onSelectProduct={(product) => {
+              setSelectedProduct(product);
+            }}
             onOpenQuoteModal={handleOpenQuoteModal}
             trackEvent={trackEvent}
             theme={theme}
           />
+        ) : selectedLocation ? (
+          <LocationPage
+            location={selectedLocation}
+            onBack={() => {
+              setSelectedLocation(null);
+              setCurrentTab('home');
+            }}
+            onOpenQuoteModal={handleOpenQuoteModal}
+            trackEvent={trackEvent}
+            theme={theme}
+            onSelectLocation={(slug) => {
+              setCurrentTab(slug);
+            }}
+          />
+        ) : currentTab === 'locations' ? (
+          <LocationDirectory
+            onSelectLocation={(slug) => {
+              setCurrentTab(slug);
+            }}
+            theme={theme}
+          />
+        ) : currentTab === 'blog' ? (
+          <BlogSection
+            onOpenQuoteModal={handleOpenQuoteModal}
+            trackEvent={trackEvent}
+            theme={theme}
+          />
+        ) : currentTab === 'roi-calculator' ? (
+          <div className="py-8">
+            <CapacityRoiCalculator
+              onOpenQuoteModal={handleOpenQuoteModal}
+              trackEvent={trackEvent}
+              theme={theme}
+            />
+          </div>
+        ) : currentTab === 'faqs' ? (
+          <div className="py-8">
+            <FAQSection
+              onOpenQuoteModal={handleOpenQuoteModal}
+              trackEvent={trackEvent}
+              theme={theme}
+            />
+          </div>
         ) : (
           <>
             {/* Above the Fold Hero Image */}
@@ -166,20 +248,15 @@ export default function App() {
               theme={theme}
             />
 
-            {/* Plant Capacity & ROI Calculator */}
-            <div id="roi-calculator">
-              <CapacityRoiCalculator
-                onOpenQuoteModal={handleOpenQuoteModal}
-                trackEvent={trackEvent}
-                theme={theme}
-              />
-            </div>
-
-            {/* Business Benefits & Financial Advantages */}
-            <BusinessBenefits theme={theme} />
-
             {/* 7-Step Turnkey Process Timeline */}
             <ProcessTimeline theme={theme} />
+
+            {/* Turnkey Project Case Studies */}
+            <CaseStudiesSection
+              onOpenQuoteModal={handleOpenQuoteModal}
+              trackEvent={trackEvent}
+              theme={theme}
+            />
 
             {/* Photo & Video Installation Gallery */}
             <GallerySection
@@ -191,21 +268,15 @@ export default function App() {
             {/* Verified Testimonials */}
             <TestimonialsSlider theme={theme} />
 
-            {/* Accordion FAQ Section */}
-            <div id="faqs">
-              <FAQSection
-                onOpenQuoteModal={handleOpenQuoteModal}
-                trackEvent={trackEvent}
-                theme={theme}
-              />
-            </div>
-
             {/* End of Page Lead Form */}
             <ContactFormSection
               trackEvent={trackEvent}
               onFormSuccess={handleFormSuccess}
               theme={theme}
             />
+
+            {/* SEO Content Block */}
+            <SeoContent theme={theme} />
 
             {/* Conversion CTA Banner before Footer */}
             <CTASection

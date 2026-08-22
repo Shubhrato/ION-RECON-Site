@@ -23,6 +23,8 @@ export default function Navbar({ onOpenQuoteModal, currentTab, setCurrentTab, tr
     { id: 'ss-ro-plant', label: 'SS RO Plant' },
     { id: 'pet-blowing-machine', label: 'PET Blowing' },
     { id: 'jar-filling-machine', label: '20L Jar Plant' },
+    { id: 'locations', label: 'Locations Served' },
+    { id: 'blog', label: 'Blog & Setup Guides' },
     { id: 'roi-calculator', label: 'ROI Calculator' },
     { id: 'faqs', label: 'FAQs & Support' },
   ];
@@ -67,9 +69,13 @@ export default function Navbar({ onOpenQuoteModal, currentTab, setCurrentTab, tr
         <div className="flex items-center justify-between h-20">
           
           {/* Logo */}
-          <div 
+          <a 
+            href="/"
             className="flex items-center space-x-3 cursor-pointer group"
-            onClick={() => setCurrentTab('home')}
+            onClick={(e) => {
+              e.preventDefault();
+              setCurrentTab('home');
+            }}
           >
             <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 p-0.5 shadow-lg shadow-cyan-500/30 group-hover:scale-105 transition-transform">
               <div className={`w-full h-full rounded-[10px] flex items-center justify-center ${theme === 'light' ? 'bg-slate-900' : 'bg-slate-950'}`}>
@@ -84,14 +90,16 @@ export default function Navbar({ onOpenQuoteModal, currentTab, setCurrentTab, tr
                 Mineral Water Plants & Filling Machines
               </span>
             </div>
-          </div>
+          </a>
 
           {/* Desktop Nav Links */}
           <nav className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => (
-              <button
+              <a
                 key={link.id}
-                onClick={() => {
+                href={link.id === 'home' ? '/' : `/${link.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
                   setCurrentTab(link.id);
                   trackEvent(`Navigated to ${link.label}`, 'nav_click');
                 }}
@@ -106,7 +114,7 @@ export default function Navbar({ onOpenQuoteModal, currentTab, setCurrentTab, tr
                 }`}
               >
                 {link.label}
-              </button>
+              </a>
             ))}
           </nav>
 
@@ -181,20 +189,22 @@ export default function Navbar({ onOpenQuoteModal, currentTab, setCurrentTab, tr
         }`}>
           <div className="grid grid-cols-1 gap-1">
             {navLinks.map((link) => (
-              <button
+              <a
                 key={link.id}
-                onClick={() => {
+                href={link.id === 'home' ? '/' : `/${link.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
                   setCurrentTab(link.id);
                   setMobileMenuOpen(false);
                 }}
-                className={`text-left px-4 py-3 rounded-lg text-xs font-semibold ${
+                className={`text-left px-4 py-3 rounded-lg text-xs font-semibold block ${
                   currentTab === link.id
                     ? 'text-cyan-600 bg-cyan-50 font-bold'
                     : 'text-slate-700 hover:bg-slate-100'
                 }`}
               >
                 {link.label}
-              </button>
+              </a>
             ))}
           </div>
 
