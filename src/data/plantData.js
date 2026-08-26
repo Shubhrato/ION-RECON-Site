@@ -281,7 +281,7 @@ export const PLANT_DATA = {
         "Isobaric Counter-Pressure Monoblock PET Bottle Filler",
         "Crown / Screw Capping System"
       ],
-      image: "/images/csd_bottle_plant.png",
+      image: "/images/csd-project-1.jpg",
       badge: "Beverage Line",
       metaTitle: "Turnkey CSD Carbonated Soft Drink Plant Manufacturer - Ion Recon",
       seoContent: "Complete turnkey CSD carbonated beverage processing plant & isobaric filling line manufacturer. High-capacity soda, cola & juice carbonators from 30 BPM to 120 BPM with SS 316 beverage lines. Request project cost estimate."
@@ -301,7 +301,7 @@ export const PLANT_DATA = {
         "Hot Filling Monoblock Machine (85°C) for PET bottles",
         "Sterile Cooling Tunnel & Sleeve Labeler"
       ],
-      image: "/images/fruit_juice_bottle_line.png",
+      image: "/images/rts-juice-dairy-plant-1.jpg",
       badge: "Food & Dairy",
       metaTitle: "RTS Fruit Juice Line & Dairy Pasteurizer Manufacturer - Ion Recon",
       seoContent: "Turnkey fruit pulp processing machinery & RTS fruit juice bottling plant manufacturer. Plate heat exchanger pasteurizers and 85°C hot filling monoblock lines from 1,000 LPH to 10,000 LPH with SS 316 sanitary steel. Request free quote."
@@ -321,7 +321,7 @@ export const PLANT_DATA = {
         "Low power requirement ideal for rural distribution",
         "Pouch counter & automatic roll feeding"
       ],
-      image: "/images/water_pouch_packing_machine.png",
+      image: "/images/water-pouch-packing-machine-1.jpg",
       badge: "Economical",
       metaTitle: "Automatic Water Pouch Packing Machine Manufacturer - Ion Recon",
       seoContent: "Vertical Form-Fill-Seal (FFS) automatic liquid water pouch packing machine manufacturer. Packs 2,000 to 2,500 pouches per hour (200ml to 500ml) with UV film sterilization lamp & SS 304 contact parts. Request price quote."
@@ -470,6 +470,7 @@ export const PLANT_DATA = {
 
   capacities: [
     {
+      bpm: "30 BPM",
       bottlesPerHour: "1,800 Bottles/Hr",
       suitableFor: "Startup & Small Enterprise",
       estimatedPrice: "₹29 Lakhs - ₹32 Lakhs",
@@ -725,7 +726,13 @@ export const PLANT_DATA = {
     { title: "Shrink Packaging Tunnel Unit", category: "Machinery", image: "/images/shrink-wrapping-machine-2.jpg" },
     { title: "Automatic Sticker Labeling Machine", category: "Machinery", image: "/images/sticker-labeling-machine-1.jpg" },
     { title: "Sticker Labeling Conveyor Unit", category: "Machinery", image: "/images/sticker-labeling-machine-2.jpg" },
-    { title: "Semi-Auto Shrink Wrapping Machine", category: "Machinery", image: "/images/semi-auto-shrink-wrapping-machine-1.jpg" }
+    { title: "Semi-Auto Shrink Wrapping Machine", category: "Machinery", image: "/images/semi-auto-shrink-wrapping-machine-1.jpg" },
+    { title: "Carbonated Soft Drink (CSD) Plant", category: "Machinery", image: "/images/csd-project-1.jpg" },
+    { title: "Isobaric Counter Pressure CSD Filler", category: "Machinery", image: "/images/csd-project-2.jpg" },
+    { title: "RTS Fruit Juice & Dairy Plant", category: "Machinery", image: "/images/rts-juice-dairy-plant-1.jpg" },
+    { title: "PHE Pasteurizer Fruit Juice Unit", category: "Machinery", image: "/images/rts-juice-dairy-plant-2.jpg" },
+    { title: "Automatic Water Pouch Packing Machine", category: "Machinery", image: "/images/water-pouch-packing-machine-1.jpg" },
+    { title: "Vertical FFS Liquid Pouch Packing Unit", category: "Machinery", image: "/images/water-pouch-packing-machine-2.jpg" }
   ],
 
   caseStudies: [

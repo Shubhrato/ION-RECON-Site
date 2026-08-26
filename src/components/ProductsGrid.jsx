@@ -78,15 +78,23 @@ export default function ProductsGrid({ onOpenQuoteModal, onSelectProduct, trackE
                   : 'glass-card border-slate-800'
               }`}
             >
-              {/* Image Container */}
-              <div className="relative h-60 overflow-hidden bg-slate-100 dark:bg-slate-950">
+              {/* Clickable Image Container */}
+              <a
+                href={`/${product.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSelectProduct(product);
+                  trackEvent(`Product Image Clicked: ${product.title}`, 'product_click');
+                }}
+                className="relative h-60 overflow-hidden bg-slate-100 dark:bg-slate-950 block cursor-pointer group/img"
+              >
                 <img 
                   src={product.image} 
                   alt={`${product.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-machine-ion-recon`}
                   loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 group-hover/img:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent group-hover/img:from-slate-950/80 transition-colors" />
                 
                 {/* Badge */}
                 <div className="absolute top-3 left-3 px-3 py-1 rounded-md bg-cyan-600 text-white text-xs font-bold shadow-md">
@@ -96,16 +104,26 @@ export default function ProductsGrid({ onOpenQuoteModal, onSelectProduct, trackE
                 <div className="absolute bottom-3 right-3 text-xs font-mono bg-slate-900/90 text-white px-2.5 py-1 rounded border border-slate-700">
                   {product.capacityRange}
                 </div>
-              </div>
+              </a>
 
               {/* Card Body */}
               <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className={`text-xl font-bold group-hover:text-cyan-600 transition-colors ${
-                    isLight ? 'text-slate-900' : 'text-white'
-                  }`}>
-                    {product.title}
-                  </h3>
+                  <a
+                    href={`/${product.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onSelectProduct(product);
+                      trackEvent(`Product Title Clicked: ${product.title}`, 'product_click');
+                    }}
+                    className="block group/title"
+                  >
+                    <h3 className={`text-xl font-bold group-hover/title:text-cyan-600 transition-colors ${
+                      isLight ? 'text-slate-900' : 'text-white'
+                    }`}>
+                      {product.title}
+                    </h3>
+                  </a>
                   <p className={`text-xs sm:text-sm mt-2 leading-relaxed ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>
                     {product.shortDesc}
                   </p>

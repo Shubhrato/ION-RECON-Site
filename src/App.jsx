@@ -130,6 +130,17 @@ export default function App() {
     setTimeout(() => setUrlSaved(false), 2500);
   };
 
+  const handleSelectTab = (tab) => {
+    setSelectedProduct(null);
+    setSelectedLocation(null);
+    setCurrentTab(tab);
+    const targetPath = tab === 'home' ? '/' : `/${tab}`;
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({}, '', targetPath);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // Scroll to top when tab changes or reset view and update pushState URL
   useEffect(() => {
     const targetPath = currentTab === 'home' ? '/' : `/${currentTab}`;
@@ -167,7 +178,7 @@ export default function App() {
       <Navbar
         onOpenQuoteModal={handleOpenQuoteModal}
         currentTab={currentTab}
-        setCurrentTab={setCurrentTab}
+        setCurrentTab={handleSelectTab}
         trackEvent={trackEvent}
         theme={theme}
         toggleTheme={toggleTheme}
@@ -179,11 +190,13 @@ export default function App() {
           <ProductDetailPage
             product={selectedProduct}
             onBack={() => {
-              setSelectedProduct(null);
-              setCurrentTab('home');
+              handleSelectTab('home');
             }}
             onSelectProduct={(product) => {
               setSelectedProduct(product);
+              setSelectedLocation(null);
+              setCurrentTab(product.id);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             onOpenQuoteModal={handleOpenQuoteModal}
             trackEvent={trackEvent}
@@ -193,20 +206,19 @@ export default function App() {
           <LocationPage
             location={selectedLocation}
             onBack={() => {
-              setSelectedLocation(null);
-              setCurrentTab('home');
+              handleSelectTab('home');
             }}
             onOpenQuoteModal={handleOpenQuoteModal}
             trackEvent={trackEvent}
             theme={theme}
             onSelectLocation={(slug) => {
-              setCurrentTab(slug);
+              handleSelectTab(slug);
             }}
           />
         ) : currentTab === 'locations' ? (
           <LocationDirectory
             onSelectLocation={(slug) => {
-              setCurrentTab(slug);
+              handleSelectTab(slug);
             }}
             theme={theme}
           />
@@ -257,6 +269,8 @@ export default function App() {
               onOpenQuoteModal={handleOpenQuoteModal}
               onSelectProduct={(product) => {
                 setSelectedProduct(product);
+                setSelectedLocation(null);
+                setCurrentTab(product.id);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               trackEvent={trackEvent}

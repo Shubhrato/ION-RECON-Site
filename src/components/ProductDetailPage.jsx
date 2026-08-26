@@ -101,16 +101,22 @@ const PRODUCT_GALLERIES = {
     { url: "/images/semi-auto-shrink-wrapping-machine-3.jpg", title: "Shrink Heating Tunnel Unit" }
   ],
   "csd-project": [
-    { url: "/csd_plant_real_1785748095649.png", title: "Carbonated Soft Drink (CSD) Plant" },
-    { url: "/images/csd_bottle_plant.png", title: "Soda & Beverage Isobaric Filling Line" }
+    { url: "/images/csd-project-1.jpg", title: "Carbonated Soft Drink (CSD) Plant" },
+    { url: "/images/csd-project-2.jpg", title: "Isobaric Counter-Pressure Beverage Filler" },
+    { url: "/images/csd-project-3.jpg", title: "CO2 Carbonator & Sugar Syrup Mixing Unit" },
+    { url: "/csd_plant_real_1785748095649.png", title: "Turnkey Soda & Beverage Plant" }
   ],
   "rts-juice-dairy-plant": [
-    { url: "/images/fruit_juice_bottle_line.png", title: "RTS Fruit Juice & Dairy Bottling Line" },
-    { url: "/csd_plant_real_1785748095649.png", title: "PHE Pasteurizer & Hot Filling Monoblock" }
+    { url: "/images/rts-juice-dairy-plant-1.jpg", title: "RTS Fruit Juice & Dairy Bottling Plant" },
+    { url: "/images/rts-juice-dairy-plant-2.jpg", title: "Plate Heat Exchanger (PHE) Pasteurizer" },
+    { url: "/images/rts-juice-dairy-plant-3.jpg", title: "Hot Filling Monoblock (85°C) & Homogenizer" },
+    { url: "/images/fruit_juice_bottle_line.png", title: "Fruit Pulp Processing Line" }
   ],
   "water-pouch-packing-machine": [
-    { url: "/images/water_pouch_packing_machine.png", title: "Automatic Water Pouch Packing Machine" },
-    { url: "/images/industrial_ss_ro_plant.png", title: "Vertical FFS Pouch Packaging Unit" }
+    { url: "/images/water-pouch-packing-machine-1.jpg", title: "Automatic Water Pouch Packing Machine" },
+    { url: "/images/water-pouch-packing-machine-2.jpg", title: "Vertical FFS Liquid Pouch Sealing Unit" },
+    { url: "/images/water-pouch-packing-machine-3.jpg", title: "UV Sterilization & Date Coder Station" },
+    { url: "/images/water_pouch_packing_machine.png", title: "Liquid Water Pouch Machine Setup" }
   ]
 };
 
