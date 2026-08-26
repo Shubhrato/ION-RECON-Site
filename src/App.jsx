@@ -41,33 +41,27 @@ export default function App() {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
 
-  // Check URL on initial mount for SEO location slug (e.g. /mineral-water-plant-manufacturer-in-uttar-pradesh)
+  // Check URL on initial mount for SEO location slug or product slug (e.g. /csd-project or /mineral-water-plant-manufacturer-in-uttar-pradesh)
   useEffect(() => {
     const hash = window.location.hash.replace('#/', '').replace('#', '');
     const searchParams = new URLSearchParams(window.location.search);
     const locParam = searchParams.get('location');
-    const path = window.location.pathname.replace(/^\//, '');
+    const path = window.location.pathname.replace(/^\/|\/$/g, '');
 
     const slugToTest = locParam || hash || path;
-    if (slugToTest) {
+    if (slugToTest && slugToTest !== 'home') {
       if (slugToTest.startsWith('blog')) {
         setCurrentTab('blog');
       } else {
         const locObj = getLocationBySlug(slugToTest);
+        const prodMatch = PLANT_DATA.products.find(p => p.id === slugToTest);
         if (locObj) {
           setSelectedLocation(locObj);
           setCurrentTab(locObj.slug);
-        } else if ([
-          '40-bpm-mineral-water-plant', '60-bpm-mineral-water-plant', 
-          'bottle-filling-machine', 'pet-blowing-machine', 'ss-ro-plant', 
-          'jar-filling-machine', 'bopp-labeling-machine', 'shrink-wrapping-machine', 
-          'csd-project', 'rts-juice-dairy-plant', 'water-pouch-packing-machine', 
-          'sticker-labeling-machine', 'semi-auto-shrink-wrapping-machine', 'fully-auto-shrink-wrapping-machine',
-          'water-testing-lab-equipment', 'tij-batch-coding-machine', 'cij-batch-coding-machine-neelkamal',
-          'pet-blowing-machine-handfeed-2-cavity', 'pet-blowing-machine-handfeed-4-cavity',
-          'pet-blowing-machine-fully-auto-4-cavity', 'pet-blowing-machine-fully-auto-6-cavity',
-          'locations', 'roi-calculator', 'faqs'
-        ].includes(slugToTest)) {
+        } else if (prodMatch) {
+          setSelectedProduct(prodMatch);
+          setCurrentTab(prodMatch.id);
+        } else {
           setCurrentTab(slugToTest);
         }
       }
@@ -170,7 +164,7 @@ export default function App() {
       <Helmet>
         <title>Ion Recon | Mineral Water Plant Manufacturer & Bottling Machine Ghaziabad</title>
         <meta name="description" content="Ion Recon Ghaziabad is India's leading Mineral Water Plant Manufacturer & Turnkey Solutions Supplier. 40 BPM 30 BPM 60 BPM packaged drinking water plants, RFC monoblock filling machines, SS RO plants & PET blow molding machinery." />
-        <meta name="keywords" content="Ion Recon, Ion Recon Ghaziabad, Ion Recon Industries, Mineral Water Plant Manufacturer, Packaged Drinking Water Plant Setup, 40 BPM Mineral Water Plant, 30 BPM Mineral Water Plant, 60 BPM Mineral Water Plant, 90 BPM Bottling Line, 120 BPM Automatic Water Plant, Turnkey Mineral Water Plant Manufacturer, RFC Monoblock Bottle Filling Machine, 3 in 1 Automatic Bottle Filling Machine, Rinser Filler Capper Monoblock, 20 Litre Jar Filling Machine, Automatic 20L Water Jar Washing Filling Capping Machine, PET Bottle Making Machine, PET Stretch Blow Molding Machine, BOPP Hot Melt Bottle Labeling Machine, Automatic Web Sealer Shrink Wrapping Machine, Industrial SS RO Water Treatment Plant, 1000 LPH RO Water Plant, 2000 LPH SS RO System, Commercial RO Plant Manufacturer, Automatic Water Pouch Packing Machine, Carbonated Soft Drink CSD Plant, RTS Fruit Juice Line, Mineral Water Plant Setup Cost in India, 40 BPM Mineral Water Plant Price, BIS ISI License Setup, Mineral Water Plant Profit Margin, Mineral Water Plant Manufacturer in Ghaziabad Delhi NCR UP" />
+        <meta name="keywords" content="Ion Recon, Ion Recon Ghaziabad, Ion Recon Industries, Ion Recon Sahibabad, Mineral Water Plant Manufacturer, Packaged Drinking Water Plant Setup, 30 BPM Mineral Water Plant, 40 BPM Package Drinking Water Plant, 60 BPM Mineral Water Plant, 90 BPM Bottling Line, 120 BPM Automatic Mineral Water Plant, 200 BPM High Speed Bottling Line, Turnkey Mineral Water Plant Setup, Mineral Water Plant Setup Cost in India, Mineral Water Plant Manufacturer in Ghaziabad Delhi NCR UP, RFC Monoblock Bottle Filling Machine, 3 in 1 Automatic Bottle Filling Machine, Rinser Filler Capper Monoblock, Automatic 20 Litre Jar Filling Machine, 20L Water Jar Washer Filler Capper, PET Bottle Stretch Blow Molding Machine, Semi Auto 2 Cavity PET Blow Molding Machine, Semi Auto 4 Cavity PET Blow Molding Machine, Fully Automatic 4 Cavity PET Blow Molding Machine, Fully Automatic 6 Cavity Servo PET Blow Molder, Industrial SS RO Water Treatment Plant, Commercial Stainless Steel RO Plant, 1000 LPH RO Water Plant, 2000 LPH SS RO System, 5000 LPH Industrial RO Plant, Ozonator for Mineral Water Plant, UV Water Sterilizer, BOPP Hot-Melt Bottle Labeling Machine, Automatic Self-Adhesive Sticker Labeling Machine, Automatic Web Sealer Shrink Wrapping Machine, Semi Automatic Shrink Wrapping Heating Tunnel, Automatic Water Pouch Packing Machine, Continuous Inkjet CIJ Coder Neelkamal, Thermal Inkjet TIJ Online Batch Coding Machine, MRP Date Printing Machine for PET Bottles, BIS ISI Water Testing Laboratory Equipment Package, Carbonated Soft Drink CSD Plant, Isobaric Counter Pressure Beverage Filling Machine, RTS Fruit Juice Bottling Plant, Mineral Water Plant Profit Margin in India" />
         <link rel="canonical" href={currentTab === 'home' ? 'https://ionrecon.info/' : `https://ionrecon.info/${currentTab}`} />
       </Helmet>
       
