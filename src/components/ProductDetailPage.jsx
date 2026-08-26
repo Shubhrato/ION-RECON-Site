@@ -1,15 +1,9 @@
-import {
-  ArrowLeft,
-  ChevronRight,
-  DollarSign,
-  FileText,
-  Layers,
-  MessageCircle,
-  Phone,
-  Shield
-} from 'lucide-react';
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { 
+  ArrowLeft, CheckCircle2, Shield, Wrench, Zap, FileText, Phone, MessageCircle, 
+  Play, Check, ExternalLink, Factory, Cpu, DollarSign, Clock, Layers, ChevronRight, Award
+} from 'lucide-react';
 import { PLANT_DATA } from '../data/plantData';
 
 // Image galleries map for rich product photography
@@ -30,15 +24,18 @@ const PRODUCT_GALLERIES = {
     { url: "/images/bottle-filling-machine-3.jpg", title: "Monoblock Bottling Line Connection" }
   ],
   "ss-ro-plant": [
-    { url: "/images/industrial_ss_ro_plant_1784961982054.png", title: "Industrial Stainless Steel RO Plant" },
-    { url: "/ro_plant_real_1785748121941.png", title: "Commercial RO Water Purification Skid" },
-    { url: "/images/industrial_ss_ro_plant.png", title: "SS 304 High Pressure Vessels & Pumps" },
-    { url: "/water_plant_real_1785748019896.png", title: "Turnkey Water Plant Setup" }
+    { url: "/images/ss-ro-plant-1.jpg", title: "Industrial Stainless Steel RO Plant" },
+    { url: "/images/ss-ro-plant-2.jpg", title: "SS RO Plant Skid & High Pressure Pump Setup" },
+    { url: "/images/ss-ro-plant-3.jpg", title: "SS 304 RO Membrane Housing & Control Panel" },
+    { url: "/images/industrial_ss_ro_plant_1784961982054.png", title: "Commercial SS RO Purification Plant" },
+    { url: "/ro_plant_real_1785748121941.png", title: "Turnkey RO Water Plant Installation" }
   ],
   "jar-filling-machine": [
-    { url: "/images/jar_filling_machine_20l_1784961999613.png", title: "Automatic 20 Litre Jar Plant" },
-    { url: "/images/jar_filling_machine_20l.png", title: "20L Jar Washer, Filler & Capper Unit" },
-    { url: "/images/industrial_ss_ro_plant_1784961982054.png", title: "SS RO Water Filtration System" }
+    { url: "/images/jar-filling-machine-1.jpg", title: "Automatic 20 Litre Jar Filling Machine" },
+    { url: "/images/jar-filling-machine-2.jpg", title: "20L Jar Internal Washer, Filler & Capper" },
+    { url: "/images/jar-filling-machine-3.jpg", title: "20 Litre Water Jar Washing & Capping Line" },
+    { url: "/images/jar-filling-machine-demo.mp4", title: "Live Demo Video - 20L Jar Filling Machine in Action", type: "video" },
+    { url: "/images/jar_filling_machine_20l_1784961999613.png", title: "Automatic 20 Litre Jar Plant Setup" }
   ],
   "pet-blowing-machine": [
     { url: "/images/pet_blow_molding_machine.png", title: "PET Bottle Stretch Blow Molding Machine" },
@@ -46,12 +43,26 @@ const PRODUCT_GALLERIES = {
     { url: "/images/rfc_monoblock_filling_machine_1784961966884.png", title: "Automatic Bottle Air Conveyor Connection" }
   ],
   "bopp-labeling-machine": [
-    { url: "/images/bopp_labeling_machine.png", title: "BOPP Hot-Melt Bottle Labeling Machine" },
-    { url: "/images/shrink_wrapping_machine.png", title: "Downstream Shrink Packaging Machine" }
+    { url: "/images/bopp-labeling-machine-1.jpg", title: "BOPP Hot-Melt Bottle Labeling Machine" },
+    { url: "/images/bopp-labeling-machine-2.jpg", title: "Rotary BOPP Roll-Fed Labeler Assembly" },
+    { url: "/images/bopp-labeling-machine-3.jpg", title: "Wraparound BOPP Labeling Station" },
+    { url: "/images/bopp_labeling_machine.png", title: "BOPP Labeler Setup" }
   ],
   "shrink-wrapping-machine": [
-    { url: "/images/shrink_wrapping_machine.png", title: "Automatic Shrink Wrapping Heating Tunnel" },
-    { url: "/images/bopp_labeling_machine.png", title: "Matrix Bundling Packaging Line" }
+    { url: "/images/shrink-wrapping-machine-1.jpg", title: "Automatic Shrink Wrapping Heating Tunnel" },
+    { url: "/images/shrink-wrapping-machine-2.jpg", title: "Web Sealer Shrink Tunnel Pusher Station" },
+    { url: "/images/shrink-wrapping-machine-3.jpg", title: "Matrix Bundling Heating Chamber Unit" },
+    { url: "/images/shrink_wrapping_machine.png", title: "Fully Auto Web Sealer Shrink Tunnel" }
+  ],
+  "sticker-labeling-machine": [
+    { url: "/images/sticker-labeling-machine-1.jpg", title: "Automatic Sticker Labeling Machine" },
+    { url: "/images/sticker-labeling-machine-2.jpg", title: "Self-Adhesive Bottle Sticker Labeler" },
+    { url: "/images/sticker-labeling-machine-3.jpg", title: "High Speed Bottle Labeling Conveyor Unit" }
+  ],
+  "semi-auto-shrink-wrapping-machine": [
+    { url: "/images/semi-auto-shrink-wrapping-machine-1.jpg", title: "Semi-Automatic Shrink Wrapping Machine" },
+    { url: "/images/semi-auto-shrink-wrapping-machine-2.jpg", title: "Manual Tray & Web Sealer Station" },
+    { url: "/images/semi-auto-shrink-wrapping-machine-3.jpg", title: "Shrink Heating Tunnel Unit" }
   ],
   "csd-project": [
     { url: "/csd_plant_real_1785748095649.png", title: "Carbonated Soft Drink (CSD) Plant" },
@@ -151,18 +162,29 @@ export default function ProductDetailPage({ product, onBack, onOpenQuoteModal, t
           {/* Left Column: Interactive Multi-Photo Gallery Showcase */}
           <div className="lg:col-span-7 space-y-4">
             
-            {/* Featured Active High-Res Photo Display */}
+            {/* Featured Active High-Res Photo / Video Display */}
             <div className={`relative rounded-3xl overflow-hidden border shadow-2xl h-80 sm:h-[420px] transition-all group ${
               isLight ? 'border-slate-200 bg-white' : 'border-cyan-500/30 bg-slate-900'
             }`}>
-              <img 
-                src={gallery[activeImgIndex]?.url || product.image} 
-                alt={`${(gallery[activeImgIndex]?.title || product.title).toLowerCase().replace(/[^a-z0-9]+/g, '-')}-machine-view-ion-recon`} 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-              />
+              {gallery[activeImgIndex]?.type === 'video' || gallery[activeImgIndex]?.url?.endsWith('.mp4') ? (
+                <video 
+                  key={gallery[activeImgIndex].url}
+                  src={gallery[activeImgIndex].url} 
+                  controls 
+                  autoPlay 
+                  loop 
+                  className="w-full h-full object-cover" 
+                />
+              ) : (
+                <img 
+                  src={gallery[activeImgIndex]?.url || product.image} 
+                  alt={`${(gallery[activeImgIndex]?.title || product.title).toLowerCase().replace(/[^a-z0-9]+/g, '-')}-machine-view-ion-recon`} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                />
+              )}
               
               {/* Badge Overlay */}
-              <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+              <div className="absolute top-4 left-4 flex flex-wrap gap-2 pointer-events-none">
                 <span className="px-3.5 py-1.5 rounded-lg bg-cyan-950/90 border border-cyan-400/50 text-cyan-300 text-xs font-extrabold shadow-lg backdrop-blur-md">
                   {product.badge || "Ion Recon Machinery"}
                 </span>
@@ -172,18 +194,20 @@ export default function ProductDetailPage({ product, onBack, onOpenQuoteModal, t
               </div>
 
               {/* Caption Overlay */}
-              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent p-4 sm:p-6 flex justify-between items-end">
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent p-4 sm:p-6 flex justify-between items-end pointer-events-none">
                 <div>
-                  <span className="text-[10px] uppercase font-bold text-cyan-400 tracking-widest block">Photo {activeImgIndex + 1} of {gallery.length}</span>
+                  <span className="text-[10px] uppercase font-bold text-cyan-400 tracking-widest block">
+                    {gallery[activeImgIndex]?.type === 'video' || gallery[activeImgIndex]?.url?.endsWith('.mp4') ? '🎥 Video Demo' : `Photo ${activeImgIndex + 1} of ${gallery.length}`}
+                  </span>
                   <h4 className="text-white text-sm sm:text-base font-extrabold">{gallery[activeImgIndex]?.title || product.title}</h4>
                 </div>
               </div>
             </div>
 
-            {/* Clickable Photo Thumbnails Carousel Row */}
+            {/* Clickable Photo/Video Thumbnails Carousel Row */}
             <div className="space-y-2">
               <span className={`text-xs font-extrabold uppercase tracking-wider block ${isLight ? 'text-slate-600' : 'text-slate-400'}`}>
-                📷 Click Photos to Inspect Machinery & Setup:
+                📷 Click Media to Inspect Machinery & Setup:
               </span>
               <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 sm:gap-3">
                 {gallery.map((item, idx) => (
@@ -198,7 +222,14 @@ export default function ProductDetailPage({ product, onBack, onOpenQuoteModal, t
                           : 'border-slate-800 opacity-60 hover:opacity-100 hover:border-slate-600'
                     }`}
                   >
-                    <img src={item.url} alt={`${item.title} - Ion Recon Machinery Photo ${idx + 1}`} loading="lazy" className="w-full h-full object-cover" />
+                    {item.type === 'video' || item.url?.endsWith('.mp4') ? (
+                      <div className="w-full h-full bg-slate-950 flex flex-col items-center justify-center text-cyan-400 relative">
+                        <Play className="w-6 h-6 fill-cyan-400" />
+                        <span className="text-[9px] font-extrabold uppercase mt-0.5 text-white">Video</span>
+                      </div>
+                    ) : (
+                      <img src={item.url} alt={`${item.title} - Ion Recon Machinery Photo ${idx + 1}`} loading="lazy" className="w-full h-full object-cover" />
+                    )}
                   </button>
                 ))}
               </div>

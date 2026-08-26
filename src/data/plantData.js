@@ -161,7 +161,7 @@ export const PLANT_DATA = {
         "Ozonator & UV Disinfection System",
         "Pressure Sand Filter & Activated Carbon Filter"
       ],
-      image: "/images/industrial_ss_ro_plant.png",
+      image: "/images/ss-ro-plant-1.jpg",
       badge: "Pure Water Standard",
       metaTitle: "Industrial SS RO Water Treatment Plant Manufacturer - Ion Recon",
       seoContent: "Commercial and Industrial SS 304/316 RO water treatment plant manufacturer. High capacity reverse osmosis purification from 500 LPH to 50,000 LPH with Grundfos pumps & ozonator. Request a free price quotation."
@@ -181,7 +181,7 @@ export const PLANT_DATA = {
         "Automatic Cap Washing & Press Capper",
         "Compact Footprint suitable for medium units"
       ],
-      image: "/images/jar_filling_machine_20l.png",
+      image: "/images/jar-filling-machine-1.jpg",
       badge: "20L Jar Specialist",
       metaTitle: "Automatic 20 Litre Water Jar Filling Machine Manufacturer - Ion Recon",
       seoContent: "Automatic 20 Litre water jar decapper, washer, filler, and capper monoblock machine manufacturer. High output from 100 to 600 jars per hour with SS 304 food grade construction. Request free price quote."
@@ -201,10 +201,30 @@ export const PLANT_DATA = {
         "Wraparound labeling for 200ml to 2,000ml bottles",
         "Zero bubble smooth label application"
       ],
-      image: "/images/bopp_labeling_machine.png",
+      image: "/images/bopp-labeling-machine-1.jpg",
       badge: "High Speed Labeling",
       metaTitle: "BOPP Hot-Melt Bottle Labeling Machine Manufacturer - Ion Recon",
       seoContent: "Rotary and linear BOPP hot-melt roll-fed sticker bottle labeling machine manufacturer. High-speed wraparound PET bottle labeling from 50 BPM to 250 BPM with optical eye sensors. Request price quotation."
+    },
+    {
+      id: "sticker-labeling-machine",
+      title: "Automatic Sticker Labeling Machine",
+      category: "packaging",
+      shortDesc: "High-speed linear automatic self-adhesive sticker labeling machine for PET bottles and jars.",
+      capacityRange: "30 BPM to 150 BPM",
+      automation: "Fully Automatic Microprocessor",
+      material: "SS 304 Stainless Steel Frame",
+      powerConsumption: "2 HP to 5 HP",
+      keyFeatures: [
+        "Microprocessor controller with digital stepper motor",
+        "Optical photo sensor for label length sensing",
+        "Suitable for round, flat, and oval bottles",
+        "Zero label missing sensor & batch coder sync"
+      ],
+      image: "/images/sticker-labeling-machine-1.jpg",
+      badge: "Self-Adhesive Specialist",
+      metaTitle: "Automatic Sticker Labeling Machine Manufacturer - Ion Recon",
+      seoContent: "Automatic self-adhesive bottle sticker labeling machine manufacturer. High precision round bottle labeling lines from 30 BPM to 150 BPM with SS 304 frame & optical sensor. Request price quote."
     },
     {
       id: "shrink-wrapping-machine",
@@ -221,10 +241,30 @@ export const PLANT_DATA = {
         "Auto bottle lane collating and pusher system",
         "Heavy-duty Teflon coated sealing knife"
       ],
-      image: "/images/shrink_wrapping_machine.png",
+      image: "/images/shrink-wrapping-machine-1.jpg",
       badge: "Durable Bundling",
       metaTitle: "Automatic Web Sealer Shrink Wrapping Machine Manufacturer - Ion Recon",
       seoContent: "Automatic web sealer shrink wrapping heating tunnel machine manufacturer. Trayless matrix bundling for 6, 12, and 24 PET bottle packs at 10 to 25 packs/min with Teflon knife. Request free price quote."
+    },
+    {
+      id: "semi-auto-shrink-wrapping-machine",
+      title: "Semi-Automatic Shrink Wrapping Machine",
+      category: "packaging",
+      shortDesc: "Economical web sealer semi-automatic shrink packaging machine for matrix PET bottle bundling.",
+      capacityRange: "5 to 12 Packs / Minute",
+      automation: "Semi-Automatic Manual Push",
+      material: "Heavy Duty Mild Steel / Powder Coated",
+      powerConsumption: "8 HP to 18 HP",
+      keyFeatures: [
+        "Pneumatic web sealer knife & manual tray feed",
+        "High efficiency thermal shrink tunnel",
+        "Ideal for entry level mineral water setup",
+        "Low power & compact floor footprint"
+      ],
+      image: "/images/semi-auto-shrink-wrapping-machine-1.jpg",
+      badge: "Budget Friendly",
+      metaTitle: "Semi Automatic Shrink Wrapping Machine Manufacturer - Ion Recon",
+      seoContent: "Semi-automatic web sealer shrink wrapping machine manufacturer. Economical packaging setup producing 5 to 12 packs/min for mineral water plants. Request price quote."
     },
     {
       id: "csd-project",
@@ -525,11 +565,21 @@ export const PLANT_DATA = {
 
   gallery: [
     { title: "40 BPM Ion Recon Monoblock Line", category: "Machinery", image: "/images/mineral_water_plant_40bpm.png" },
-    { title: "Commercial SS RO Water Plant", category: "RO Plant", image: "/images/industrial_ss_ro_plant.png" },
+    { title: "Industrial SS RO Water Treatment Plant", category: "RO Plant", image: "/images/ss-ro-plant-1.jpg" },
+    { title: "SS RO Plant Skid & Pressure Vessels", category: "RO Plant", image: "/images/ss-ro-plant-2.jpg" },
+    { title: "SS 304 RO Membrane & Control Unit", category: "RO Plant", image: "/images/ss-ro-plant-3.jpg" },
     { title: "Automatic RFC Bottling Line", category: "Machinery", image: "/images/rfc_monoblock_filling_machine.png" },
-    { title: "Automatic 20L Jar Plant", category: "Jar Plant", image: "/images/jar_filling_machine_20l.png" },
-    { title: "BOPP Hot-Melt Labeling Line", category: "Machinery", image: "/images/bopp_labeling_machine.png" },
-    { title: "Automatic Web Sealer Shrink Tunnel", category: "Machinery", image: "/images/shrink_wrapping_machine.png" }
+    { title: "Automatic 20 Litre Jar Filling Line", category: "Jar Plant", image: "/images/jar-filling-machine-1.jpg" },
+    { title: "20L Jar Washer, Filler & Capper Unit", category: "Jar Plant", image: "/images/jar-filling-machine-2.jpg" },
+    { title: "20 Litre Water Jar Washing & Capping", category: "Jar Plant", image: "/images/jar-filling-machine-3.jpg" },
+    { title: "20L Jar Machine Live Video Demo", category: "Jar Plant", image: "/images/jar-filling-machine-1.jpg", video: "/images/jar-filling-machine-demo.mp4", isVideo: true },
+    { title: "BOPP Hot-Melt Labeling Machine", category: "Machinery", image: "/images/bopp-labeling-machine-1.jpg" },
+    { title: "BOPP Roll-Fed Labeler Assembly", category: "Machinery", image: "/images/bopp-labeling-machine-2.jpg" },
+    { title: "Automatic Web Sealer Shrink Tunnel", category: "Machinery", image: "/images/shrink-wrapping-machine-1.jpg" },
+    { title: "Shrink Packaging Tunnel Unit", category: "Machinery", image: "/images/shrink-wrapping-machine-2.jpg" },
+    { title: "Automatic Sticker Labeling Machine", category: "Machinery", image: "/images/sticker-labeling-machine-1.jpg" },
+    { title: "Sticker Labeling Conveyor Unit", category: "Machinery", image: "/images/sticker-labeling-machine-2.jpg" },
+    { title: "Semi-Auto Shrink Wrapping Machine", category: "Machinery", image: "/images/semi-auto-shrink-wrapping-machine-1.jpg" }
   ],
 
   caseStudies: [

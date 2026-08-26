@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { X, Play, Factory, CheckCircle2 } from 'lucide-react';
 import { PLANT_DATA } from '../data/plantData';
 
-export default function VideoModal({ isOpen, onClose, onOpenQuoteModal, trackEvent, theme }) {
+export default function VideoModal({ isOpen, onClose, onOpenQuoteModal, trackEvent, theme, videoUrl, videoTitle }) {
   const [videoError, setVideoError] = useState(false);
 
   if (!isOpen) return null;
 
   const isLight = theme === 'light';
+  const activeVideo = videoUrl || "/images/jar-filling-machine-demo.mp4";
+  const titleText = videoTitle || "Ion Recon Industrial Bottling Plant Video Demo";
 
   return (
     <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
@@ -22,7 +24,7 @@ export default function VideoModal({ isOpen, onClose, onOpenQuoteModal, trackEve
           <div className="flex items-center space-x-2">
             <Factory className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
             <h3 className={`text-base font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>
-              Ion Recon Industrial Bottling Plant Video Demo
+              {titleText}
             </h3>
           </div>
           <button
@@ -39,7 +41,7 @@ export default function VideoModal({ isOpen, onClose, onOpenQuoteModal, trackEve
         <div className="relative aspect-video bg-slate-950 flex flex-col items-center justify-center overflow-hidden">
           {!videoError ? (
             <video
-              src="/images/90 BPM plant.mp4"
+              src={activeVideo}
               controls
               autoPlay
               onError={() => setVideoError(true)}

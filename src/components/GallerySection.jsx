@@ -100,13 +100,21 @@ export default function GallerySection({ onOpenVideoModal, trackEvent, theme }) 
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
               
+              {/* Badge for Video items */}
+              {item.isVideo && (
+                <div className="absolute top-3 left-3 bg-cyan-600/90 text-white text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-md flex items-center space-x-1 shadow-md">
+                  <Play className="w-3 h-3 fill-white" />
+                  <span>Video Demo</span>
+                </div>
+              )}
+
               <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
                 <div>
                   <span className="text-[10px] uppercase font-bold tracking-wider text-cyan-400 block">{item.category}</span>
                   <h4 className="text-sm font-bold text-white mt-0.5">{item.title}</h4>
                 </div>
                 <div className="w-8 h-8 rounded-lg bg-cyan-600 flex items-center justify-center text-white group-hover:scale-110 transition-transform shadow-md">
-                  <Eye className="w-4 h-4" />
+                  {item.isVideo ? <Play className="w-4 h-4 fill-white" /> : <Eye className="w-4 h-4" />}
                 </div>
               </div>
             </div>
@@ -125,7 +133,15 @@ export default function GallerySection({ onOpenVideoModal, trackEvent, theme }) 
               >
                 ✕
               </button>
-              <img src={selectedImg.image} alt={selectedImg.title} className="w-full max-h-[70vh] object-cover" />
+              
+              {selectedImg.video ? (
+                <div className="aspect-video bg-slate-950">
+                  <video src={selectedImg.video} controls autoPlay className="w-full h-full object-cover" />
+                </div>
+              ) : (
+                <img src={selectedImg.image} alt={selectedImg.title} className="w-full max-h-[70vh] object-cover" />
+              )}
+
               <div className={`p-6 flex justify-between items-center ${isLight ? 'bg-slate-50' : 'bg-slate-950'}`}>
                 <div>
                   <span className="text-xs text-cyan-600 font-bold uppercase">{selectedImg.category}</span>
@@ -134,7 +150,7 @@ export default function GallerySection({ onOpenVideoModal, trackEvent, theme }) 
                 <button
                   onClick={() => {
                     setSelectedImg(null);
-                    onOpenVideoModal();
+                    onOpenVideoModal(selectedImg.video, selectedImg.title);
                   }}
                   className="px-4 py-2.5 rounded-xl bg-cyan-600 text-white font-bold text-xs hover:bg-cyan-500 transition-colors"
                 >

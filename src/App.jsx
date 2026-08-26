@@ -74,11 +74,18 @@ export default function App() {
     }
   }, []);
 
-  // Modals state
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [modalSource, setModalSource] = useState('Default CTA');
   const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const [activeVideoUrl, setActiveVideoUrl] = useState(null);
+  const [activeVideoTitle, setActiveVideoTitle] = useState(null);
   const [thankYouModalOpen, setThankYouModalOpen] = useState(false);
+
+  const handleOpenVideoModal = (url = null, title = null) => {
+    setActiveVideoUrl(url);
+    setActiveVideoTitle(title);
+    setVideoModalOpen(true);
+  };
   const [lastSubmittedLead, setLastSubmittedLead] = useState(null);
   const [showScriptCode, setShowScriptCode] = useState(false);
   const [copiedCode, setCopiedCode] = useState(false);
@@ -131,14 +138,12 @@ export default function App() {
     }
 
     const locObj = getLocationBySlug(currentTab);
+    const prodMatch = PLANT_DATA.products.find(p => p.id === currentTab);
     if (locObj) {
       setSelectedLocation(locObj);
       setSelectedProduct(null);
-    } else if (['40-bpm-mineral-water-plant', '60-bpm-mineral-water-plant', 'bottle-filling-machine', 'pet-blowing-machine', 'ss-ro-plant', 'jar-filling-machine', 'bopp-labeling-machine', 'shrink-wrapping-machine', 'csd-project', 'rts-juice-dairy-plant', 'water-pouch-packing-machine'].includes(currentTab)) {
-      const match = PLANT_DATA.products.find(p => p.id === currentTab);
-      if (match) {
-        setSelectedProduct(match);
-      }
+    } else if (prodMatch) {
+      setSelectedProduct(prodMatch);
       setSelectedLocation(null);
     } else {
       setSelectedProduct(null);
@@ -232,7 +237,7 @@ export default function App() {
             {/* Above the Fold Hero Image */}
             <HeroSection
               onOpenQuoteModal={handleOpenQuoteModal}
-              onOpenVideoModal={() => setVideoModalOpen(true)}
+              onOpenVideoModal={handleOpenVideoModal}
               trackEvent={trackEvent}
               theme={theme}
             />
@@ -270,7 +275,7 @@ export default function App() {
 
             {/* Photo & Video Installation Gallery */}
             <GallerySection
-              onOpenVideoModal={() => setVideoModalOpen(true)}
+              onOpenVideoModal={handleOpenVideoModal}
               trackEvent={trackEvent}
               theme={theme}
             />
@@ -325,10 +330,16 @@ export default function App() {
       {/* Video Demonstration Modal */}
       <VideoModal
         isOpen={videoModalOpen}
-        onClose={() => setVideoModalOpen(false)}
+        onClose={() => {
+          setVideoModalOpen(false);
+          setActiveVideoUrl(null);
+          setActiveVideoTitle(null);
+        }}
         onOpenQuoteModal={handleOpenQuoteModal}
         trackEvent={trackEvent}
         theme={theme}
+        videoUrl={activeVideoUrl}
+        videoTitle={activeVideoTitle}
       />
 
 
