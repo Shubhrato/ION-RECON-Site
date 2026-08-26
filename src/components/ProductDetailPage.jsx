@@ -38,9 +38,45 @@ const PRODUCT_GALLERIES = {
     { url: "/images/jar_filling_machine_20l_1784961999613.png", title: "Automatic 20 Litre Jar Plant Setup" }
   ],
   "pet-blowing-machine": [
-    { url: "/images/pet_blow_molding_machine.png", title: "PET Bottle Stretch Blow Molding Machine" },
-    { url: "/images/mineral_water_plant_40bpm_1784961952136.png", title: "PET Bottle Production & Conveyor" },
-    { url: "/images/rfc_monoblock_filling_machine_1784961966884.png", title: "Automatic Bottle Air Conveyor Connection" }
+    { url: "/images/pet-blowing-machine-handfeed-2-cavity-1.jpg", title: "PET Bottle Stretch Blow Molding Machine" },
+    { url: "/images/pet-blowing-machine-handfeed-4-cavity-1.jpg", title: "4 Cavity PET Blowing Unit" },
+    { url: "/images/pet-blowing-machine-fully-auto-4-cavity-1.jpg", title: "Fully Automatic PET Blow Molder" },
+    { url: "/images/pet_blow_molding_machine.png", title: "PET Bottle Production & Conveyor" }
+  ],
+  "pet-blowing-machine-handfeed-2-cavity": [
+    { url: "/images/pet-blowing-machine-handfeed-2-cavity-1.jpg", title: "Semi-Auto 2 Cavity PET Blow Molding Machine" },
+    { url: "/images/pet-blowing-machine-handfeed-2-cavity-2.jpg", title: "Infrared Preform Heater Oven" },
+    { url: "/images/pet-blowing-machine-handfeed-2-cavity-3.jpg", title: "2 Cavity Mold & Pneumatic Unit" }
+  ],
+  "pet-blowing-machine-handfeed-4-cavity": [
+    { url: "/images/pet-blowing-machine-handfeed-4-cavity-1.jpg", title: "Semi-Auto 4 Cavity PET Blow Molding Machine" },
+    { url: "/images/pet-blowing-machine-handfeed-4-cavity-2.jpg", title: "4 Cavity Dual Lane Oven Unit" },
+    { url: "/images/pet-blowing-machine-handfeed-4-cavity-3.jpg", title: "4 Cavity Stretch Blow Mold Station" }
+  ],
+  "pet-blowing-machine-fully-auto-4-cavity": [
+    { url: "/images/pet-blowing-machine-fully-auto-4-cavity-1.jpg", title: "Fully Automatic 4 Cavity PET Blow Molder" },
+    { url: "/images/pet-blowing-machine-fully-auto-4-cavity-2.jpg", title: "Automatic Preform Hopper Elevator" },
+    { url: "/images/pet-blowing-machine-fully-auto-4-cavity-3.jpg", title: "Air Recovery High Pressure Mold Unit" }
+  ],
+  "pet-blowing-machine-fully-auto-6-cavity": [
+    { url: "/images/pet-blowing-machine-fully-auto-6-cavity-1.jpg", title: "Fully Automatic 6 Cavity Servo PET Blow Molder" },
+    { url: "/images/pet-blowing-machine-fully-auto-6-cavity-2.jpg", title: "Rotary Servo Blowing Mechanism" },
+    { url: "/images/pet-blowing-machine-fully-auto-6-cavity-3.jpg", title: "High Speed PET Bottle Production Line" }
+  ],
+  "cij-batch-coding-machine-neelkamal": [
+    { url: "/images/cij-batch-coding-machine-neelkamal-1.jpg", title: "Continuous Inkjet (CIJ) Coder Neelkamal" },
+    { url: "/images/cij-batch-coding-machine-neelkamal-2.jpg", title: "Non-Contact CIJ Printhead & Ink Tank" },
+    { url: "/images/cij-batch-coding-machine-neelkamal-3.jpg", title: "Conveyor Line MRP Date Printing" }
+  ],
+  "tij-batch-coding-machine": [
+    { url: "/images/tij-batch-coding-machine-1.jpg", title: "Thermal Inkjet (TIJ) Online Batch Coder" },
+    { url: "/images/tij-batch-coding-machine-2.jpg", title: "600 DPI Touchscreen TIJ Controller" },
+    { url: "/images/tij-batch-coding-machine-3.jpg", title: "Zero Maintenance Cartridges Unit" }
+  ],
+  "water-testing-lab-equipment": [
+    { url: "/images/water-testing-lab-equipment-1.jpg", title: "BIS (ISI) Water Testing Lab Setup" },
+    { url: "/images/water-testing-lab-equipment-2.jpg", title: "Laminar Air Flow & Microbiological Cabinet" },
+    { url: "/images/water-testing-lab-equipment-3.jpg", title: "Autoclave & Analytical Glassware Equipment" }
   ],
   "bopp-labeling-machine": [
     { url: "/images/bopp-labeling-machine-1.jpg", title: "BOPP Hot-Melt Bottle Labeling Machine" },

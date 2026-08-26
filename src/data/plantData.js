@@ -325,12 +325,151 @@ export const PLANT_DATA = {
       badge: "Economical",
       metaTitle: "Automatic Water Pouch Packing Machine Manufacturer - Ion Recon",
       seoContent: "Vertical Form-Fill-Seal (FFS) automatic liquid water pouch packing machine manufacturer. Packs 2,000 to 2,500 pouches per hour (200ml to 500ml) with UV film sterilization lamp & SS 304 contact parts. Request price quote."
-    }
+    },
+    {
+      id: "pet-blowing-machine-handfeed-2-cavity",
+      title: "Semi-Auto 2 Cavity PET Blow Molding Machine",
+      category: "blowing",
+      shortDesc: "Manual preform loading 2-cavity stretch PET bottle blowing machine for 200ml to 2,000ml bottles.",
+      capacityRange: "1,000 to 1,400 BPH",
+      automation: "Semi-Automatic Handfeed",
+      material: "Heavy Duty Steel Frame & Alloy Mold",
+      powerConsumption: "12 kW (~16 HP)",
+      keyFeatures: [
+        "2-Cavity high precision aluminum/steel bottle mold",
+        "Infrared preform heating oven with digital temp control",
+        "Festo pneumatic cylinders & energy-saving valves",
+        "Ideal for startup & small mineral water setups"
+      ],
+      image: "/images/pet-blowing-machine-handfeed-2-cavity-1.jpg",
+      badge: "Startup Choice",
+      metaTitle: "Semi Auto 2 Cavity PET Blow Molding Machine - Ion Recon",
+      seoContent: "Semi-automatic 2 cavity PET bottle stretch blow molding machine manufacturer. Production speed 1,000 to 1,400 BPH with infrared preform heater oven. Request free price quote."
+    },
+    {
+      id: "pet-blowing-machine-handfeed-4-cavity",
+      title: "Semi-Auto 4 Cavity PET Blow Molding Machine",
+      category: "blowing",
+      shortDesc: "High output 4-cavity manual preform stretch PET bottle stretch blow molding machine.",
+      capacityRange: "2,000 to 2,400 BPH",
+      automation: "Semi-Automatic Handfeed",
+      material: "Alloy Steel Frame & Hardened Molds",
+      powerConsumption: "22 kW (~30 HP)",
+      keyFeatures: [
+        "4-Cavity high speed stretch blow molding unit",
+        "Dual-lane infrared preform heating oven",
+        "Fast mold changeover system (200ml - 2L)",
+        "Heavy-duty pneumatic clamping pressure"
+      ],
+      image: "/images/pet-blowing-machine-handfeed-4-cavity-1.jpg",
+      badge: "High Speed Semi-Auto",
+      metaTitle: "Semi Auto 4 Cavity PET Blow Molding Machine - Ion Recon",
+      seoContent: "Semi-automatic 4 cavity PET bottle blow molder manufacturer. High speed production 2,000 to 2,400 BPH with dual preform heating ovens. Request price quote."
+    },
+    {
+      id: "pet-blowing-machine-fully-auto-4-cavity",
+      title: "Fully Automatic 4 Cavity PET Blow Molding Machine",
+      category: "blowing",
+      shortDesc: "Fully automated preform elevator, orientor & 4-cavity stretch PET bottle blowing machine.",
+      capacityRange: "4,000 to 4,800 BPH",
+      automation: "100% Fully Automatic PLC",
+      material: "Sanitary Steel Frame & Hardened Molds",
+      powerConsumption: "45 kW (~60 HP)",
+      keyFeatures: [
+        "Automatic preform hopper elevator & orienting sorter",
+        "4-Cavity high pressure air recovery pneumatic system",
+        "Touchscreen PLC control panel with fault diagnostics",
+        "Direct connection to bottle air conveyor line"
+      ],
+      image: "/images/pet-blowing-machine-fully-auto-4-cavity-1.jpg",
+      badge: "Fully Automated",
+      metaTitle: "Fully Automatic 4 Cavity PET Blow Molding Machine - Ion Recon",
+      seoContent: "Fully automatic 4 cavity PET bottle stretch blow molding machine manufacturer. High output 4,000 to 4,800 BPH with automatic preform elevator & PLC touch screen. Request quote."
+    },
+    {
+      id: "pet-blowing-machine-fully-auto-6-cavity",
+      title: "Fully Automatic 6 Cavity Servo PET Blow Molder",
+      category: "blowing",
+      shortDesc: "High-speed servo motor driven 6-cavity automatic PET bottle blowing machine.",
+      capacityRange: "6,000 to 7,200 BPH",
+      automation: "Fully Automatic Servo Driven",
+      material: "Heavy Duty Alloy Steel & Hardened Molds",
+      powerConsumption: "65 kW (~85 HP)",
+      keyFeatures: [
+        "6-Cavity rotary servo driven stretch molding mechanism",
+        "Energy recovery air recycling system",
+        "High precision preform heating oven with IR sensors",
+        "Designed for 60 BPM & 120 BPM bottling lines"
+      ],
+      image: "/images/pet-blowing-machine-fully-auto-6-cavity-1.jpg",
+      badge: "Servo High Speed",
+      metaTitle: "Fully Automatic 6 Cavity Servo PET Blow Molder - Ion Recon",
+      seoContent: "High speed 6-cavity servo motor driven fully automatic PET bottle blowing machine manufacturer. Output 6,000 to 7,200 BPH with air recovery system. Request price quote."
+    },
+    {
+      id: "cij-batch-coding-machine-neelkamal",
+      title: "Continuous Inkjet (CIJ) Coder - Neelkamal",
+      category: "packaging",
+      shortDesc: "Industrial Continuous Inkjet (CIJ) printer for high speed batch MRP, MFG & EXP date printing on PET bottles.",
+      capacityRange: "Up to 300 Meters / Minute",
+      automation: "Non-Contact Inkjet Printing",
+      material: "IP55 Stainless Steel Cabinet",
+      powerConsumption: "100W Single Phase",
+      keyFeatures: [
+        "Micro-drop non-contact continuous inkjet printhead",
+        "Fast-drying food grade black/yellow inks",
+        "Automatic printhead nozzle cleaning on shutdown",
+        "Seamless synchronization with bottle conveyor lines"
+      ],
+      image: "/images/cij-batch-coding-machine-neelkamal-1.jpg",
+      badge: "Neelkamal Partner",
+      metaTitle: "Continuous Inkjet CIJ Batch Coding Machine - Ion Recon",
+      seoContent: "Continuous Inkjet (CIJ) batch coding printer manufacturer & supplier. High speed non-contact MRP date & batch printing for PET water bottles & jars. Request price quotation."
+    },
+    {
+      id: "tij-batch-coding-machine",
+      title: "Thermal Inkjet (TIJ) Online Batch Coding Machine",
+      category: "packaging",
+      shortDesc: "Maintenance-free cartridge-based Thermal Inkjet (TIJ) date and barcode coding printer for bottling lines.",
+      capacityRange: "Up to 70 Meters / Minute",
+      automation: "Digital Touchscreen TIJ",
+      material: "Compact Anodized Aluminum Body",
+      powerConsumption: "60W Single Phase",
+      keyFeatures: [
+        "Zero-maintenance thermal inkjet cartridge technology",
+        "High resolution 600 DPI printing for barcodes & QR codes",
+        "7-inch color touchscreen HMI for easy message setup",
+        "Quick cartridge changeover with zero ink spillage"
+      ],
+      image: "/images/tij-batch-coding-machine-1.jpg",
+      badge: "Zero Maintenance",
+      metaTitle: "Thermal Inkjet TIJ Online Batch Coding Machine - Ion Recon",
+      seoContent: "Thermal Inkjet (TIJ) online batch coding machine manufacturer. 600 DPI high resolution date & QR code printing for PET bottle packaging. Request price quote."
+    },
+    {
+      id: "water-testing-lab-equipment",
+      title: "BIS (ISI) Water Testing Lab Equipment Package",
+      category: "plant",
+      shortDesc: "Complete chemical and microbiological laboratory setup equipment for BIS (IS 14543) & FSSAI license compliance.",
+      capacityRange: "Turnkey BIS Lab Package",
+      automation: "Digital Analytical Instruments",
+      material: "Stainless Steel & Borosilicate Glassware",
+      powerConsumption: "5 kW Total",
+      keyFeatures: [
+        "Laminar Air Flow cabinet & UV sterilization chamber",
+        "BOD / COD Incubator, Autoclave & Muffle Furnace",
+        "Digital pH meter, TDS meter, Turbidity meter & Spectrophotometer",
+        "Complete reagent kit & glassware required for ISI inspection"
+      ],
+      image: "/images/water-testing-lab-equipment-1.jpg",
+      badge: "BIS ISI Mandatory",
+      metaTitle: "BIS ISI Water Testing Laboratory Equipment Package - Ion Recon",
+      seoContent: "Complete packaged drinking water chemical and microbiological testing lab equipment manufacturer & supplier. Essential setup for BIS IS 14543 certification. Request quote."
+    },
   ],
 
   capacities: [
     {
-      bpm: "30 BPM",
       bottlesPerHour: "1,800 Bottles/Hr",
       suitableFor: "Startup & Small Enterprise",
       estimatedPrice: "₹29 Lakhs - ₹32 Lakhs",
@@ -573,6 +712,13 @@ export const PLANT_DATA = {
     { title: "20L Jar Washer, Filler & Capper Unit", category: "Jar Plant", image: "/images/jar-filling-machine-2.jpg" },
     { title: "20 Litre Water Jar Washing & Capping", category: "Jar Plant", image: "/images/jar-filling-machine-3.jpg" },
     { title: "20L Jar Machine Live Video Demo", category: "Jar Plant", image: "/images/jar-filling-machine-1.jpg", video: "/images/jar-filling-machine-demo.mp4", isVideo: true },
+    { title: "Semi-Auto 2 Cavity PET Blow Molder", category: "Blow Molding", image: "/images/pet-blowing-machine-handfeed-2-cavity-1.jpg" },
+    { title: "Semi-Auto 4 Cavity PET Blow Molder", category: "Blow Molding", image: "/images/pet-blowing-machine-handfeed-4-cavity-1.jpg" },
+    { title: "Fully Auto 4 Cavity PET Blow Molder", category: "Blow Molding", image: "/images/pet-blowing-machine-fully-auto-4-cavity-1.jpg" },
+    { title: "Fully Auto 6 Cavity Servo PET Molder", category: "Blow Molding", image: "/images/pet-blowing-machine-fully-auto-6-cavity-1.jpg" },
+    { title: "Continuous Inkjet (CIJ) Coder Neelkamal", category: "Machinery", image: "/images/cij-batch-coding-machine-neelkamal-1.jpg" },
+    { title: "Thermal Inkjet (TIJ) Online Batch Coder", category: "Machinery", image: "/images/tij-batch-coding-machine-1.jpg" },
+    { title: "BIS (ISI) Water Testing Lab Setup", category: "Factory", image: "/images/water-testing-lab-equipment-1.jpg" },
     { title: "BOPP Hot-Melt Labeling Machine", category: "Machinery", image: "/images/bopp-labeling-machine-1.jpg" },
     { title: "BOPP Roll-Fed Labeler Assembly", category: "Machinery", image: "/images/bopp-labeling-machine-2.jpg" },
     { title: "Automatic Web Sealer Shrink Tunnel", category: "Machinery", image: "/images/shrink-wrapping-machine-1.jpg" },
