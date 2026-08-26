@@ -258,6 +258,10 @@ const NON_LOCATION_SLUGS = [
   'bottle-filling-machine', 'pet-blowing-machine', 'ss-ro-plant', 
   'jar-filling-machine', 'bopp-labeling-machine', 'shrink-wrapping-machine', 
   'csd-project', 'rts-juice-dairy-plant', 'water-pouch-packing-machine',
+  'sticker-labeling-machine', 'semi-auto-shrink-wrapping-machine', 'fully-auto-shrink-wrapping-machine',
+  'water-testing-lab-equipment', 'tij-batch-coding-machine', 'cij-batch-coding-machine-neelkamal',
+  'pet-blowing-machine-handfeed-2-cavity', 'pet-blowing-machine-handfeed-4-cavity',
+  'pet-blowing-machine-fully-auto-4-cavity', 'pet-blowing-machine-fully-auto-6-cavity',
   'index.html', 'index', '', 'app'
 ];
 
@@ -266,32 +270,50 @@ export const getLocationBySlug = (slug) => {
   let cleanSlug = slug.toLowerCase().trim();
   if (cleanSlug.startsWith('/')) cleanSlug = cleanSlug.slice(1);
 
-  // Guard against non-location tab slugs
-  if (!slug || ['blog', 'home', 'locations', 'roi-calculator', 'faqs'].includes(cleanSlug) || cleanSlug.startsWith('blog-') || NON_LOCATION_SLUGS.includes(cleanSlug)) {
+  // Guard against non-location tab slugs & machinery IDs
+  const machinerySlugs = [
+    '40-bpm-mineral-water-plant', '60-bpm-mineral-water-plant',
+    'bottle-filling-machine', 'pet-blowing-machine', 'ss-ro-plant',
+    'jar-filling-machine', 'bopp-labeling-machine', 'shrink-wrapping-machine',
+    'csd-project', 'rts-juice-dairy-plant', 'water-pouch-packing-machine',
+    'sticker-labeling-machine', 'semi-auto-shrink-wrapping-machine', 'fully-auto-shrink-wrapping-machine',
+    'water-testing-lab-equipment', 'tij-batch-coding-machine', 'cij-batch-coding-machine-neelkamal',
+    'pet-blowing-machine-handfeed-2-cavity', 'pet-blowing-machine-handfeed-4-cavity',
+    'pet-blowing-machine-fully-auto-4-cavity', 'pet-blowing-machine-fully-auto-6-cavity'
+  ];
+
+  if (!slug || ['blog', 'home', 'locations', 'roi-calculator', 'faqs'].includes(cleanSlug) || cleanSlug.startsWith('blog-') || NON_LOCATION_SLUGS.includes(cleanSlug) || machinerySlugs.includes(cleanSlug)) {
     return null;
   }
 
   // Determine plant category prefix if specified
   let targetCategory = 'Mineral Water Plant';
   let rawLocationSlug = cleanSlug;
+  let isExplicitLocationPrefix = false;
 
   if (cleanSlug.startsWith('packaged-drinking-water-plant-manufacturer-in-')) {
     targetCategory = 'Packaged Drinking Water Plant';
     rawLocationSlug = cleanSlug.replace('packaged-drinking-water-plant-manufacturer-in-', '');
+    isExplicitLocationPrefix = true;
   } else if (cleanSlug.startsWith('csd-plant-manufacturer-in-')) {
     targetCategory = 'CSD Bottling Plant';
     rawLocationSlug = cleanSlug.replace('csd-plant-manufacturer-in-', '');
+    isExplicitLocationPrefix = true;
   } else if (cleanSlug.startsWith('stp-plant-manufacturer-in-')) {
     targetCategory = 'STP Plant';
     rawLocationSlug = cleanSlug.replace('stp-plant-manufacturer-in-', '');
+    isExplicitLocationPrefix = true;
   } else if (cleanSlug.startsWith('etp-plant-manufacturer-in-')) {
     targetCategory = 'ETP Plant';
     rawLocationSlug = cleanSlug.replace('etp-plant-manufacturer-in-', '');
+    isExplicitLocationPrefix = true;
   } else if (cleanSlug.startsWith('mineral-water-plant-manufacturer-in-')) {
     targetCategory = 'Mineral Water Plant';
     rawLocationSlug = cleanSlug.replace('mineral-water-plant-manufacturer-in-', '');
+    isExplicitLocationPrefix = true;
   } else if (cleanSlug.startsWith('location-')) {
     rawLocationSlug = cleanSlug.replace('location-', '');
+    isExplicitLocationPrefix = true;
   }
 
   // 1. Direct match with static location dataset
@@ -305,38 +327,40 @@ export const getLocationBySlug = (slug) => {
     return {
       ...match,
       activeCategory: targetCategory,
-      seoTitle: `${targetCategory} Manufacturer in ${match.displayName} | Ion Recon`,
-      seoDescription: `Leading ${targetCategory} Manufacturer in ${match.displayName}. Ion Recon supplies turnkey setup, automatic machinery, and BIS/PCB compliance in ${match.displayName}.`,
-      keywords: `${targetCategory} Manufacturer in ${match.displayName}, Turnkey Plant ${match.displayName}, Machinery Supplier ${match.displayName}`
+      seoTitle: `Mineral Water Plant Manufacturer in ${match.displayName} | Ion Recon`,
+      seoDescription: `Leading Mineral Water Plant Manufacturer in ${match.displayName}. Ion Recon supplies turnkey setup, automatic machinery, and BIS/PCB compliance in ${match.displayName}.`,
+      keywords: `Mineral Water Plant Manufacturer in ${match.displayName}, Turnkey Plant ${match.displayName}, Machinery Supplier ${match.displayName}`
     };
   }
 
-  // 2. Dynamic Fallback for ANY Location
-  const rawLoc = rawLocationSlug.replace(/[^a-z0-9]+/g, ' ').trim();
-  if (rawLoc.length > 1) {
-    const formattedName = rawLoc
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+  // 2. Dynamic Fallback ONLY if it was an explicit location prefix URL and not a machine slug
+  if (isExplicitLocationPrefix && !machinerySlugs.some(ms => rawLocationSlug.includes(ms))) {
+    const rawLoc = rawLocationSlug.replace(/[^a-z0-9]+/g, ' ').trim();
+    if (rawLoc.length > 1) {
+      const formattedName = rawLoc
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
 
-    const fullSlug = `mineral-water-plant-manufacturer-in-${rawLoc.replace(/\s+/g, '-')}`;
+      const fullSlug = `mineral-water-plant-manufacturer-in-${rawLoc.replace(/\s+/g, '-')}`;
 
-    return {
-      slug: fullSlug,
-      name: formattedName,
-      displayName: formattedName,
-      type: 'dynamic_city',
-      city: formattedName,
-      stateId: 'north-central-india',
-      stateName: 'India',
-      shortCode: 'IN',
-      region: 'North & Central India',
-      activeCategory: targetCategory,
-      highlights: `Establish a high-profit ${targetCategory} in ${formattedName} with Ion Recon\'s ISI/BIS/PCB compliant automatic turnkey machinery.`,
-      seoTitle: `${targetCategory} Manufacturer in ${formattedName} | Ion Recon`,
-      seoDescription: `Ion Recon is the premier ${targetCategory} Manufacturer serving ${formattedName}. Fully automatic turnkey plant & machinery with doorstep installation in ${formattedName}.`,
-      keywords: `${targetCategory} Manufacturer in ${formattedName}, Plant Setup ${formattedName}, Automatic Machinery ${formattedName}`
-    };
+      return {
+        slug: fullSlug,
+        name: formattedName,
+        displayName: formattedName,
+        type: 'dynamic_city',
+        city: formattedName,
+        stateId: 'uttar-pradesh',
+        stateName: 'Uttar Pradesh',
+        shortCode: 'UP',
+        region: 'North India',
+        activeCategory: targetCategory,
+        highlights: `Set up a fully automatic ${targetCategory} in ${formattedName} with Ion Recon\'s doorstep engineering & installation services.`,
+        seoTitle: `Mineral Water Plant Manufacturer in ${formattedName} | Packaged Water Setup`,
+        seoDescription: `Ion Recon is the premier ${targetCategory} Manufacturer serving ${formattedName}. High efficiency automatic machinery, RO purification & turnkey setup in ${formattedName}.`,
+        keywords: `Mineral Water Plant Manufacturer in ${formattedName}, Water Bottling Plant ${formattedName}, Commercial RO Plant ${formattedName}`
+      };
+    }
   }
 
   return null;

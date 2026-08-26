@@ -48,7 +48,7 @@ export const PLANT_DATA = {
         "SS Sand Filter & Activated Carbon Vessel",
         "BIS (ISI) & FSSAI Compliant Chemical Lab Layout"
       ],
-      image: "/images/mineral_water_plant_40bpm.png",
+      image: "/images/40-bpm-mineral-water-plant-1.jpg",
       badge: "Ion Recon Best Seller",
       metaTitle: "40 BPM Mineral Water Bottling Plant Manufacturer - Ion Recon",
       seoContent: "Custom 40 BPM turnkey mineral water plant manufacturer in Ghaziabad. High-efficiency automatic bottling lines producing 2,400 BPH with SS 304 food grade construction & 2,000 LPH RO plant. Request a free project cost estimation & factory quote.",
@@ -79,7 +79,7 @@ export const PLANT_DATA = {
         "SS Sand Filter & Activated Carbon Vessel",
         "BIS (ISI) & FSSAI Compliant Chemical Lab Layout"
       ],
-      image: "/images/mineral_water_plant_40bpm.png",
+      image: "/images/60-bpm-mineral-water-plant-1.jpg",
       badge: "High Efficiency",
       metaTitle: "60 BPM Mineral Water Bottling Plant Manufacturer - Ion Recon",
       seoContent: "High-speed 60 BPM (3,600 BPH) mineral water bottling plant manufacturer. Servo-driven automatic monoblock filling line with 2,000 LPH SS RO plant & 4-cavity PET blow molder. Request a free project cost estimation & factory quote.",
@@ -110,7 +110,7 @@ export const PLANT_DATA = {
         "Automatic Cap Elevator & Orienting Sorter",
         "Touchscreen HMI Control Panel"
       ],
-      image: "/images/rfc_monoblock_filling_machine.png",
+      image: "/images/bottle-filling-machine-1.jpg",
       badge: "High Precision",
       metaTitle: "RFC Monoblock Bottle Filling Machine Manufacturer - Ion Recon",
       seoContent: "3-in-1 RFC Monoblock Bottle Filling Machine manufacturer. Precision zero-drip PET bottle filling lines from 30 BPM to 240 BPM (1,800 to 14,400 BPH) with SS 304 food grade construction. Request technical datasheet & free price quotation.",

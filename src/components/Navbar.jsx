@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Phone, MessageCircle, Droplet, Menu, X, Shield, Award, Sun, Moon } from 'lucide-react';
+import { Award, Droplet, Menu, MessageCircle, Moon, Shield, Sun, X } from 'lucide-react';
+import { useState } from 'react';
 import { PLANT_DATA } from '../data/plantData';
 
 export default function Navbar({ onOpenQuoteModal, currentTab, setCurrentTab, trackEvent, theme, toggleTheme }) {

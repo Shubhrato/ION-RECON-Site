@@ -1,32 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { 
-  ArrowLeft, CheckCircle2, Shield, Wrench, Zap, FileText, Phone, MessageCircle, 
-  Play, Check, ExternalLink, Factory, Cpu, DollarSign, Clock, Layers, ChevronRight, Award
+import {
+  ArrowLeft,
+  ChevronRight,
+  DollarSign,
+  FileText,
+  Layers,
+  MessageCircle,
+  Phone,
+  Shield
 } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { PLANT_DATA } from '../data/plantData';
 
 // Image galleries map for rich product photography
 const PRODUCT_GALLERIES = {
   "40-bpm-mineral-water-plant": [
-    { url: "/images/mineral_water_plant_40bpm_1784961952136.png", title: "40 BPM Turnkey Plant Overview" },
-    { url: "/water_plant_real_1785748019896.png", title: "Full Factory Installation Layout" },
-    { url: "/images/rfc_monoblock_filling_machine_1784961966884.png", title: "40 BPM 8-8-4 RFC Monoblock Machine" },
-    { url: "/images/industrial_ss_ro_plant_1784961982054.png", title: "1,500 LPH SS RO Plant + Ozone Unit" },
-    { url: "/images/shrink_wrapping_machine.png", title: "Automatic Shrink Wrapping Heating Tunnel" }
+    { url: "/images/40-bpm-mineral-water-plant-1.jpg", title: "40 BPM Turnkey Plant Overview" },
+    { url: "/images/40-bpm-mineral-water-plant-2.jpg.png", title: "40 BPM Bottling Line Layout" },
+    { url: "/images/40-bpm-mineral-water-plant-3.jpg.png", title: "40 BPM Equipment Detail View" }
   ],
   "60-bpm-mineral-water-plant": [
-    { url: "/water_plant_real_1785748019896.png", title: "60 BPM High Speed Bottling Line" },
-    { url: "/images/mineral_water_plant_40bpm_1784961952136.png", title: "Turnkey Plant Layout & Assembly" },
-    { url: "/images/rfc_monoblock_filling_machine_1784961966884.png", title: "60 BPM 12-12-5 RFC Monoblock Filler" },
-    { url: "/images/bopp_labeling_machine.png", title: "BOPP Hot Melt Glue Labeler" },
-    { url: "/images/shrink_wrapping_machine.png", title: "Web Sealer Shrink Tunnel" }
+    { url: "/images/60-bpm-mineral-water-plant-1.jpg", title: "60 BPM High Speed Bottling Line" },
+    { url: "/images/60-bpm-mineral-water-plant-2.jpg", title: "60 BPM Monoblock Filler & Setup" },
+    { url: "/images/60-bpm-mineral-water-plant-3.jpg", title: "60 BPM Packaging Line" }
   ],
   "bottle-filling-machine": [
-    { url: "/images/rfc_monoblock_filling_machine_1784961966884.png", title: "3-in-1 RFC Monoblock Bottle Filler" },
-    { url: "/images/rfc_monoblock_filling_machine.png", title: "Rinser Filler Capper Monoblock Unit" },
-    { url: "/images/mineral_water_plant_40bpm_1784961952136.png", title: "Monoblock Integrated on Bottling Line" },
-    { url: "/images/bopp_labeling_machine.png", title: "Inline BOPP Labeling Connection" }
+    { url: "/images/bottle-filling-machine-1.jpg", title: "3-in-1 RFC Monoblock Bottle Filler" },
+    { url: "/images/bottle-filling-machine-2.jpg", title: "Rinser Filler Capper Monoblock Unit" },
+    { url: "/images/bottle-filling-machine-3.jpg", title: "Monoblock Bottling Line Connection" }
   ],
   "ss-ro-plant": [
     { url: "/images/industrial_ss_ro_plant_1784961982054.png", title: "Industrial Stainless Steel RO Plant" },

@@ -57,7 +57,17 @@ export default function App() {
         if (locObj) {
           setSelectedLocation(locObj);
           setCurrentTab(locObj.slug);
-        } else if (['40-bpm-mineral-water-plant', '60-bpm-mineral-water-plant', 'bottle-filling-machine', 'pet-blowing-machine', 'ss-ro-plant', 'jar-filling-machine', 'bopp-labeling-machine', 'shrink-wrapping-machine', 'csd-project', 'rts-juice-dairy-plant', 'water-pouch-packing-machine', 'locations', 'roi-calculator', 'faqs'].includes(slugToTest)) {
+        } else if ([
+          '40-bpm-mineral-water-plant', '60-bpm-mineral-water-plant', 
+          'bottle-filling-machine', 'pet-blowing-machine', 'ss-ro-plant', 
+          'jar-filling-machine', 'bopp-labeling-machine', 'shrink-wrapping-machine', 
+          'csd-project', 'rts-juice-dairy-plant', 'water-pouch-packing-machine', 
+          'sticker-labeling-machine', 'semi-auto-shrink-wrapping-machine', 'fully-auto-shrink-wrapping-machine',
+          'water-testing-lab-equipment', 'tij-batch-coding-machine', 'cij-batch-coding-machine-neelkamal',
+          'pet-blowing-machine-handfeed-2-cavity', 'pet-blowing-machine-handfeed-4-cavity',
+          'pet-blowing-machine-fully-auto-4-cavity', 'pet-blowing-machine-fully-auto-6-cavity',
+          'locations', 'roi-calculator', 'faqs'
+        ].includes(slugToTest)) {
           setCurrentTab(slugToTest);
         }
       }
