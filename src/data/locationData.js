@@ -316,6 +316,10 @@ export const getLocationBySlug = (slug) => {
     isExplicitLocationPrefix = true;
   }
 
+  if (machinerySlugs.includes(rawLocationSlug) || machinerySlugs.some(ms => rawLocationSlug.includes(ms))) {
+    return null;
+  }
+
   // 1. Direct match with static location dataset
   let match = ALL_LOCATIONS.find(loc => 
     loc.slug === cleanSlug || 

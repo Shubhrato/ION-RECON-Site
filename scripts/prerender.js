@@ -266,8 +266,25 @@ function getPageMeta(urlStr) {
 
   // Location routes
   if (cleanPath.startsWith('mineral-water-plant-manufacturer-in-')) {
-    const locName = cleanPath
-      .replace('mineral-water-plant-manufacturer-in-', '')
+    const rawSlug = cleanPath.replace('mineral-water-plant-manufacturer-in-', '');
+    
+    // Guard: If rawSlug matches a machine slug or product ID, map it to the proper product route!
+    const productRoutes = [
+      '40-bpm-mineral-water-plant', '60-bpm-mineral-water-plant',
+      'bottle-filling-machine', 'pet-blowing-machine', 'ss-ro-plant',
+      'jar-filling-machine', 'bopp-labeling-machine', 'shrink-wrapping-machine',
+      'csd-project', 'rts-juice-dairy-plant', 'water-pouch-packing-machine',
+      'sticker-labeling-machine', 'semi-auto-shrink-wrapping-machine', 'fully-auto-shrink-wrapping-machine',
+      'water-testing-lab-equipment', 'tij-batch-coding-machine', 'cij-batch-coding-machine-neelkamal',
+      'pet-blowing-machine-handfeed-2-cavity', 'pet-blowing-machine-handfeed-4-cavity',
+      'pet-blowing-machine-fully-auto-4-cavity', 'pet-blowing-machine-fully-auto-6-cavity'
+    ];
+
+    if (productRoutes.includes(rawSlug)) {
+      return getPageMeta(`https://ionrecon.info/${rawSlug}`);
+    }
+
+    const locName = rawSlug
       .split('-')
       .map(w => w.charAt(0).toUpperCase() + w.slice(1))
       .join(' ');
@@ -275,7 +292,7 @@ function getPageMeta(urlStr) {
     return {
       title: `Turnkey Mineral Water Plant Manufacturer in ${locName} | Packaged Water Setup - Ion Recon`,
       description: `Ion Recon: Turnkey packaged drinking water project & commercial RO plant manufacturer in ${locName}. Automatic bottling line setup & direct factory price quote.`,
-      canonical
+      canonical: `https://ionrecon.info/mineral-water-plant-manufacturer-in-${rawSlug}`
     };
   }
 
