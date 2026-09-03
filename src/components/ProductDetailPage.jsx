@@ -5,6 +5,7 @@ import {
   Play, Check, ExternalLink, Factory, Cpu, DollarSign, Clock, Layers, ChevronRight, Award
 } from 'lucide-react';
 import { PLANT_DATA } from '../data/plantData';
+import SocialShare from './SocialShare';
 
 // Image galleries map for rich product photography
 const PRODUCT_GALLERIES = {
@@ -101,22 +102,19 @@ const PRODUCT_GALLERIES = {
     { url: "/images/semi-auto-shrink-wrapping-machine-3.jpg", title: "Shrink Heating Tunnel Unit" }
   ],
   "csd-project": [
-    { url: "/images/csd-project-1.jpg", title: "Carbonated Soft Drink (CSD) Plant" },
-    { url: "/images/csd-project-2.jpg", title: "Isobaric Counter-Pressure Beverage Filler" },
-    { url: "/images/csd-project-3.jpg", title: "CO2 Carbonator & Sugar Syrup Mixing Unit" },
-    { url: "/csd_plant_real_1785748095649.png", title: "Turnkey Soda & Beverage Plant" }
+    { url: "/images/csd_bottle_plant.png", title: "Carbonated Soft Drink (CSD) Plant" },
+    { url: "/csd_plant_real_1785748095649.png", title: "Turnkey Soda & Beverage Plant" },
+    { url: "/images/csd_bottle_plant.png", title: "Isobaric Counter-Pressure Beverage Filler" }
   ],
   "rts-juice-dairy-plant": [
-    { url: "/images/rts-juice-dairy-plant-1.jpg", title: "RTS Fruit Juice & Dairy Bottling Plant" },
-    { url: "/images/rts-juice-dairy-plant-2.jpg", title: "Plate Heat Exchanger (PHE) Pasteurizer" },
-    { url: "/images/rts-juice-dairy-plant-3.jpg", title: "Hot Filling Monoblock (85°C) & Homogenizer" },
-    { url: "/images/fruit_juice_bottle_line.png", title: "Fruit Pulp Processing Line" }
+    { url: "/images/fruit_juice_bottle_line.png", title: "RTS Fruit Juice & Dairy Bottling Plant" },
+    { url: "/images/fruit_juice_bottle_line.png", title: "Plate Heat Exchanger (PHE) Pasteurizer" },
+    { url: "/images/fruit_juice_bottle_line.png", title: "Hot Filling Monoblock (85°C) & Homogenizer" }
   ],
   "water-pouch-packing-machine": [
-    { url: "/images/water-pouch-packing-machine-1.jpg", title: "Automatic Water Pouch Packing Machine" },
-    { url: "/images/water-pouch-packing-machine-2.jpg", title: "Vertical FFS Liquid Pouch Sealing Unit" },
-    { url: "/images/water-pouch-packing-machine-3.jpg", title: "UV Sterilization & Date Coder Station" },
-    { url: "/images/water_pouch_packing_machine.png", title: "Liquid Water Pouch Machine Setup" }
+    { url: "/images/water_pouch_packing_machine.png", title: "Automatic Water Pouch Packing Machine" },
+    { url: "/images/water_pouch_packing_machine.png", title: "Vertical FFS Liquid Pouch Sealing Unit" },
+    { url: "/images/water_pouch_packing_machine.png", title: "UV Sterilization & Date Coder Station" }
   ]
 };
 
@@ -267,7 +265,6 @@ export default function ProductDetailPage({ product, onBack, onOpenQuoteModal, t
                     {item.type === 'video' || item.url?.endsWith('.mp4') ? (
                       <div className="w-full h-full bg-slate-950 flex flex-col items-center justify-center text-cyan-400 relative">
                         <Play className="w-6 h-6 fill-cyan-400" />
-                        <span className="text-[9px] font-extrabold uppercase mt-0.5 text-white">Video</span>
                       </div>
                     ) : (
                       <img src={item.url} alt={`${item.title} - Ion Recon Machinery Photo ${idx + 1}`} loading="lazy" className="w-full h-full object-cover" />
@@ -275,6 +272,16 @@ export default function ProductDetailPage({ product, onBack, onOpenQuoteModal, t
                   </button>
                 ))}
               </div>
+            </div>
+
+            {/* Social Share Plugin Card */}
+            <div className="pt-2">
+              <SocialShare
+                variant="card"
+                theme={theme}
+                title={`${product.title} - Ion Recon Machinery`}
+                description={product.description}
+              />
             </div>
 
             {/* Financial & Operating Specs Breakdown (If 40 BPM / 60 BPM) */}

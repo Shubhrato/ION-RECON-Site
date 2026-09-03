@@ -1,6 +1,7 @@
 import React from 'react';
 import { Droplet, Phone, Mail, MapPin, ExternalLink, ShieldCheck } from 'lucide-react';
 import { PLANT_DATA } from '../data/plantData';
+import SocialShare from './SocialShare';
 
 export default function Footer({ setCurrentTab, onOpenQuoteModal, theme }) {
   const isLight = theme === 'light';
@@ -28,6 +29,9 @@ export default function Footer({ setCurrentTab, onOpenQuoteModal, theme }) {
             <div className="pt-2 text-emerald-400 font-semibold flex items-center">
               <ShieldCheck className="w-4 h-4 mr-1.5" />
               <span>GST No: {PLANT_DATA.company.gstNo} (Reg: 09-07-2021)</span>
+            </div>
+            <div className="pt-2">
+              <SocialShare variant="inline" theme="dark" />
             </div>
           </div>
 

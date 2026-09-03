@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { MapPin, ShieldCheck, Award, CheckCircle2, Phone, MessageCircle, ArrowRight, Factory, Droplet, FileText, Settings, Sparkles, Building2, TrendingUp, HelpCircle } from 'lucide-react';
 import { PLANT_DATA } from '../data/plantData';
 import { LOCATION_STATES, searchLocations } from '../data/locationData';
+import SocialShare from './SocialShare';
 
 export default function LocationPage({ location, onBack, onOpenQuoteModal, trackEvent, theme, onSelectLocation }) {
   const isLight = theme === 'light';
@@ -164,6 +165,16 @@ export default function LocationPage({ location, onBack, onOpenQuoteModal, track
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Social Media Share Card */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <SocialShare
+          variant="card"
+          theme={theme}
+          title={`${selectedCategory} Manufacturer in ${location.displayName} - Ion Recon`}
+          description={location.metaDescription || `Ion Recon turnkey ${selectedCategory} setup in ${location.displayName}.`}
+        />
       </section>
 
       {/* Regional Business Opportunity Section */}

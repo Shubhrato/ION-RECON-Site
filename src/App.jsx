@@ -17,6 +17,7 @@ import StickyBottomBar from './components/StickyBottomBar';
 import LeadModal from './components/LeadModal';
 import VideoModal from './components/VideoModal';
 import ContactFormSection from './components/ContactFormSection';
+import SocialShare from './components/SocialShare';
 
 import ProductDetailPage from './components/ProductDetailPage';
 import LocationPage from './components/LocationPage';
@@ -29,10 +30,43 @@ import { getLocationBySlug } from './data/locationData';
 import { GOOGLE_APPS_SCRIPT_CODE, getSheetUrl, setCustomSheetUrl } from './utils/googleSheets';
 import { CheckCircle2, FileSpreadsheet, Copy, Check, Link } from 'lucide-react';
 
+// Helper to parse URL path on initial load & popstate
+function parseUrlRoute() {
+  if (typeof window === 'undefined') {
+    return { tab: 'home', product: null, location: null, blogSlug: null };
+  }
+
+  const hash = window.location.hash.replace('#/', '').replace('#', '');
+  const searchParams = new URLSearchParams(window.location.search);
+  const locParam = searchParams.get('location');
+  const rawPath = window.location.pathname.replace(/^\/|\/$/g, '');
+
+  const slugToTest = locParam || hash || rawPath;
+  if (!slugToTest || slugToTest === 'home') {
+    return { tab: 'home', product: null, location: null, blogSlug: null };
+  }
+
+  if (slugToTest.startsWith('blog')) {
+    const parts = slugToTest.split('/');
+    const blogSlug = parts.length > 1 && parts[1] ? parts[1] : null;
+    return { tab: 'blog', product: null, location: null, blogSlug };
+  }
+
+  const locObj = getLocationBySlug(slugToTest);
+  const prodMatch = PLANT_DATA.products.find(p => p.id === slugToTest);
+
+  if (locObj) {
+    return { tab: locObj.slug, product: null, location: locObj, blogSlug: null };
+  } else if (prodMatch) {
+    return { tab: prodMatch.id, product: prodMatch, location: null, blogSlug: null };
+  } else {
+    return { tab: slugToTest, product: null, location: null, blogSlug: null };
+  }
+}
+
 export default function App() {
-  const [currentTab, setCurrentTab] = useState('home');
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [routeState, setRouteState] = useState(() => parseUrlRoute());
+  const { tab: currentTab, product: selectedProduct, location: selectedLocation, blogSlug: selectedBlogSlug } = routeState;
   
   // Theme state: DEFAULT IS LIGHT MODE ('light')
   const [theme, setTheme] = useState('light');
@@ -41,32 +75,34 @@ export default function App() {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
 
-  // Check URL on initial mount for SEO location slug or product slug (e.g. /csd-project or /mineral-water-plant-manufacturer-in-uttar-pradesh)
+  // Sync state when browser Back / Forward buttons are used
   useEffect(() => {
-    const hash = window.location.hash.replace('#/', '').replace('#', '');
-    const searchParams = new URLSearchParams(window.location.search);
-    const locParam = searchParams.get('location');
-    const path = window.location.pathname.replace(/^\/|\/$/g, '');
+    const handlePopState = () => {
+      setRouteState(parseUrlRoute());
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
-    const slugToTest = locParam || hash || path;
-    if (slugToTest && slugToTest !== 'home') {
-      if (slugToTest.startsWith('blog')) {
-        setCurrentTab('blog');
-      } else {
-        const locObj = getLocationBySlug(slugToTest);
-        const prodMatch = PLANT_DATA.products.find(p => p.id === slugToTest);
-        if (locObj) {
-          setSelectedLocation(locObj);
-          setCurrentTab(locObj.slug);
-        } else if (prodMatch) {
-          setSelectedProduct(prodMatch);
-          setCurrentTab(prodMatch.id);
-        } else {
-          setCurrentTab(slugToTest);
-        }
-      }
-    }
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
+
+  // Update browser address bar (pushState) only when route state changes in client UI
+  useEffect(() => {
+    let targetPath = '/';
+    if (selectedProduct) {
+      targetPath = `/${selectedProduct.id}`;
+    } else if (selectedLocation) {
+      targetPath = `/${selectedLocation.slug}`;
+    } else if (currentTab === 'blog') {
+      targetPath = selectedBlogSlug ? `/blog/${selectedBlogSlug}` : '/blog';
+    } else if (currentTab !== 'home') {
+      targetPath = `/${currentTab}`;
+    }
+
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({}, '', targetPath);
+    }
+  }, [currentTab, selectedProduct, selectedLocation, selectedBlogSlug]);
 
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [modalSource, setModalSource] = useState('Default CTA');
@@ -125,37 +161,48 @@ export default function App() {
   };
 
   const handleSelectTab = (tab) => {
-    setSelectedProduct(null);
-    setSelectedLocation(null);
-    setCurrentTab(tab);
-    const targetPath = tab === 'home' ? '/' : `/${tab}`;
-    if (window.location.pathname !== targetPath) {
-      window.history.pushState({}, '', targetPath);
+    const prodMatch = PLANT_DATA.products.find(p => p.id === tab);
+    const locObj = getLocationBySlug(tab);
+
+    if (prodMatch) {
+      setRouteState({ tab: prodMatch.id, product: prodMatch, location: null, blogSlug: null });
+    } else if (locObj) {
+      setRouteState({ tab: locObj.slug, product: null, location: locObj, blogSlug: null });
+    } else {
+      setRouteState({ tab, product: null, location: null, blogSlug: null });
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Scroll to top when tab changes or reset view and update pushState URL
-  useEffect(() => {
-    const targetPath = currentTab === 'home' ? '/' : `/${currentTab}`;
-    if (window.location.pathname !== targetPath) {
-      window.history.pushState({}, '', targetPath);
-    }
+  const handleSelectProduct = (product) => {
+    setRouteState({ tab: product.id, product, location: null, blogSlug: null });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
-    const locObj = getLocationBySlug(currentTab);
-    const prodMatch = PLANT_DATA.products.find(p => p.id === currentTab);
+  const handleSelectLocation = (slug) => {
+    const locObj = getLocationBySlug(slug);
     if (locObj) {
-      setSelectedLocation(locObj);
-      setSelectedProduct(null);
-    } else if (prodMatch) {
-      setSelectedProduct(prodMatch);
-      setSelectedLocation(null);
+      setRouteState({ tab: locObj.slug, product: null, location: locObj, blogSlug: null });
     } else {
-      setSelectedProduct(null);
-      setSelectedLocation(null);
+      setRouteState({ tab: slug, product: null, location: null, blogSlug: null });
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [currentTab]);
+  };
+
+  const handleSelectArticle = (slug) => {
+    setRouteState({ tab: 'blog', product: null, location: null, blogSlug: slug });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const canonicalUrl = selectedProduct
+    ? `https://ionrecon.info/${selectedProduct.id}`
+    : selectedLocation
+    ? `https://ionrecon.info/${selectedLocation.slug}`
+    : currentTab === 'blog' && selectedBlogSlug
+    ? `https://ionrecon.info/blog/${selectedBlogSlug}`
+    : currentTab === 'home'
+    ? 'https://ionrecon.info/'
+    : `https://ionrecon.info/${currentTab}`;
 
   return (
     <div className={`min-h-screen flex flex-col font-sans relative selection:bg-cyan-500 selection:text-slate-950 transition-colors ${
@@ -163,9 +210,9 @@ export default function App() {
     }`}>
       <Helmet>
         <title>Ion Recon | Mineral Water Plant Manufacturer & Bottling Machine Ghaziabad</title>
-        <meta name="description" content="Ion Recon Ghaziabad is India's leading Mineral Water Plant Manufacturer & Turnkey Solutions Supplier. 40 BPM 30 BPM 60 BPM packaged drinking water plants, RFC monoblock filling machines, SS RO plants & PET blow molding machinery." />
+        <meta name="description" content="Ion Recon: Premier turnkey mineral water plant &amp; bottling machine manufacturer in Ghaziabad. Custom automatic filling lines, commercial RO &amp; CSD plants." />
         <meta name="keywords" content="Ion Recon, Ion Recon Ghaziabad, Ion Recon Industries, Ion Recon Sahibabad, Mineral Water Plant Manufacturer, Packaged Drinking Water Plant Setup, 30 BPM Mineral Water Plant, 40 BPM Package Drinking Water Plant, 60 BPM Mineral Water Plant, 90 BPM Bottling Line, 120 BPM Automatic Mineral Water Plant, 200 BPM High Speed Bottling Line, Turnkey Mineral Water Plant Setup, Mineral Water Plant Setup Cost in India, Mineral Water Plant Manufacturer in Ghaziabad Delhi NCR UP, RFC Monoblock Bottle Filling Machine, 3 in 1 Automatic Bottle Filling Machine, Rinser Filler Capper Monoblock, Automatic 20 Litre Jar Filling Machine, 20L Water Jar Washer Filler Capper, PET Bottle Stretch Blow Molding Machine, Semi Auto 2 Cavity PET Blow Molding Machine, Semi Auto 4 Cavity PET Blow Molding Machine, Fully Automatic 4 Cavity PET Blow Molding Machine, Fully Automatic 6 Cavity Servo PET Blow Molder, Industrial SS RO Water Treatment Plant, Commercial Stainless Steel RO Plant, 1000 LPH RO Water Plant, 2000 LPH SS RO System, 5000 LPH Industrial RO Plant, Ozonator for Mineral Water Plant, UV Water Sterilizer, BOPP Hot-Melt Bottle Labeling Machine, Automatic Self-Adhesive Sticker Labeling Machine, Automatic Web Sealer Shrink Wrapping Machine, Semi Automatic Shrink Wrapping Heating Tunnel, Automatic Water Pouch Packing Machine, Continuous Inkjet CIJ Coder Neelkamal, Thermal Inkjet TIJ Online Batch Coding Machine, MRP Date Printing Machine for PET Bottles, BIS ISI Water Testing Laboratory Equipment Package, Carbonated Soft Drink CSD Plant, Isobaric Counter Pressure Beverage Filling Machine, RTS Fruit Juice Bottling Plant, Mineral Water Plant Profit Margin in India" />
-        <link rel="canonical" href={currentTab === 'home' ? 'https://ionrecon.info/' : `https://ionrecon.info/${currentTab}`} />
+        <link rel="canonical" href={canonicalUrl} />
       </Helmet>
       
       {/* Sticky Header Navbar with Theme Switcher */}
@@ -183,15 +230,8 @@ export default function App() {
         {selectedProduct ? (
           <ProductDetailPage
             product={selectedProduct}
-            onBack={() => {
-              handleSelectTab('home');
-            }}
-            onSelectProduct={(product) => {
-              setSelectedProduct(product);
-              setSelectedLocation(null);
-              setCurrentTab(product.id);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
+            onBack={() => handleSelectTab('home')}
+            onSelectProduct={handleSelectProduct}
             onOpenQuoteModal={handleOpenQuoteModal}
             trackEvent={trackEvent}
             theme={theme}
@@ -199,21 +239,15 @@ export default function App() {
         ) : selectedLocation ? (
           <LocationPage
             location={selectedLocation}
-            onBack={() => {
-              handleSelectTab('home');
-            }}
+            onBack={() => handleSelectTab('home')}
             onOpenQuoteModal={handleOpenQuoteModal}
             trackEvent={trackEvent}
             theme={theme}
-            onSelectLocation={(slug) => {
-              handleSelectTab(slug);
-            }}
+            onSelectLocation={handleSelectLocation}
           />
         ) : currentTab === 'locations' ? (
           <LocationDirectory
-            onSelectLocation={(slug) => {
-              handleSelectTab(slug);
-            }}
+            onSelectLocation={handleSelectLocation}
             theme={theme}
           />
         ) : currentTab === 'blog' ? (
@@ -221,6 +255,8 @@ export default function App() {
             onOpenQuoteModal={handleOpenQuoteModal}
             trackEvent={trackEvent}
             theme={theme}
+            currentArticleSlug={selectedBlogSlug}
+            onSelectArticle={handleSelectArticle}
           />
         ) : currentTab === 'roi-calculator' ? (
           <div className="py-8">
@@ -261,12 +297,7 @@ export default function App() {
             {/* Products Grid Showcase */}
             <ProductsGrid
               onOpenQuoteModal={handleOpenQuoteModal}
-              onSelectProduct={(product) => {
-                setSelectedProduct(product);
-                setSelectedLocation(null);
-                setCurrentTab(product.id);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
+              onSelectProduct={handleSelectProduct}
               trackEvent={trackEvent}
               theme={theme}
             />
@@ -313,7 +344,7 @@ export default function App() {
 
       {/* Footer */}
       <Footer
-        setCurrentTab={setCurrentTab}
+        setCurrentTab={handleSelectTab}
         onOpenQuoteModal={handleOpenQuoteModal}
         theme={theme}
       />
@@ -377,6 +408,9 @@ export default function App() {
           </div>
         </div>
       )}
+
+      {/* Floating Social Media Share Bar */}
+      <SocialShare variant="floating" theme={theme} />
 
     </div>
   );

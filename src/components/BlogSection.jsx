@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { BookOpen, Clock, User, ArrowRight, CheckCircle2, FileText, Sparkles, X, ChevronRight, Share2, HelpCircle } from 'lucide-react';
 import { BLOG_POSTS } from '../data/blogData';
@@ -10,6 +10,15 @@ export default function BlogSection({ onOpenQuoteModal, trackEvent, theme, curre
     currentArticleSlug ? BLOG_POSTS.find(b => b.slug === currentArticleSlug) : null
   );
 
+  useEffect(() => {
+    if (currentArticleSlug) {
+      const found = BLOG_POSTS.find(b => b.slug === currentArticleSlug);
+      if (found) setSelectedArticle(found);
+    } else {
+      setSelectedArticle(null);
+    }
+  }, [currentArticleSlug]);
+
   const categories = ['All', 'Mineral Water Plant', 'CSD Bottling Plant', 'STP Plant', 'ETP Plant', 'BIS & Licensing'];
 
   const filteredPosts = activeCategory === 'All' 
@@ -20,6 +29,11 @@ export default function BlogSection({ onOpenQuoteModal, trackEvent, theme, curre
     setSelectedArticle(post);
     if (onSelectArticle) onSelectArticle(post.slug);
     trackEvent(`Read Blog Article - ${post.title}`, 'blog_article_view');
+  };
+
+  const handleCloseArticle = () => {
+    setSelectedArticle(null);
+    if (onSelectArticle) onSelectArticle(null);
   };
 
   return (
@@ -157,7 +171,7 @@ export default function BlogSection({ onOpenQuoteModal, trackEvent, theme, curre
                 <span>{selectedArticle.category}</span>
               </div>
               <button
-                onClick={() => setSelectedArticle(null)}
+                onClick={handleCloseArticle}
                 className="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors"
               >
                 <X className="w-5 h-5" />
