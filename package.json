@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "sitemap": "node scripts/generateSitemap.js",
-    "build": "node scripts/generateSitemap.js && vite build && node scripts/prerender.js",
+    "llms": "node scripts/generateLlms.js",
+    "build": "node scripts/generateSitemap.js && node scripts/generateLlms.js && vite build && node scripts/prerender.js",
     "lint": "oxlint",
     "preview": "vite preview"
   },
