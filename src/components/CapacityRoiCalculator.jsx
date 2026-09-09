@@ -68,10 +68,10 @@ export default function CapacityRoiCalculator({ onOpenQuoteModal, trackEvent, th
             Ion Recon Capacity & ROI Simulator
           </span>
           <h1 className={`text-3xl sm:text-4xl font-extrabold mt-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>
-            Select Your Production Line <span className="text-gradient-cyan">BPM Speed</span>
+            Mineral Water Plant Setup Cost & <span className="text-gradient-cyan">ROI Calculator</span>
           </h1>
           <p className={`text-sm sm:text-base mt-2 ${isLight ? 'text-slate-600' : 'text-slate-400'}`}>
-            Compare bottle filling capacities, power requirements, floor space, and project profit potential.
+            Compare 30 BPM, 40 BPM, and 60 BPM bottle filling capacities, machinery setup costs, power requirements, and net profit margins in India.
           </p>
         </div>
 
