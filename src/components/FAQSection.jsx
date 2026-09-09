@@ -31,8 +31,48 @@ export default function FAQSection({ onOpenQuoteModal, trackEvent, theme }) {
       isLight ? 'bg-white border-slate-200 text-slate-900' : 'bg-slate-900 border-slate-800 text-white'
     }`}>
       <Helmet>
+        <title>Mineral Water Plant Setup FAQs & Machinery Licensing Guide | Ion Recon</title>
+        <meta name="description" content="Get expert answers to frequently asked questions regarding packaged drinking water plant setup cost, BIS IS 14543 approval, space & power requirements, and machinery selection." />
+        <link rel="canonical" href="https://ionrecon.info/faqs" />
+
+        {/* OpenGraph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Mineral Water Plant Setup FAQs & Machinery Licensing Guide | Ion Recon" />
+        <meta property="og:description" content="Get expert answers to frequently asked questions regarding packaged drinking water plant setup cost, BIS IS 14543 approval, space & power requirements, and machinery selection." />
+        <meta property="og:url" content="https://ionrecon.info/faqs" />
+        <meta property="og:image" content="https://ionrecon.info/images/mineral_water_plant_40bpm.png" />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content="Mineral Water Plant Setup FAQs & Machinery Licensing Guide | Ion Recon" />
+        <meta property="twitter:description" content="Get expert answers to frequently asked questions regarding packaged drinking water plant setup cost, BIS IS 14543 approval, space & power requirements, and machinery selection." />
+        <meta property="twitter:image" content="https://ionrecon.info/images/mineral_water_plant_40bpm.png" />
+
+        {/* FAQ Schema */}
         <script type="application/ld+json">
           {JSON.stringify(faqSchema)}
+        </script>
+
+        {/* BreadcrumbList Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://ionrecon.info/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "FAQs",
+                "item": "https://ionrecon.info/faqs"
+              }
+            ]
+          })}
         </script>
       </Helmet>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -44,9 +84,9 @@ export default function FAQSection({ onOpenQuoteModal, trackEvent, theme }) {
           }`}>
             Frequently Asked Questions
           </span>
-          <h2 className={`text-3xl sm:text-4xl font-extrabold mt-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>
+          <h1 className={`text-3xl sm:text-4xl font-extrabold mt-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>
             Got Questions About <span className="text-gradient-cyan">Setting Up a Water Plant?</span>
-          </h2>
+          </h1>
           <p className={`text-sm sm:text-base mt-2 ${isLight ? 'text-slate-600' : 'text-slate-400'}`}>
             Clear, transparent answers regarding machinery cost, BIS approval, space requirements, and after-sales support.
           </p>

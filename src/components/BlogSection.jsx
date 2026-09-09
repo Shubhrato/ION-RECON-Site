@@ -19,7 +19,7 @@ export default function BlogSection({ onOpenQuoteModal, trackEvent, theme, curre
     }
   }, [currentArticleSlug]);
 
-  const categories = ['All', 'Mineral Water Plant', 'CSD Bottling Plant', 'STP Plant', 'ETP Plant', 'BIS & Licensing'];
+  const categories = ['All', ...Array.from(new Set(BLOG_POSTS.map(p => p.category)))];
 
   const filteredPosts = activeCategory === 'All' 
     ? BLOG_POSTS 
@@ -40,27 +40,124 @@ export default function BlogSection({ onOpenQuoteModal, trackEvent, theme, curre
     <section id="blog-section" className={`py-16 lg:py-24 border-t relative transition-colors ${
       isLight ? 'bg-slate-50 border-slate-200 text-slate-900' : 'bg-slate-950 border-slate-800 text-white'
     }`}>
-      {/* Helmet SEO Meta Tags when an article is open */}
-      {selectedArticle && (
+      {/* Helmet SEO Meta Tags */}
+      {selectedArticle ? (
         <Helmet>
-          <title>{selectedArticle.title} | Ion Recon Guides</title>
+          <title>{`${selectedArticle.title} | Ion Recon Setup Guides`}</title>
           <meta name="description" content={selectedArticle.summary} />
           <link rel="canonical" href={`https://ionrecon.info/blog/${selectedArticle.slug}`} />
+
+          {/* OpenGraph */}
+          <meta property="og:type" content="article" />
+          <meta property="og:title" content={selectedArticle.title} />
+          <meta property="og:description" content={selectedArticle.summary} />
+          <meta property="og:url" content={`https://ionrecon.info/blog/${selectedArticle.slug}`} />
+          <meta property="og:image" content={selectedArticle.image?.startsWith('http') ? selectedArticle.image : `https://ionrecon.info${selectedArticle.image || '/images/mineral_water_plant_40bpm.png'}`} />
+
+          {/* Twitter */}
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta property="twitter:title" content={selectedArticle.title} />
+          <meta property="twitter:description" content={selectedArticle.summary} />
+          <meta property="twitter:image" content={selectedArticle.image?.startsWith('http') ? selectedArticle.image : `https://ionrecon.info${selectedArticle.image || '/images/mineral_water_plant_40bpm.png'}`} />
+
+          {/* Article Schema */}
           <script type="application/ld+json">
             {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Article",
               "headline": selectedArticle.title,
               "description": selectedArticle.summary,
+              "image": [
+                selectedArticle.image?.startsWith('http') ? selectedArticle.image : `https://ionrecon.info${selectedArticle.image}`
+              ],
+              "datePublished": "2026-01-15T08:00:00+05:30",
+              "dateModified": "2026-08-21T10:00:00+05:30",
+              "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": `https://ionrecon.info/blog/${selectedArticle.slug}`
+              },
               "author": {
                 "@type": "Organization",
-                "name": "Ion Recon Industries"
+                "name": "Ion Recon Industries",
+                "url": "https://ionrecon.info/"
               },
               "publisher": {
                 "@type": "Organization",
                 "name": "Ion Recon Industries",
-                "logo": "https://ionrecon.info/images/mineral_water_plant_40bpm.png"
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://ionrecon.info/images/mineral_water_plant_40bpm.png"
+                }
               }
+            })}
+          </script>
+
+          {/* BreadcrumbList Schema */}
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://ionrecon.info/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Blog & Machinery Setup Guides",
+                  "item": "https://ionrecon.info/blog"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": selectedArticle.title,
+                  "item": `https://ionrecon.info/blog/${selectedArticle.slug}`
+                }
+              ]
+            })}
+          </script>
+        </Helmet>
+      ) : (
+        <Helmet>
+          <title>Water Plant & Bottling Machine Setup Guides & Blueprints | Ion Recon</title>
+          <meta name="description" content="Explore expert engineering blueprints, BIS IS 14543 licensing guides, packaged water plant cost calculations, and bottling line setup tutorials by Ion Recon." />
+          <link rel="canonical" href="https://ionrecon.info/blog" />
+
+          {/* OpenGraph */}
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content="Water Plant & Bottling Machine Setup Guides & Blueprints | Ion Recon" />
+          <meta property="og:description" content="Explore expert engineering blueprints, BIS IS 14543 licensing guides, packaged water plant cost calculations, and bottling line setup tutorials by Ion Recon." />
+          <meta property="og:url" content="https://ionrecon.info/blog" />
+          <meta property="og:image" content="https://ionrecon.info/images/mineral_water_plant_40bpm.png" />
+
+          {/* Twitter */}
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta property="twitter:title" content="Water Plant & Bottling Machine Setup Guides & Blueprints | Ion Recon" />
+          <meta property="twitter:description" content="Explore expert engineering blueprints, BIS IS 14543 licensing guides, packaged water plant cost calculations, and bottling line setup tutorials by Ion Recon." />
+          <meta property="twitter:image" content="https://ionrecon.info/images/mineral_water_plant_40bpm.png" />
+
+          {/* BreadcrumbList Schema */}
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://ionrecon.info/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Blog & Machinery Setup Guides",
+                  "item": "https://ionrecon.info/blog"
+                }
+              ]
             })}
           </script>
         </Helmet>
@@ -180,9 +277,9 @@ export default function BlogSection({ onOpenQuoteModal, trackEvent, theme, curre
 
             {/* Title & Metadata */}
             <div className="space-y-3">
-              <h2 className={`text-2xl sm:text-3xl font-extrabold leading-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
+              <h1 className={`text-2xl sm:text-3xl font-extrabold leading-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
                 {selectedArticle.title}
-              </h2>
+              </h1>
               <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 dark:text-slate-400">
                 <span className="flex items-center"><User className="w-3.5 h-3.5 mr-1 text-cyan-500" />{selectedArticle.author}</span>
                 <span>•</span>

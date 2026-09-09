@@ -34,10 +34,12 @@ export default function Navbar({ onOpenQuoteModal, currentTab, setCurrentTab, tr
 
   const mainNavLinks = [
     { id: 'home', label: 'Home' },
-    { id: 'locations', label: 'Locations Served' },
-    { id: 'blog', label: 'Blog & Setup Guides' },
+    { id: 'about-us', label: 'About Us' },
+    { id: 'locations', label: 'Locations' },
+    { id: 'blog', label: 'Guides' },
     { id: 'roi-calculator', label: 'ROI Calculator' },
-    { id: 'faqs', label: 'FAQs & Support' },
+    { id: 'faqs', label: 'FAQs' },
+    { id: 'contact-us', label: 'Contact Us' },
   ];
 
   const productsList = PLANT_DATA.products || [];

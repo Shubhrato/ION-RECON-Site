@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { CheckCircle2, TrendingUp, Layers, Zap, Maximize, ArrowRight } from 'lucide-react';
 import { PLANT_DATA } from '../data/plantData';
 
@@ -16,6 +17,47 @@ export default function CapacityRoiCalculator({ onOpenQuoteModal, trackEvent, th
     <section id="roi-calculator-section" className={`py-16 lg:py-24 relative overflow-hidden transition-colors ${
       isLight ? 'bg-slate-50 text-slate-900' : 'bg-slate-950 text-white'
     }`}>
+      <Helmet>
+        <title>Mineral Water Plant Capacity & Profit ROI Calculator | Ion Recon</title>
+        <meta name="description" content="Calculate mineral water plant production capacity (30 BPM to 200 BPM), daily bottle output, power consumption, floor space requirements, and profit margins." />
+        <link rel="canonical" href="https://ionrecon.info/roi-calculator" />
+
+        {/* OpenGraph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Mineral Water Plant Capacity & Profit ROI Calculator | Ion Recon" />
+        <meta property="og:description" content="Calculate mineral water plant production capacity (30 BPM to 200 BPM), daily bottle output, power consumption, floor space requirements, and profit margins." />
+        <meta property="og:url" content="https://ionrecon.info/roi-calculator" />
+        <meta property="og:image" content="https://ionrecon.info/images/mineral_water_plant_40bpm.png" />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content="Mineral Water Plant Capacity & Profit ROI Calculator | Ion Recon" />
+        <meta property="twitter:description" content="Calculate mineral water plant production capacity (30 BPM to 200 BPM), daily bottle output, power consumption, floor space requirements, and profit margins." />
+        <meta property="twitter:image" content="https://ionrecon.info/images/mineral_water_plant_40bpm.png" />
+
+        {/* BreadcrumbList Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://ionrecon.info/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Capacity & ROI Calculator",
+                "item": "https://ionrecon.info/roi-calculator"
+              }
+            ]
+          })}
+        </script>
+      </Helmet>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
@@ -25,9 +67,9 @@ export default function CapacityRoiCalculator({ onOpenQuoteModal, trackEvent, th
           }`}>
             Ion Recon Capacity & ROI Simulator
           </span>
-          <h2 className={`text-3xl sm:text-4xl font-extrabold mt-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>
+          <h1 className={`text-3xl sm:text-4xl font-extrabold mt-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>
             Select Your Production Line <span className="text-gradient-cyan">BPM Speed</span>
-          </h2>
+          </h1>
           <p className={`text-sm sm:text-base mt-2 ${isLight ? 'text-slate-600' : 'text-slate-400'}`}>
             Compare bottle filling capacities, power requirements, floor space, and project profit potential.
           </p>

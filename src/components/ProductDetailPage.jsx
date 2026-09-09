@@ -119,6 +119,14 @@ const PRODUCT_GALLERIES = {
 };
 
 export default function ProductDetailPage({ product, onBack, onOpenQuoteModal, trackEvent, theme, onSelectProduct }) {
+  const [activeImgIndex, setActiveImgIndex] = useState(0);
+
+  // Sync active image when product changes
+  useEffect(() => {
+    setActiveImgIndex(0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [product?.id]);
+
   if (!product) return null;
 
   const isLight = theme === 'light';
@@ -129,14 +137,6 @@ export default function ProductDetailPage({ product, onBack, onOpenQuoteModal, t
     { url: "/images/mineral_water_plant_40bpm_1784961952136.png", title: "Ion Recon Machinery Line" },
     { url: "/water_plant_real_1785748019896.png", title: "Factory Commissioning" }
   ];
-
-  const [activeImgIndex, setActiveImgIndex] = useState(0);
-
-  // Sync active image when product changes
-  useEffect(() => {
-    setActiveImgIndex(0);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [product.id]);
 
   // Match capacity financial metrics if available (e.g. for 40 BPM / 60 BPM)
   const matchingCapacity = PLANT_DATA.capacities.find(c => 
@@ -168,7 +168,78 @@ export default function ProductDetailPage({ product, onBack, onOpenQuoteModal, t
       <Helmet>
         <title>{product.metaTitle || `${product.title} Manufacturer | Ion Recon Ghaziabad`}</title>
         <meta name="description" content={product.seoContent || product.shortDesc} />
+        <meta name="keywords" content={`${product.title}, ${product.title} Manufacturer, Ion Recon ${product.title}, ${product.category}`} />
         <link rel="canonical" href={`https://ionrecon.info/${product.id}`} />
+
+        {/* OpenGraph */}
+        <meta property="og:type" content="product" />
+        <meta property="og:title" content={product.metaTitle || product.title} />
+        <meta property="og:description" content={product.seoContent || product.shortDesc} />
+        <meta property="og:url" content={`https://ionrecon.info/${product.id}`} />
+        <meta property="og:image" content={product.image?.startsWith('http') ? product.image : `https://ionrecon.info${product.image || '/images/mineral_water_plant_40bpm.png'}`} />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content={product.metaTitle || product.title} />
+        <meta property="twitter:description" content={product.seoContent || product.shortDesc} />
+        <meta property="twitter:image" content={product.image?.startsWith('http') ? product.image : `https://ionrecon.info${product.image || '/images/mineral_water_plant_40bpm.png'}`} />
+
+        {/* Product Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org/",
+            "@type": "Product",
+            "name": product.title,
+            "image": product.image?.startsWith('http') ? product.image : `https://ionrecon.info${product.image || '/images/mineral_water_plant_40bpm.png'}`,
+            "description": product.shortDesc,
+            "brand": {
+              "@type": "Brand",
+              "name": "Ion Recon"
+            },
+            "manufacturer": {
+              "@type": "Organization",
+              "name": "Ion Recon Industries",
+              "url": "https://ionrecon.info/"
+            },
+            "offers": {
+              "@type": "AggregateOffer",
+              "priceCurrency": "INR",
+              "lowPrice": "150000",
+              "highPrice": "3500000",
+              "offerCount": "5",
+              "availability": "https://schema.org/InStock",
+              "itemCondition": "https://schema.org/NewCondition"
+            }
+          })}
+        </script>
+
+        {/* BreadcrumbList Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://ionrecon.info/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Products",
+                "item": "https://ionrecon.info/#products"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": product.title,
+                "item": `https://ionrecon.info/${product.id}`
+              }
+            ]
+          })}
+        </script>
       </Helmet>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -24,6 +24,10 @@ import LocationPage from './components/LocationPage';
 import LocationDirectory from './components/LocationDirectory';
 import BlogSection from './components/BlogSection';
 import CaseStudiesSection from './components/CaseStudiesSection';
+import AboutUsPage from './components/AboutUsPage';
+import ContactUsPage from './components/ContactUsPage';
+import PrivacyPolicyPage from './components/PrivacyPolicyPage';
+import TermsConditionsPage from './components/TermsConditionsPage';
 import Footer from './components/Footer';
 import { PLANT_DATA } from './data/plantData';
 import { getLocationBySlug } from './data/locationData';
@@ -274,6 +278,26 @@ export default function App() {
               theme={theme}
             />
           </div>
+        ) : currentTab === 'about-us' || currentTab === 'about' ? (
+          <AboutUsPage
+            onOpenQuoteModal={handleOpenQuoteModal}
+            trackEvent={trackEvent}
+            theme={theme}
+          />
+        ) : currentTab === 'contact-us' || currentTab === 'contact' ? (
+          <ContactUsPage
+            trackEvent={trackEvent}
+            theme={theme}
+            onFormSuccess={handleFormSuccess}
+          />
+        ) : currentTab === 'privacy-policy' ? (
+          <PrivacyPolicyPage
+            theme={theme}
+          />
+        ) : currentTab === 'terms-and-conditions' || currentTab === 'terms' ? (
+          <TermsConditionsPage
+            theme={theme}
+          />
         ) : (
           <>
             {/* Above the Fold Hero Image */}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Search, MapPin, Building2, ChevronRight, Sparkles, Filter, Globe } from 'lucide-react';
 import { LOCATION_STATES, searchLocations } from '../data/locationData';
 
@@ -13,6 +14,47 @@ export default function LocationDirectory({ onSelectLocation, theme }) {
     <section className={`py-12 sm:py-16 border-t ${
       isLight ? 'bg-slate-100/70 border-slate-200 text-slate-900' : 'bg-slate-950/80 border-slate-800 text-white'
     }`}>
+      <Helmet>
+        <title>PAN India Mineral Water Plant Setup Locations | Ion Recon</title>
+        <meta name="description" content="Explore mineral water plant manufacturing and turnkey setup availability across Uttar Pradesh, Delhi NCR, Rajasthan, Madhya Pradesh, Bihar, Punjab, Gujarat & PAN India by Ion Recon." />
+        <link rel="canonical" href="https://ionrecon.info/locations" />
+
+        {/* OpenGraph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="PAN India Mineral Water Plant Setup Locations | Ion Recon" />
+        <meta property="og:description" content="Explore mineral water plant manufacturing and turnkey setup availability across Uttar Pradesh, Delhi NCR, Rajasthan, Madhya Pradesh, Bihar, Punjab, Gujarat & PAN India by Ion Recon." />
+        <meta property="og:url" content="https://ionrecon.info/locations" />
+        <meta property="og:image" content="https://ionrecon.info/images/mineral_water_plant_40bpm.png" />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content="PAN India Mineral Water Plant Setup Locations | Ion Recon" />
+        <meta property="twitter:description" content="Explore mineral water plant manufacturing and turnkey setup availability across Uttar Pradesh, Delhi NCR, Rajasthan, Madhya Pradesh, Bihar, Punjab, Gujarat & PAN India by Ion Recon." />
+        <meta property="twitter:image" content="https://ionrecon.info/images/mineral_water_plant_40bpm.png" />
+
+        {/* BreadcrumbList Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://ionrecon.info/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Locations Directory",
+                "item": "https://ionrecon.info/locations"
+              }
+            ]
+          })}
+        </script>
+      </Helmet>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Section Header */}
@@ -22,9 +64,9 @@ export default function LocationDirectory({ onSelectLocation, theme }) {
             <span>PAN India Setup Directory (North, Central, West, East & NE)</span>
           </div>
 
-          <h2 className={`text-2xl sm:text-4xl font-extrabold tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
+          <h1 className={`text-2xl sm:text-4xl font-extrabold tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
             Mineral Water Plant Manufacturers by <span className="text-cyan-600 dark:text-cyan-400">City & State</span>
-          </h2>
+          </h1>
 
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
             Select your city or state to explore local turnkey plant options, BIS ISI licensing guidelines, and delivered projects.

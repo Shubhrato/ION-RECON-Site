@@ -466,6 +466,46 @@ export const PLANT_DATA = {
       metaTitle: "BIS ISI Water Testing Laboratory Equipment Package - Ion Recon",
       seoContent: "Complete packaged drinking water chemical and microbiological testing lab equipment manufacturer & supplier. Essential setup for BIS IS 14543 certification. Request quote."
     },
+    {
+      id: "industrial-etp-plant",
+      title: "Industrial Effluent Treatment Plant (ETP Setup)",
+      category: "plant",
+      shortDesc: "Turnkey industrial ETP and Zero Liquid Discharge (ZLD) treatment plant for textile, chemical, pharma & food industries complying with CPCB norms.",
+      capacityRange: "10 KLD to 1,000 KLD",
+      automation: "PLC Controlled Multi-Stage ETP",
+      material: "MS Epoxy Coated / SS 304 Tanks",
+      powerConsumption: "7.5 kW to 45 kW",
+      keyFeatures: [
+        "Physico-Chemical Coagulation & Flocculation Tanks",
+        "High Efficiency Aeration Tank with Air Blowers & Lamella Clarifier",
+        "Tertiary Multi-Media Sand & Carbon Filtration",
+        "Optional Zero Liquid Discharge (ZLD) Multi-Effect Evaporator (MEE)"
+      ],
+      image: "/etp_plant_real_1785748072952.png",
+      badge: "CPCB Compliant",
+      metaTitle: "Industrial Effluent Treatment Plant ETP Manufacturer & Setup Cost - Ion Recon",
+      seoContent: "Industrial Effluent Treatment Plant (ETP) setup & manufacturer in Ghaziabad. Custom ETP plants from 10 KLD to 1000 KLD with Zero Liquid Discharge (ZLD) Multi-Effect Evaporator for chemical, textile & pharma factories. Request free project cost quotation."
+    },
+    {
+      id: "sewage-treatment-plant-stp",
+      title: "Sewage Treatment Plant (STP - MBBR / MBR)",
+      category: "plant",
+      shortDesc: "Commercial and residential Sewage Treatment Plant (STP) utilizing MBBR and MBR membrane technology for apartments, hotels & malls.",
+      capacityRange: "10 KLD to 500 KLD",
+      automation: "Fully Automatic / Containerized STP",
+      material: "FRP / MS Epoxy / Civil Structure",
+      powerConsumption: "5 kW to 30 kW",
+      keyFeatures: [
+        "CPCB / SPCB Compliant Water Discharge Quality (BOD < 10 mg/L)",
+        "MBBR Moving Bed Biofilm Reactor & MBR Membrane Technology",
+        "Treated Water Reuse for Gardening, Flushing & Cooling Towers",
+        "Compact Footprint & Low Noise Operation"
+      ],
+      image: "/stp_plant_real_1785748052700.png",
+      badge: "Zero Odor Tech",
+      metaTitle: "Sewage Treatment Plant STP Manufacturer & Setup Cost - Ion Recon",
+      seoContent: "Sewage Treatment Plant (STP) manufacturer for residential housing societies, malls & commercial buildings. Advanced MBBR & MBR membrane STP plants meeting CPCB discharge standards. Request free price quotation."
+    }
   ],
 
   capacities: [

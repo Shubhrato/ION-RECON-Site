@@ -65,6 +65,16 @@ export default function Footer({ setCurrentTab, onOpenQuoteModal, theme }) {
                 </a>
               </li>
               <li>
+                <a href="/about-us" onClick={(e) => { e.preventDefault(); setCurrentTab('about-us'); }} className="hover:text-cyan-400 font-semibold transition-colors">
+                  About Ion Recon
+                </a>
+              </li>
+              <li>
+                <a href="/contact-us" onClick={(e) => { e.preventDefault(); setCurrentTab('contact-us'); }} className="hover:text-cyan-400 font-semibold transition-colors">
+                  Contact Factory & Sales
+                </a>
+              </li>
+              <li>
                 <a href="/blog" onClick={(e) => { e.preventDefault(); setCurrentTab('blog'); }} className="hover:text-cyan-400 font-bold text-cyan-400 transition-colors">
                   Blog & Industrial Setup Guides
                 </a>
@@ -72,6 +82,11 @@ export default function Footer({ setCurrentTab, onOpenQuoteModal, theme }) {
               <li>
                 <a href="/roi-calculator" onClick={(e) => { e.preventDefault(); setCurrentTab('roi-calculator'); }} className="hover:text-cyan-400 transition-colors">
                   Plant Capacity & ROI Simulator
+                </a>
+              </li>
+              <li>
+                <a href="/faqs" onClick={(e) => { e.preventDefault(); setCurrentTab('faqs'); }} className="hover:text-cyan-400 transition-colors">
+                  Frequently Asked Questions (FAQs)
                 </a>
               </li>
             </ul>
@@ -102,7 +117,7 @@ export default function Footer({ setCurrentTab, onOpenQuoteModal, theme }) {
               <a 
                 href="https://maps.google.com?q=28.66630000,77.34887000" 
                 target="_blank" 
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="inline-flex items-center text-xs font-semibold text-cyan-400 hover:underline"
               >
                 <span>Google Map Directions (Sahibabad Factory)</span>
@@ -124,10 +139,10 @@ export default function Footer({ setCurrentTab, onOpenQuoteModal, theme }) {
               onClick={(e) => { e.preventDefault(); setCurrentTab('locations'); }}
               className="text-xs text-cyan-400 hover:underline font-semibold"
             >
-              View All City & State Pages →
+              Explore Full PAN India Setup Directory →
             </a>
           </div>
-          <div className="flex flex-wrap gap-2 text-[11px]">
+          <div className="flex flex-wrap gap-x-3 gap-y-1.5 text-[11px]">
             {[
               { label: "Uttar Pradesh", slug: "mineral-water-plant-manufacturer-in-uttar-pradesh" },
               { label: "Delhi NCR", slug: "mineral-water-plant-manufacturer-in-delhi-ncr" },
@@ -161,11 +176,15 @@ export default function Footer({ setCurrentTab, onOpenQuoteModal, theme }) {
         <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center text-slate-400 text-[11px] gap-4">
           <p>© 2026 {PLANT_DATA.company.fullName}. All Rights Reserved. Turnkey Mineral Water Plants & Bottling Machinery.</p>
           <div className="flex space-x-4">
-            <span className="hover:text-slate-300 cursor-pointer">Privacy Policy</span>
+            <a href="/about-us" onClick={(e) => { e.preventDefault(); setCurrentTab('about-us'); }} className="hover:text-cyan-400 transition-colors">About Us</a>
             <span>•</span>
-            <span className="hover:text-slate-300 cursor-pointer">Terms & Conditions</span>
+            <a href="/contact-us" onClick={(e) => { e.preventDefault(); setCurrentTab('contact-us'); }} className="hover:text-cyan-400 transition-colors">Contact Us</a>
             <span>•</span>
-            <span className="hover:text-slate-300 cursor-pointer">Sitemap</span>
+            <a href="/privacy-policy" onClick={(e) => { e.preventDefault(); setCurrentTab('privacy-policy'); }} className="hover:text-cyan-400 transition-colors">Privacy Policy</a>
+            <span>•</span>
+            <a href="/terms-and-conditions" onClick={(e) => { e.preventDefault(); setCurrentTab('terms-and-conditions'); }} className="hover:text-cyan-400 transition-colors">Terms & Conditions</a>
+            <span>•</span>
+            <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">XML Sitemap</a>
           </div>
         </div>
 

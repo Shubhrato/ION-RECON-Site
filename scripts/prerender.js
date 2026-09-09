@@ -89,6 +89,24 @@ function getPageMeta(urlStr) {
       category: 'Water Treatment Plants'
     };
   }
+  if (cleanPath === 'industrial-etp-plant') {
+    return {
+      title: 'Industrial Effluent Treatment Plant ETP Manufacturer & Setup Cost | Zero Liquid Discharge ZLD - Ion Recon',
+      description: 'Industrial Effluent Treatment Plant (ETP) setup & manufacturer in Ghaziabad. Custom ETP plants from 10 KLD to 1000 KLD with Zero Liquid Discharge (ZLD) Multi-Effect Evaporator for chemical, textile & pharma factories. Request free price quotation.',
+      canonical,
+      productName: 'Industrial Effluent Treatment Plant (ETP Setup)',
+      category: 'Wastewater Treatment Plants'
+    };
+  }
+  if (cleanPath === 'sewage-treatment-plant-stp') {
+    return {
+      title: 'Sewage Treatment Plant STP Manufacturer & Setup Cost | MBBR & MBR Membrane Systems - Ion Recon',
+      description: 'Sewage Treatment Plant (STP) manufacturer for residential housing societies, malls & commercial buildings. Advanced MBBR & MBR membrane STP plants meeting CPCB discharge standards. Request free price quotation.',
+      canonical,
+      productName: 'Sewage Treatment Plant (STP - MBBR / MBR)',
+      category: 'Wastewater Treatment Plants'
+    };
+  }
   if (cleanPath === 'shrink-wrapping-machine') {
     return {
       title: 'Automatic Web Sealer Shrink Wrapping Machine Manufacturer & Price | Bottle Bundling Heating Tunnel - Ion Recon',
@@ -326,6 +344,35 @@ function getPageMeta(urlStr) {
     };
   }
 
+  if (cleanPath === 'about-us' || cleanPath === 'about') {
+    return {
+      title: 'About Ion Recon Industries | Mineral Water Plant Manufacturer Ghaziabad',
+      description: 'Learn about Ion Recon Industries: Premier turnkey mineral water plant manufacturer & bottling machinery supplier in Sahibabad Industrial Area Site 4, Ghaziabad. 15+ years experience & 500+ projects installed.',
+      canonical
+    };
+  }
+  if (cleanPath === 'contact-us' || cleanPath === 'contact') {
+    return {
+      title: 'Contact Ion Recon Industries | Factory Address & Sales Phone Ghaziabad',
+      description: 'Contact Ion Recon Industries in Sahibabad Industrial Area Site 4, Ghaziabad. Phone: +91 98109 20792. Get free quotation, machinery catalog & factory location map directions.',
+      canonical
+    };
+  }
+  if (cleanPath === 'privacy-policy') {
+    return {
+      title: 'Privacy Policy | Ion Recon Industries Ghaziabad',
+      description: 'Official Privacy Policy of Ion Recon Industries. Learn how we handle lead information, quotation requests, cookies, and data security.',
+      canonical
+    };
+  }
+  if (cleanPath === 'terms-and-conditions' || cleanPath === 'terms') {
+    return {
+      title: 'Terms & Conditions | Ion Recon Industries Ghaziabad',
+      description: 'Official Terms & Conditions for machinery supply, installation, 12-month warranty, and sales policies by Ion Recon Industries.',
+      canonical
+    };
+  }
+
   // Default fallback
   const humanized = cleanPath
     .split('-')
@@ -370,7 +417,7 @@ urls.forEach((fullUrl) => {
     `<meta name="description" content="${meta.description}" />`
   );
 
-  // OG Title & OG URL replacement
+  // OG Title & OG Description & OG URL & OG Image replacement
   pageHtml = pageHtml.replace(
     /<meta property="og:title" content=".*?" \/>/s,
     `<meta property="og:title" content="${meta.title}" />`
@@ -383,6 +430,32 @@ urls.forEach((fullUrl) => {
     /<meta property="og:url" content=".*?" \/>/s,
     `<meta property="og:url" content="${meta.canonical}" />`
   );
+  if (meta.image) {
+    pageHtml = pageHtml.replace(
+      /<meta property="og:image" content=".*?" \/>/s,
+      `<meta property="og:image" content="${meta.image}" />`
+    );
+  }
+
+  // Twitter Card Meta Replacement
+  pageHtml = pageHtml.replace(
+    /<meta property="twitter:title" content=".*?" \/>/s,
+    `<meta property="twitter:title" content="${meta.title}" />`
+  );
+  pageHtml = pageHtml.replace(
+    /<meta property="twitter:description" content=".*?" \/>/s,
+    `<meta property="twitter:description" content="${meta.description}" />`
+  );
+  pageHtml = pageHtml.replace(
+    /<meta property="twitter:url" content=".*?" \/>/s,
+    `<meta property="twitter:url" content="${meta.canonical}" />`
+  );
+  if (meta.image) {
+    pageHtml = pageHtml.replace(
+      /<meta property="twitter:image" content=".*?" \/>/s,
+      `<meta property="twitter:image" content="${meta.image}" />`
+    );
+  }
 
   // Inject or replace canonical link tag before </head>
   if (pageHtml.includes('<link rel="canonical"')) {
@@ -403,7 +476,7 @@ urls.forEach((fullUrl) => {
       "@context": "https://schema.org/",
       "@type": "Product",
       "name": meta.productName,
-      "image": "https://ionrecon.info/images/bopp_labeling_machine.png",
+      "image": meta.image || "https://ionrecon.info/images/mineral_water_plant_40bpm.png",
       "description": meta.description,
       "brand": {
         "@type": "Brand",
@@ -411,15 +484,17 @@ urls.forEach((fullUrl) => {
       },
       "manufacturer": {
         "@type": "Organization",
-        "name": "Ion Recon Industries"
+        "name": "Ion Recon Industries",
+        "url": "https://ionrecon.info/"
       },
       "offers": {
         "@type": "AggregateOffer",
         "priceCurrency": "INR",
         "lowPrice": "150000",
-        "highPrice": "2500000",
-        "offerCount": "10",
-        "availability": "https://schema.org/InStock"
+        "highPrice": "3500000",
+        "offerCount": "5",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition"
       }
     };
 
