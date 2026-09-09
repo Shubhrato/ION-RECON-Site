@@ -694,4 +694,35 @@
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
+  <!-- Healthy Lifestyle & Wellness Guides -->
+  <url>
+    <loc>https://ionrecon.info/blog/quick-healthy-lifestyle-habits-for-busy-professionals</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ionrecon.info/blog/how-to-start-a-healthy-lifestyle-in-5-simple-steps</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ionrecon.info/blog/simple-hydration-habits-to-boost-daily-energy</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ionrecon.info/blog/5-minute-daily-habits-for-a-healthier-lifestyle</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://ionrecon.info/blog/micro-habits-for-healthy-lifestyle-and-mental-wellness</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
 </urlset>

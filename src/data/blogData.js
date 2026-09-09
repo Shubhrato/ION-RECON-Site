@@ -680,6 +680,118 @@ export const BLOG_POSTS = [
         content: 'Requires minimal civil work. Can be installed and fully operational on site within 48 hours for construction camps, remote resorts, and small industrial units.'
       }
     ]
+  },
+
+  // --- CLUSTER 7: Healthy Lifestyle & Hydration Habits ---
+  {
+    id: 'quick-healthy-lifestyle-habits-for-busy-professionals',
+    slug: 'quick-healthy-lifestyle-habits-for-busy-professionals',
+    category: 'Healthy Lifestyle & Wellness',
+    categoryTag: 'Daily Habits',
+    title: 'Quick Healthy Lifestyle Habits for Busy Professionals (Daily Hydration & Energy)',
+    summary: 'Simple, actionable micro-habits for busy professionals: morning hydration protocols, desk posture resets, 5-minute movement breaks, and clean water habit stacking.',
+    readTime: '7 min read',
+    date: 'September 2026',
+    author: 'Health & Wellness Editorial, Ion Recon',
+    image: '/images/mineral_water_plant_40bpm.png',
+    sections: [
+      {
+        heading: '1. Morning Hydration Habit Stacking',
+        content: 'Drink 500ml of fresh, purified mineral water immediately upon waking. Rehydrating after 7-8 hours of sleep restores metabolic function, flushes toxins, and boosts cognitive alertness before caffeine intake.'
+      },
+      {
+        heading: '2. 50-10 Desk Work Rule',
+        content: 'For every 50 minutes of continuous desk work, take a 10-minute active break to drink water, stretch, and step away from digital screens to reduce eye strain and fatigue.'
+      }
+    ]
+  },
+  {
+    id: 'how-to-start-a-healthy-lifestyle-in-5-simple-steps',
+    slug: 'how-to-start-a-healthy-lifestyle-in-5-simple-steps',
+    category: 'Healthy Lifestyle & Wellness',
+    categoryTag: 'Lifestyle Guide',
+    title: 'How to Start a Healthy Lifestyle in 5 Simple Steps (Beginner Blueprint)',
+    summary: 'A beginner-friendly roadmap to building sustainable wellness habits: upgrading drinking water quality, balanced nutrition, daily 20-minute movement, sleep hygiene, and stress relief.',
+    readTime: '8 min read',
+    date: 'September 2026',
+    author: 'Wellness & Nutrition Desk, Ion Recon',
+    image: '/images/ss-ro-plant-1.jpg',
+    sections: [
+      {
+        heading: '1. Upgrade Your Daily Water Quality',
+        content: 'Consuming purified ozonated mineral water free from heavy metals and TDS impurities improves digestion, nutrient absorption, and skin elasticity.'
+      },
+      {
+        heading: '2. Consistent Sleep & Movement Schedule',
+        content: 'Aim for 7-8 hours of restful sleep daily by setting a fixed bedtime and incorporating a 20-minute daily outdoor walk to regulate circadian rhythms.'
+      }
+    ]
+  },
+  {
+    id: 'simple-hydration-habits-to-boost-daily-energy',
+    slug: 'simple-hydration-habits-to-boost-daily-energy',
+    category: 'Healthy Lifestyle & Wellness',
+    categoryTag: 'Hydration Habits',
+    title: 'Simple Hydration Habits to Boost Daily Energy & Vitality',
+    summary: 'How proper daily fluid intake impacts cellular energy, brain clarity, and athletic recovery. Simple guidelines on calculating daily water requirements and electrolyte balance.',
+    readTime: '6 min read',
+    date: 'September 2026',
+    author: 'Human Performance & Hydration Team, Ion Recon',
+    image: '/images/mineral_water_plant_40bpm.png',
+    sections: [
+      {
+        heading: '1. Calculating Your Personal Water Intake',
+        content: 'A healthy adult requires approximately 35ml of water per kg of body weight. For a 70kg individual, daily optimal hydration is roughly 2.5 to 3.0 Liters of clean mineral water.'
+      },
+      {
+        heading: '2. Pre-Meal Hydration for Digestion',
+        content: 'Drinking a glass of purified water 30 minutes before meals aids stomach acid preparation, enhances nutrient digestion, and prevents overeating.'
+      }
+    ]
+  },
+  {
+    id: '5-minute-daily-habits-for-a-healthier-lifestyle',
+    slug: '5-minute-daily-habits-for-a-healthier-lifestyle',
+    category: 'Healthy Lifestyle & Wellness',
+    categoryTag: 'Micro Habits',
+    title: '5-Minute Daily Habits for a Healthier Lifestyle & Better Digestion',
+    summary: 'Transform your health with micro-habits that take less than 5 minutes a day: deep diaphragmatic breathing, morning water ritual, quick body stretches, and screen-free meals.',
+    readTime: '6 min read',
+    date: 'September 2026',
+    author: 'Wellness & Lifestyle Team, Ion Recon',
+    image: '/images/water-testing-lab-equipment-1.jpg',
+    sections: [
+      {
+        heading: '1. 5-Minute Morning Mobility Stretch',
+        content: 'Spend 5 minutes stretching spine, hamstrings, and shoulders right after drinking morning water to wake up nervous system and circulation.'
+      },
+      {
+        heading: '2. Screen-Free Mindful Eating',
+        content: 'Dedicating just 5 extra minutes to chew food thoroughly without smartphone distractions improves gut motility and satiety signals.'
+      }
+    ]
+  },
+  {
+    id: 'micro-habits-for-healthy-lifestyle-and-mental-wellness',
+    slug: 'micro-habits-for-healthy-lifestyle-and-mental-wellness',
+    category: 'Healthy Lifestyle & Wellness',
+    categoryTag: 'Mental Wellness',
+    title: 'Micro Habits for a Healthy Lifestyle, Clean Drinking Water & Mental Wellness',
+    summary: 'Connecting physical hydration and clean drinking water with cognitive performance, mood stability, and reduced anxiety levels in daily life.',
+    readTime: '7 min read',
+    date: 'September 2026',
+    author: 'Mind & Body Research, Ion Recon',
+    image: '/images/ss-ro-plant-1.jpg',
+    sections: [
+      {
+        heading: '1. Dehydration and Mood Dynamics',
+        content: 'Mild dehydration (even 1-2% loss of body water) causes mood swings, head fatigue, and anxiety. Maintaining consistent hydration stabilizes neurotransmitter production.'
+      },
+      {
+        heading: '2. Daily Gratitude & Evening Wind-Down Ritual',
+        content: 'Pairing evening hydration with 2 minutes of gratitude journaling reduces cortisol stress levels and promotes restorative REM sleep.'
+      }
+    ]
   }
 ];
 
