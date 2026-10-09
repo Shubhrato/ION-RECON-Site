@@ -79,9 +79,9 @@ export default function LeadModal({ isOpen, onClose, triggerSource, trackEvent, 
             />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
             <div>
-              <label className={`block text-xs font-bold mb-1 ${isLight ? 'text-slate-700' : 'text-slate-300'}`}>Phone / Mobile Number *</label>
+              <label className={`block text-xs font-bold mb-1.5 ${isLight ? 'text-slate-700' : 'text-slate-300'}`}>Phone / Mobile Number *</label>
               <input
                 type="tel"
                 required
@@ -94,10 +94,10 @@ export default function LeadModal({ isOpen, onClose, triggerSource, trackEvent, 
               />
             </div>
             <div>
-              <label className={`block text-xs font-bold mb-1 ${isLight ? 'text-slate-700' : 'text-slate-300'}`}>Email Address</label>
+              <label className={`block text-xs font-bold mb-1.5 ${isLight ? 'text-slate-700' : 'text-slate-300'}`}>Email Address</label>
               <input
                 type="email"
-                placeholder="info@ionrecon.info"
+                placeholder="info@ionrecon.online"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className={`w-full px-3.5 py-2.5 rounded-xl text-sm ${
@@ -107,7 +107,7 @@ export default function LeadModal({ isOpen, onClose, triggerSource, trackEvent, 
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
             <div>
               <label className={`block text-xs font-bold mb-1 ${isLight ? 'text-slate-700' : 'text-slate-300'}`}>State / City *</label>
               <input

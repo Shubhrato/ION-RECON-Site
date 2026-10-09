@@ -11,14 +11,14 @@ export default function PrivacyPolicyPage({ theme }) {
       <Helmet>
         <title>Privacy Policy | Ion Recon Industries Ghaziabad</title>
         <meta name="description" content="Official Privacy Policy of Ion Recon Industries. Learn how we handle lead information, quotation requests, cookies, and data security." />
-        <link rel="canonical" href="https://ionrecon.info/privacy-policy" />
+        <link rel="canonical" href="https://ionrecon.online/privacy-policy" />
 
         {/* OpenGraph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Privacy Policy | Ion Recon Industries Ghaziabad" />
         <meta property="og:description" content="Official Privacy Policy of Ion Recon Industries." />
-        <meta property="og:url" content="https://ionrecon.info/privacy-policy" />
-        <meta property="og:image" content="https://ionrecon.info/images/mineral_water_plant_40bpm.png" />
+        <meta property="og:url" content="https://ionrecon.online/privacy-policy" />
+        <meta property="og:image" content="https://ionrecon.online/images/mineral_water_plant_40bpm.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary" />
@@ -35,13 +35,13 @@ export default function PrivacyPolicyPage({ theme }) {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://ionrecon.info/"
+                "item": "https://ionrecon.online/"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Privacy Policy",
-                "item": "https://ionrecon.info/privacy-policy"
+                "item": "https://ionrecon.online/privacy-policy"
               }
             ]
           })}
@@ -65,7 +65,7 @@ export default function PrivacyPolicyPage({ theme }) {
           <section className="space-y-3">
             <h2 className={`text-xl font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>1. Information We Collect</h2>
             <p>
-              When you submit a price quote request or inquiry form on <strong>Ion Recon Industries</strong> (ionrecon.info), we collect your name, phone number, email address, city/state location, and requested machinery specifications.
+              When you submit a price quote request or inquiry form on <strong>Ion Recon Industries</strong> (ionrecon.online), we collect your name, phone number, email address, city/state location, and requested machinery specifications.
             </p>
           </section>
 
@@ -101,7 +101,7 @@ export default function PrivacyPolicyPage({ theme }) {
               If you have any questions regarding our privacy practices, please contact:<br />
               <strong>Ion Recon Industries</strong><br />
               57/1/9, Sahibabad Industrial Area Site 4, Ghaziabad - 201010, Uttar Pradesh, India<br />
-              Email: <a href="mailto:info@ionrecon.info" className="text-cyan-500 underline">info@ionrecon.info</a> | Phone: +91 98109 20792
+              Email: <a href="mailto:info@ionrecon.online" className="text-cyan-500 underline">info@ionrecon.online</a> | Phone: +91 98109 20792
             </p>
           </section>
         </div>

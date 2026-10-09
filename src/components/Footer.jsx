@@ -37,7 +37,7 @@ export default function Footer({ setCurrentTab, onOpenQuoteModal, theme }) {
 
           {/* Col 2: Quick Links */}
           <div className="space-y-3">
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider">Turnkey Solutions</h4>
+            <h3 className="text-sm font-bold text-white tracking-wide">Turnkey Solutions</h3>
             <ul className="space-y-2">
               <li>
                 <a href="/40-bpm-mineral-water-plant" onClick={(e) => { e.preventDefault(); setCurrentTab('40-bpm-mineral-water-plant'); }} className="hover:text-cyan-400 transition-colors">
@@ -94,7 +94,7 @@ export default function Footer({ setCurrentTab, onOpenQuoteModal, theme }) {
 
           {/* Col 3: Contact Details */}
           <div className="space-y-3">
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider">Factory & Sales Contact</h4>
+            <h3 className="text-sm font-bold text-white tracking-wide">Factory & Sales Contact</h3>
             <div className="space-y-2 text-slate-300">
               <p className="flex items-start space-x-2">
                 <MapPin className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
@@ -130,50 +130,45 @@ export default function Footer({ setCurrentTab, onOpenQuoteModal, theme }) {
 
         {/* Target Locations Served SEO Interlinking Directory */}
         <div className="border-t border-slate-800/80 pt-6">
-          <div className="mb-3">
-            <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-              Mineral Water Plant Setup Locations (North, Central, West, East & NE India)
-            </h4>
-            <a 
-              href="/locations"
-              onClick={(e) => { e.preventDefault(); setCurrentTab('locations'); }}
-              className="text-xs text-cyan-400 hover:underline font-semibold"
-            >
-              Explore Full PAN India Setup Directory →
-            </a>
-          </div>
-          <div className="flex flex-wrap gap-x-3 gap-y-1.5 text-[11px]">
-            {[
-              { label: "Uttar Pradesh", slug: "mineral-water-plant-manufacturer-in-uttar-pradesh" },
-              { label: "Delhi NCR", slug: "mineral-water-plant-manufacturer-in-delhi-ncr" },
-              { label: "Rajasthan", slug: "mineral-water-plant-manufacturer-in-rajasthan" },
-              { label: "Madhya Pradesh", slug: "mineral-water-plant-manufacturer-in-madhya-pradesh" },
-              { label: "Bihar", slug: "mineral-water-plant-manufacturer-in-bihar" },
-              { label: "Punjab", slug: "mineral-water-plant-manufacturer-in-punjab" },
-              { label: "Haryana", slug: "mineral-water-plant-manufacturer-in-haryana" },
-              { label: "Gujarat", slug: "mineral-water-plant-manufacturer-in-gujarat" },
-              { label: "Maharashtra", slug: "mineral-water-plant-manufacturer-in-maharashtra" },
-              { label: "West Bengal", slug: "mineral-water-plant-manufacturer-in-west-bengal" },
-              { label: "Odisha", slug: "mineral-water-plant-manufacturer-in-odisha" },
-              { label: "Chhattisgarh", slug: "mineral-water-plant-manufacturer-in-chhattisgarh" },
-              { label: "Uttarakhand", slug: "mineral-water-plant-manufacturer-in-uttarakhand" },
-              { label: "Himachal Pradesh", slug: "mineral-water-plant-manufacturer-in-himachal-pradesh" },
-              { label: "Assam & NE", slug: "mineral-water-plant-manufacturer-in-assam-northeast" }
-            ].map((loc, i) => (
-              <a 
-                key={i} 
-                href={`/${loc.slug}`}
-                onClick={(e) => { e.preventDefault(); setCurrentTab(loc.slug); }}
-                className="text-slate-400 hover:text-cyan-400 transition-colors"
-              >
-                {loc.label} •
-              </a>
-            ))}
-          </div>
+          <details className="group">
+            <summary className="text-xs font-bold text-slate-400 cursor-pointer flex items-center justify-between hover:text-cyan-400 transition-colors list-none">
+              <span>Mineral Water Plant Setup Locations (15+ Target States Across India)</span>
+              <span className="text-cyan-400 group-open:rotate-180 transition-transform text-[10px]">▼</span>
+            </summary>
+            
+            <div className="flex flex-wrap gap-x-3 gap-y-1.5 text-xs pt-4">
+              {[
+                { label: "Uttar Pradesh", slug: "mineral-water-plant-manufacturer-in-uttar-pradesh" },
+                { label: "Delhi NCR", slug: "mineral-water-plant-manufacturer-in-delhi-ncr" },
+                { label: "Rajasthan", slug: "mineral-water-plant-manufacturer-in-rajasthan" },
+                { label: "Madhya Pradesh", slug: "mineral-water-plant-manufacturer-in-madhya-pradesh" },
+                { label: "Bihar", slug: "mineral-water-plant-manufacturer-in-bihar" },
+                { label: "Punjab", slug: "mineral-water-plant-manufacturer-in-punjab" },
+                { label: "Haryana", slug: "mineral-water-plant-manufacturer-in-haryana" },
+                { label: "Gujarat", slug: "mineral-water-plant-manufacturer-in-gujarat" },
+                { label: "Maharashtra", slug: "mineral-water-plant-manufacturer-in-maharashtra" },
+                { label: "West Bengal", slug: "mineral-water-plant-manufacturer-in-west-bengal" },
+                { label: "Odisha", slug: "mineral-water-plant-manufacturer-in-odisha" },
+                { label: "Chhattisgarh", slug: "mineral-water-plant-manufacturer-in-chhattisgarh" },
+                { label: "Uttarakhand", slug: "mineral-water-plant-manufacturer-in-uttarakhand" },
+                { label: "Himachal Pradesh", slug: "mineral-water-plant-manufacturer-in-himachal-pradesh" },
+                { label: "Assam & NE", slug: "mineral-water-plant-manufacturer-in-assam-northeast" }
+              ].map((loc, i) => (
+                <a 
+                  key={i} 
+                  href={`/${loc.slug}`}
+                  onClick={(e) => { e.preventDefault(); setCurrentTab(loc.slug); }}
+                  className="text-slate-400 hover:text-cyan-400 transition-colors"
+                >
+                  {loc.label} •
+                </a>
+              ))}
+            </div>
+          </details>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center text-slate-400 text-[11px] gap-4">
+        <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center text-slate-400 text-xs gap-4">
           <p>© 2026 {PLANT_DATA.company.fullName}. All Rights Reserved. Turnkey Mineral Water Plants & Bottling Machinery.</p>
           <div className="flex space-x-4">
             <a href="/about-us" onClick={(e) => { e.preventDefault(); setCurrentTab('about-us'); }} className="hover:text-cyan-400 transition-colors">About Us</a>

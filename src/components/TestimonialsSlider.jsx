@@ -61,7 +61,7 @@ export default function TestimonialsSlider({ theme }) {
               isLight ? 'border-slate-200' : 'border-slate-800'
             }`}>
               <div>
-                <h4 className={`text-lg font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>{current.name}</h4>
+                <h3 className={`text-lg font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>{current.name}</h3>
                 <div className="flex items-center space-x-3 text-xs mt-1">
                   <span className="flex items-center text-cyan-600 dark:text-cyan-400 font-semibold">
                     <Building className="w-3.5 h-3.5 mr-1" />

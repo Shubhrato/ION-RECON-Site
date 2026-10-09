@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 const llmsPath = path.join(rootDir, 'public', 'llms.txt');
 
-const DOMAIN = 'https://ionrecon.info';
+const DOMAIN = 'https://ionrecon.online';
 
 console.log('Generating fresh llms.txt for Ion Recon...');
 

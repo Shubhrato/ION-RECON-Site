@@ -11,14 +11,14 @@ export default function TermsConditionsPage({ theme }) {
       <Helmet>
         <title>Terms & Conditions | Ion Recon Industries Ghaziabad</title>
         <meta name="description" content="Official Terms & Conditions for machinery supply, installation, 12-month warranty, and sales policies by Ion Recon Industries." />
-        <link rel="canonical" href="https://ionrecon.info/terms-and-conditions" />
+        <link rel="canonical" href="https://ionrecon.online/terms-and-conditions" />
 
         {/* OpenGraph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Terms & Conditions | Ion Recon Industries Ghaziabad" />
         <meta property="og:description" content="Official Terms & Conditions of Ion Recon Industries." />
-        <meta property="og:url" content="https://ionrecon.info/terms-and-conditions" />
-        <meta property="og:image" content="https://ionrecon.info/images/mineral_water_plant_40bpm.png" />
+        <meta property="og:url" content="https://ionrecon.online/terms-and-conditions" />
+        <meta property="og:image" content="https://ionrecon.online/images/mineral_water_plant_40bpm.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary" />
@@ -35,13 +35,13 @@ export default function TermsConditionsPage({ theme }) {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://ionrecon.info/"
+                "item": "https://ionrecon.online/"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Terms & Conditions",
-                "item": "https://ionrecon.info/terms-and-conditions"
+                "item": "https://ionrecon.online/terms-and-conditions"
               }
             ]
           })}

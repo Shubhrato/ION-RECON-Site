@@ -1,14 +1,15 @@
-import React from 'react';
-import { Factory, ShieldCheck, CheckCircle2, Award } from 'lucide-react';
+import React, { useState } from 'react';
+import { Factory, ShieldCheck, CheckCircle2, Award, ChevronDown } from 'lucide-react';
 import SocialShare from './SocialShare';
 
 export default function SeoContent({ theme }) {
+  const [showKeywords, setShowKeywords] = useState(false);
   const isLight = theme === 'light';
 
   const keywordCategories = [
     {
       category: "Brand & Direct Search",
-      keywords: ["Ion Recon", "Ion Recon Ghaziabad", "Ion Recon Industries", "Ion Recon Mineral Water Plant", "ionrecon.info"]
+      keywords: ["Ion Recon", "Ion Recon Ghaziabad", "Ion Recon Industries", "Ion Recon Mineral Water Plant", "ionrecon.online"]
     },
     {
       category: "Mineral Water Plants & Turnkey Projects",
@@ -120,28 +121,41 @@ export default function SeoContent({ theme }) {
             />
           </div>
 
-          <div className="pt-6">
-            <h3 className={`text-lg font-bold mb-4 ${isLight ? 'text-slate-900' : 'text-white'}`}>
-              Target Search Index &amp; Technical Keywords Matrix
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-              {keywordCategories.map((cat, idx) => (
-                <div key={idx} className={`p-4 rounded-xl border ${
-                  isLight ? 'bg-white border-slate-200' : 'bg-slate-950/60 border-slate-800'
-                }`}>
-                  <h4 className="font-bold text-cyan-500 mb-2">{cat.category}</h4>
-                  <div className="flex flex-wrap gap-1.5">
-                    {cat.keywords.map((kw, kIdx) => (
-                      <span key={kIdx} className={`px-2 py-0.5 rounded text-[11px] ${
-                        isLight ? 'bg-slate-100 text-slate-700' : 'bg-slate-800 text-slate-300'
-                      }`}>
-                        {kw}
-                      </span>
-                    ))}
+          {/* Collapsible Technical Keywords Matrix */}
+          <div className="pt-6 border-t border-slate-200 dark:border-slate-800">
+            <button
+              onClick={() => setShowKeywords(!showKeywords)}
+              className={`w-full py-3 px-4 rounded-xl border flex items-center justify-between font-semibold text-xs transition-all ${
+                isLight 
+                  ? 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100' 
+                  : 'bg-slate-900/50 border-slate-800 text-slate-300 hover:bg-slate-800'
+              }`}
+              aria-expanded={showKeywords}
+            >
+              <span>Target Search Index &amp; Technical Keywords Matrix ({keywordCategories.length} Categories)</span>
+              <ChevronDown className={`w-4 h-4 text-cyan-500 transition-transform duration-200 ${showKeywords ? 'rotate-180' : ''}`} />
+            </button>
+
+            {showKeywords && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs mt-4 animate-fadeIn">
+                {keywordCategories.map((cat, idx) => (
+                  <div key={idx} className={`p-4 rounded-xl border ${
+                    isLight ? 'bg-white border-slate-200' : 'bg-slate-950/60 border-slate-800'
+                  }`}>
+                    <h3 className="font-bold text-xs text-cyan-600 dark:text-cyan-400 mb-2">{cat.category}</h3>
+                    <div className="flex flex-wrap gap-x-2 gap-y-1">
+                      {cat.keywords.map((kw, kIdx) => (
+                        <span key={kIdx} className={`text-xs ${
+                          isLight ? 'text-slate-600' : 'text-slate-400'
+                        }`}>
+                          {kw} {kIdx < cat.keywords.length - 1 ? '•' : ''}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 

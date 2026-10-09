@@ -102,7 +102,7 @@ export default function Navbar({ onOpenQuoteModal, currentTab, setCurrentTab, tr
               <span className={`text-xl font-extrabold tracking-tight block leading-none ${isLight ? 'text-slate-900' : 'text-white'}`}>
                 ION<span className="text-cyan-600 dark:text-cyan-400">RECON</span>
               </span>
-              <span className={`text-[10px] uppercase font-bold tracking-widest block mt-1 ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>
+              <span className={`text-xs font-semibold tracking-normal block mt-0.5 ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>
                 Mineral Water Plants & Filling Machines
               </span>
             </div>
@@ -267,7 +267,7 @@ export default function Navbar({ onOpenQuoteModal, currentTab, setCurrentTab, tr
                 trackEvent('Get Quotation Header CTA Clicked', 'conversion_quote_open');
                 onOpenQuoteModal('Header Navbar CTA');
               }}
-              className="flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all hover:scale-105"
+              className="flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs shadow-md hover:shadow-lg transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400"
             >
               <span>Get Free Quote</span>
             </button>

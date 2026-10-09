@@ -42,20 +42,20 @@ export default function LocationPage({ location, onBack, onOpenQuoteModal, track
         <title>{location.seoTitle}</title>
         <meta name="description" content={location.seoDescription} />
         <meta name="keywords" content={location.keywords} />
-        <link rel="canonical" href={`https://ionrecon.info/${location.slug}`} />
+        <link rel="canonical" href={`https://ionrecon.online/${location.slug}`} />
 
         {/* OpenGraph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={location.seoTitle} />
         <meta property="og:description" content={location.seoDescription} />
-        <meta property="og:url" content={`https://ionrecon.info/${location.slug}`} />
-        <meta property="og:image" content="https://ionrecon.info/images/mineral_water_plant_40bpm.png" />
+        <meta property="og:url" content={`https://ionrecon.online/${location.slug}`} />
+        <meta property="og:image" content="https://ionrecon.online/images/mineral_water_plant_40bpm.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:title" content={location.seoTitle} />
         <meta property="twitter:description" content={location.seoDescription} />
-        <meta property="twitter:image" content="https://ionrecon.info/images/mineral_water_plant_40bpm.png" />
+        <meta property="twitter:image" content="https://ionrecon.online/images/mineral_water_plant_40bpm.png" />
 
         {/* Structured Schema for Local Manufacturing in this location */}
         <script type="application/ld+json">
@@ -64,7 +64,7 @@ export default function LocationPage({ location, onBack, onOpenQuoteModal, track
             "@type": "ManufacturingBusiness",
             "name": `Ion Recon - Mineral Water Plant Manufacturer in ${location.displayName}`,
             "description": location.seoDescription,
-            "url": `https://ionrecon.info/${location.slug}`,
+            "url": `https://ionrecon.online/${location.slug}`,
             "telephone": PLANT_DATA.company.phonePrimary,
             "areaServed": location.displayName,
             "address": {
@@ -90,19 +90,19 @@ export default function LocationPage({ location, onBack, onOpenQuoteModal, track
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://ionrecon.info/"
+                "item": "https://ionrecon.online/"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Locations Directory",
-                "item": "https://ionrecon.info/locations"
+                "item": "https://ionrecon.online/locations"
               },
               {
                 "@type": "ListItem",
                 "position": 3,
                 "name": location.displayName,
-                "item": `https://ionrecon.info/${location.slug}`
+                "item": `https://ionrecon.online/${location.slug}`
               }
             ]
           })}

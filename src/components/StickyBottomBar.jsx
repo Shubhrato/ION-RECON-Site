@@ -17,7 +17,7 @@ export default function StickyBottomBar({ onOpenQuoteModal, trackEvent, theme })
   };
 
   return (
-    <div className={`fixed bottom-0 left-0 right-0 z-40 border-t p-2.5 sm:px-6 shadow-2xl backdrop-blur-md transition-colors ${
+    <div className={`fixed bottom-0 left-0 right-0 z-40 md:hidden border-t p-2.5 sm:px-6 shadow-2xl backdrop-blur-md transition-colors ${
       isLight ? 'bg-white/95 border-slate-200 text-slate-900' : 'bg-slate-950/95 border-slate-800 text-white'
     }`}>
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
@@ -44,16 +44,16 @@ export default function StickyBottomBar({ onOpenQuoteModal, trackEvent, theme })
           <span>WhatsApp</span>
         </button>
 
-        {/* Get Quote Button */}
+        {/* Get Free Quote Button */}
         <button
           onClick={() => {
             trackEvent('Sticky Get Quote Clicked', 'conversion_quote_open');
-            onOpenQuoteModal('Sticky Mobile/Desktop Bottom Bar');
+            onOpenQuoteModal('Sticky Mobile Bottom Bar');
           }}
-          className="flex-1 py-2.5 px-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-xs sm:text-sm font-extrabold flex items-center justify-center space-x-1.5 shadow-lg shadow-cyan-600/25 transition-all"
+          className="flex-1 py-2.5 px-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-xs sm:text-sm font-bold flex items-center justify-center space-x-1.5 shadow-lg shadow-cyan-600/25 transition-all"
         >
           <FileText className="w-4 h-4" />
-          <span>Get Quote</span>
+          <span>Get Free Quote</span>
         </button>
 
       </div>

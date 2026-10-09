@@ -33,7 +33,7 @@ export default function CaseStudiesSection({ onOpenQuoteModal, trackEvent, theme
           {caseStudies.map((study) => (
             <div
               key={study.id}
-              className={`rounded-3xl border overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-2xl ${
+              className={`rounded-2xl border overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-2xl h-full ${
                 isLight ? 'bg-white border-slate-200 shadow-md' : 'bg-slate-900 border-slate-800'
               }`}
             >
@@ -48,26 +48,26 @@ export default function CaseStudiesSection({ onOpenQuoteModal, trackEvent, theme
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent" />
                   
-                  <div className="absolute top-3 left-3 px-3 py-1 rounded-md bg-slate-950/80 backdrop-blur-md text-cyan-400 text-[11px] font-extrabold uppercase tracking-wider border border-cyan-500/30">
+                  <div className="absolute top-3 left-3 px-3 py-1 rounded-md bg-slate-950/80 backdrop-blur-md text-cyan-400 text-xs font-bold border border-cyan-500/30">
                     📍 {study.location}
                   </div>
 
                   <div className="absolute bottom-3 left-4 right-4">
-                    <span className="text-[10px] text-cyan-300 uppercase font-bold tracking-widest block">Client Case Study</span>
+                    <span className="text-xs text-cyan-300 font-bold tracking-wide block">Client Case Study</span>
                     <h3 className="text-white font-extrabold text-base line-clamp-1">{study.client}</h3>
                   </div>
                 </div>
 
                 <div className="p-6 space-y-4">
                   {/* Capacity Pill */}
-                  <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 text-xs font-bold flex items-center justify-between">
-                    <span>Installed Capacity:</span>
-                    <strong className="text-slate-900 dark:text-white font-extrabold">{study.plantInstalled}</strong>
+                  <div className="p-3.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 text-xs font-bold flex items-center justify-between">
+                    <span className="whitespace-nowrap">Installed Capacity:</span>
+                    <strong className="text-slate-900 dark:text-white font-extrabold ml-2 truncate">{study.plantInstalled}</strong>
                   </div>
 
                   {/* Challenge Statement */}
                   <div className="space-y-1">
-                    <span className="text-xs font-extrabold uppercase text-amber-600 dark:text-amber-400 flex items-center">
+                    <span className="text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center">
                       <span className="w-2 h-2 rounded-full bg-amber-500 mr-2" />
                       Client Challenge:
                     </span>
@@ -78,9 +78,9 @@ export default function CaseStudiesSection({ onOpenQuoteModal, trackEvent, theme
 
                   {/* Solution Statement */}
                   <div className="space-y-1">
-                    <span className="text-xs font-extrabold uppercase text-cyan-600 dark:text-cyan-400 flex items-center">
+                    <span className="text-xs font-bold text-cyan-600 dark:text-cyan-400 flex items-center">
                       <span className="w-2 h-2 rounded-full bg-cyan-500 mr-2" />
-                      Ion Recon Engineering Solution:
+                      Ion Recon Solution:
                     </span>
                     <p className={`text-xs leading-relaxed ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>
                       {study.solution}
@@ -88,37 +88,37 @@ export default function CaseStudiesSection({ onOpenQuoteModal, trackEvent, theme
                   </div>
 
                   {/* Measurable Results Box */}
-                  <div className={`p-4 rounded-2xl border space-y-2.5 ${
+                  <div className={`p-4 rounded-xl border space-y-2.5 ${
                     isLight ? 'bg-slate-50 border-slate-200' : 'bg-slate-950 border-slate-800'
                   }`}>
-                    <span className="text-[11px] font-extrabold uppercase text-emerald-600 dark:text-emerald-400 tracking-wider block">
+                    <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 tracking-wide block">
                       ⚡ Measurable Project Results:
                     </span>
                     
-                    <div className="grid grid-cols-2 gap-2 text-[11px]">
-                      <div>
-                        <span className="text-slate-500 block">Daily Output:</span>
-                        <strong className="text-slate-900 dark:text-white font-bold">{study.results.dailyOutput}</strong>
+                    <dl className="space-y-2 text-xs">
+                      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-1">
+                        <dt className="text-slate-500 font-medium">Daily Output:</dt>
+                        <dd className="font-bold text-slate-900 dark:text-white">{study.results.dailyOutput}</dd>
                       </div>
-                      <div>
-                        <span className="text-slate-500 block">Certification:</span>
-                        <strong className="text-emerald-600 dark:text-emerald-400 font-bold">{study.results.bisTimeframe}</strong>
+                      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-1">
+                        <dt className="text-slate-500 font-medium">Certification:</dt>
+                        <dd className="font-bold text-emerald-600 dark:text-emerald-400">{study.results.bisTimeframe}</dd>
                       </div>
-                      <div>
-                        <span className="text-slate-500 block">Full ROI Payback:</span>
-                        <strong className="text-cyan-600 dark:text-cyan-400 font-bold">{study.results.roiTimeframe}</strong>
+                      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-1">
+                        <dt className="text-slate-500 font-medium">ROI Payback:</dt>
+                        <dd className="font-bold text-cyan-600 dark:text-cyan-400">{study.results.roiTimeframe}</dd>
                       </div>
-                      <div>
-                        <span className="text-slate-500 block">Line Reliability:</span>
-                        <strong className="text-slate-900 dark:text-white font-bold">{study.results.uptime}</strong>
+                      <div className="flex items-center justify-between">
+                        <dt className="text-slate-500 font-medium">Line Reliability:</dt>
+                        <dd className="font-bold text-slate-900 dark:text-white">{study.results.uptime}</dd>
                       </div>
-                    </div>
+                    </dl>
                   </div>
                 </div>
               </div>
 
               {/* Action Button */}
-              <div className="p-6 pt-0">
+              <div className="p-6 pt-0 mt-auto">
                 <button
                   onClick={() => {
                     trackEvent(`Case Study Quote Request: ${study.client}`, 'conversion_quote_open');

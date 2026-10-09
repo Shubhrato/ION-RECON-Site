@@ -37,11 +37,11 @@ function getPageMeta(urlStr) {
     return {
       title: 'Ion Recon | No.1 Mineral Water Plant Manufacturer & Turnkey Solutions',
       description: 'Ion Recon Ghaziabad: Leading Turnkey Mineral Water Plant Manufacturer in India. Setup 40 BPM 30 BPM 60 BPM packaged drinking water plant & SS RO machinery at best price.',
-      canonical: 'https://ionrecon.info/'
+      canonical: 'https://ionrecon.online/'
     };
   }
 
-  const canonical = `https://ionrecon.info/${cleanPath}`;
+  const canonical = `https://ionrecon.online/${cleanPath}`;
 
   // Product routes - Front-loaded non-branded target keywords + Brand Name
   if (cleanPath === 'bopp-labeling-machine') {
@@ -299,7 +299,7 @@ function getPageMeta(urlStr) {
     ];
 
     if (productRoutes.includes(rawSlug)) {
-      return getPageMeta(`https://ionrecon.info/${rawSlug}`);
+      return getPageMeta(`https://ionrecon.online/${rawSlug}`);
     }
 
     const locName = rawSlug
@@ -310,7 +310,7 @@ function getPageMeta(urlStr) {
     return {
       title: `Turnkey Mineral Water Plant Manufacturer in ${locName} | Packaged Water Setup - Ion Recon`,
       description: `Ion Recon: Turnkey packaged drinking water project & commercial RO plant manufacturer in ${locName}. Automatic bottling line setup & direct factory price quote.`,
-      canonical: `https://ionrecon.info/mineral-water-plant-manufacturer-in-${rawSlug}`
+      canonical: `https://ionrecon.online/mineral-water-plant-manufacturer-in-${rawSlug}`
     };
   }
 
@@ -476,7 +476,7 @@ urls.forEach((fullUrl) => {
       "@context": "https://schema.org/",
       "@type": "Product",
       "name": meta.productName,
-      "image": meta.image || "https://ionrecon.info/images/mineral_water_plant_40bpm.png",
+      "image": meta.image || "https://ionrecon.online/images/mineral_water_plant_40bpm.png",
       "description": meta.description,
       "sku": `ION-${cleanPath.toUpperCase()}`,
       "mpn": `ION-${cleanPath.toUpperCase()}-2026`,
@@ -487,7 +487,7 @@ urls.forEach((fullUrl) => {
       "manufacturer": {
         "@type": "Organization",
         "name": "Ion Recon Industries",
-        "url": "https://ionrecon.info/"
+        "url": "https://ionrecon.online/"
       },
       "aggregateRating": {
         "@type": "AggregateRating",
@@ -507,7 +507,7 @@ urls.forEach((fullUrl) => {
                cleanPath === 'bopp-labeling-machine' ? "850000.00" :
                cleanPath === 'csd-project' ? "4200000.00" : "2500000.00",
         "priceValidUntil": "2027-12-31",
-        "url": `https://ionrecon.info/${cleanPath}`,
+        "url": `https://ionrecon.online/${cleanPath}`,
         "itemCondition": "https://schema.org/NewCondition",
         "availability": "https://schema.org/InStock",
         "seller": {

@@ -14,20 +14,20 @@ export default function ContactUsPage({ trackEvent, theme, onFormSuccess }) {
         <title>Contact Ion Recon Industries | Factory Address & Sales Phone Ghaziabad</title>
         <meta name="description" content="Contact Ion Recon Industries in Sahibabad Industrial Area Site 4, Ghaziabad. Phone: +91 98109 20792. Get free quotation, machinery catalog & factory location map directions." />
         <meta name="keywords" content="Contact Ion Recon, Ion Recon Phone Number, Ion Recon Address, Ion Recon Ghaziabad Factory, Mineral Water Plant Quote" />
-        <link rel="canonical" href="https://ionrecon.info/contact-us" />
+        <link rel="canonical" href="https://ionrecon.online/contact-us" />
 
         {/* OpenGraph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Contact Ion Recon Industries | Factory Address & Sales Phone Ghaziabad" />
         <meta property="og:description" content="Contact Ion Recon Industries in Sahibabad Industrial Area Site 4, Ghaziabad. Phone: +91 98109 20792. Get free quotation & factory directions." />
-        <meta property="og:url" content="https://ionrecon.info/contact-us" />
-        <meta property="og:image" content="https://ionrecon.info/images/mineral_water_plant_40bpm.png" />
+        <meta property="og:url" content="https://ionrecon.online/contact-us" />
+        <meta property="og:image" content="https://ionrecon.online/images/mineral_water_plant_40bpm.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:title" content="Contact Ion Recon Industries | Factory Address & Sales Phone Ghaziabad" />
         <meta property="twitter:description" content="Contact Ion Recon Industries in Ghaziabad. Get free quotation & factory directions." />
-        <meta property="twitter:image" content="https://ionrecon.info/images/mineral_water_plant_40bpm.png" />
+        <meta property="twitter:image" content="https://ionrecon.online/images/mineral_water_plant_40bpm.png" />
 
         {/* ContactPage Schema */}
         <script type="application/ld+json">
@@ -36,12 +36,12 @@ export default function ContactUsPage({ trackEvent, theme, onFormSuccess }) {
             "@type": "ContactPage",
             "name": "Contact Ion Recon Industries",
             "description": "Factory contact page for Ion Recon Industries in Sahibabad Industrial Area Site 4, Ghaziabad.",
-            "url": "https://ionrecon.info/contact-us",
+            "url": "https://ionrecon.online/contact-us",
             "mainEntity": {
               "@type": "ManufacturingBusiness",
               "name": "Ion Recon Industries",
               "telephone": "+919810920792",
-              "email": "info@ionrecon.info",
+              "email": "info@ionrecon.online",
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "57/1/9, Sahibabad Industrial Area Site 4",
@@ -64,13 +64,13 @@ export default function ContactUsPage({ trackEvent, theme, onFormSuccess }) {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://ionrecon.info/"
+                "item": "https://ionrecon.online/"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Contact Us",
-                "item": "https://ionrecon.info/contact-us"
+                "item": "https://ionrecon.online/contact-us"
               }
             ]
           })}
@@ -154,8 +154,8 @@ export default function ContactUsPage({ trackEvent, theme, onFormSuccess }) {
             </div>
             <h3 className={`text-xl font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>Email & Hours</h3>
             <div className="space-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-              <p>Email: <a href="mailto:info@ionrecon.info" className="font-bold text-cyan-600 dark:text-cyan-400 hover:underline">info@ionrecon.info</a></p>
-              <p>Sales: <a href="mailto:sales@ionrecon.info" className="font-bold text-cyan-600 dark:text-cyan-400 hover:underline">sales@ionrecon.info</a></p>
+              <p>Email: <a href="mailto:info@ionrecon.online" className="font-bold text-cyan-600 dark:text-cyan-400 hover:underline">info@ionrecon.online</a></p>
+              <p>Sales: <a href="mailto:sales@ionrecon.online" className="font-bold text-cyan-600 dark:text-cyan-400 hover:underline">sales@ionrecon.online</a></p>
               <div className="pt-2 flex items-center space-x-2 text-slate-500 text-xs">
                 <Clock className="w-4 h-4 text-cyan-500" />
                 <span>Mon - Sat: 9:00 AM - 7:00 PM IST</span>

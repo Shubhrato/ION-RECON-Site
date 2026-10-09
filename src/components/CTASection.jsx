@@ -37,17 +37,17 @@ export default function CTASection({ onOpenQuoteModal, trackEvent, theme }) {
               trackEvent('CTA Bottom Quote Clicked', 'conversion_quote_open');
               onOpenQuoteModal('Bottom CTA Banner');
             }}
-            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-base shadow-xl hover:scale-105 transition-all flex items-center justify-center space-x-2"
+            className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-bold text-sm shadow-xl hover:scale-105 transition-all flex items-center justify-center space-x-2 focus:ring-2 focus:ring-cyan-400"
           >
             <span>Get Free Quote</span>
-            <ArrowRight className="w-5 h-5 text-cyan-600" />
+            <ArrowRight className="w-4 h-4 text-cyan-600" />
           </button>
 
           <button
             onClick={handleWhatsApp}
-            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-base shadow-xl shadow-emerald-600/30 hover:scale-105 transition-all flex items-center justify-center space-x-2"
+            className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-xl shadow-emerald-600/30 hover:scale-105 transition-all flex items-center justify-center space-x-2"
           >
-            <MessageCircle className="w-5 h-5 fill-white text-emerald-600" />
+            <MessageCircle className="w-4 h-4 fill-white text-emerald-600" />
             <span>Chat on WhatsApp</span>
           </button>
         </div>

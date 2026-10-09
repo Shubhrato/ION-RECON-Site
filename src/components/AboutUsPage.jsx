@@ -13,20 +13,20 @@ export default function AboutUsPage({ onOpenQuoteModal, trackEvent, theme }) {
         <title>About Ion Recon Industries | Mineral Water Plant Manufacturer Ghaziabad</title>
         <meta name="description" content="Learn about Ion Recon Industries: Premier turnkey mineral water plant manufacturer & bottling machinery supplier in Sahibabad Industrial Area Site 4, Ghaziabad. 15+ years experience & 500+ projects installed." />
         <meta name="keywords" content="About Ion Recon, Ion Recon Ghaziabad, Ion Recon Sahibabad, Mineral Water Plant Manufacturer Ghaziabad, Ion Recon Industries" />
-        <link rel="canonical" href="https://ionrecon.info/about-us" />
+        <link rel="canonical" href="https://ionrecon.online/about-us" />
 
         {/* OpenGraph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="About Ion Recon Industries | Mineral Water Plant Manufacturer Ghaziabad" />
         <meta property="og:description" content="Learn about Ion Recon Industries: Premier turnkey mineral water plant manufacturer & bottling machinery supplier in Ghaziabad. 15+ years experience & 500+ projects installed." />
-        <meta property="og:url" content="https://ionrecon.info/about-us" />
-        <meta property="og:image" content="https://ionrecon.info/images/mineral_water_plant_40bpm.png" />
+        <meta property="og:url" content="https://ionrecon.online/about-us" />
+        <meta property="og:image" content="https://ionrecon.online/images/mineral_water_plant_40bpm.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:title" content="About Ion Recon Industries | Mineral Water Plant Manufacturer Ghaziabad" />
         <meta property="twitter:description" content="Learn about Ion Recon Industries: Premier turnkey mineral water plant manufacturer & bottling machinery supplier in Ghaziabad." />
-        <meta property="twitter:image" content="https://ionrecon.info/images/mineral_water_plant_40bpm.png" />
+        <meta property="twitter:image" content="https://ionrecon.online/images/mineral_water_plant_40bpm.png" />
 
         {/* Organization & AboutPage Schema */}
         <script type="application/ld+json">
@@ -35,11 +35,11 @@ export default function AboutUsPage({ onOpenQuoteModal, trackEvent, theme }) {
             "@type": "AboutPage",
             "name": "About Ion Recon Industries",
             "description": "Ion Recon Industries is a premier manufacturer, trader, and retailer of mineral water bottling plants, commercial RO systems, and packaging machinery based in Ghaziabad, UP.",
-            "url": "https://ionrecon.info/about-us",
+            "url": "https://ionrecon.online/about-us",
             "mainEntity": {
               "@type": "ManufacturingBusiness",
               "name": "Ion Recon Industries",
-              "url": "https://ionrecon.info/",
+              "url": "https://ionrecon.online/",
               "telephone": "+919810920792",
               "address": {
                 "@type": "PostalAddress",
@@ -63,13 +63,13 @@ export default function AboutUsPage({ onOpenQuoteModal, trackEvent, theme }) {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://ionrecon.info/"
+                "item": "https://ionrecon.online/"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "About Us",
-                "item": "https://ionrecon.info/about-us"
+                "item": "https://ionrecon.online/about-us"
               }
             ]
           })}

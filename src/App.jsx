@@ -199,14 +199,14 @@ export default function App() {
   };
 
   const canonicalUrl = selectedProduct
-    ? `https://ionrecon.info/${selectedProduct.id}`
+    ? `https://ionrecon.online/${selectedProduct.id}`
     : selectedLocation
-    ? `https://ionrecon.info/${selectedLocation.slug}`
+    ? `https://ionrecon.online/${selectedLocation.slug}`
     : currentTab === 'blog' && selectedBlogSlug
-    ? `https://ionrecon.info/blog/${selectedBlogSlug}`
+    ? `https://ionrecon.online/blog/${selectedBlogSlug}`
     : currentTab === 'home'
-    ? 'https://ionrecon.info/'
-    : `https://ionrecon.info/${currentTab}`;
+    ? 'https://ionrecon.online/'
+    : `https://ionrecon.online/${currentTab}`;
 
   return (
     <div className={`min-h-screen flex flex-col font-sans relative selection:bg-cyan-500 selection:text-slate-950 transition-colors ${

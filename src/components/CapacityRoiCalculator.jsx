@@ -20,20 +20,20 @@ export default function CapacityRoiCalculator({ onOpenQuoteModal, trackEvent, th
       <Helmet>
         <title>Mineral Water Plant Capacity & Profit ROI Calculator | Ion Recon</title>
         <meta name="description" content="Calculate mineral water plant production capacity (30 BPM to 200 BPM), daily bottle output, power consumption, floor space requirements, and profit margins." />
-        <link rel="canonical" href="https://ionrecon.info/roi-calculator" />
+        <link rel="canonical" href="https://ionrecon.online/roi-calculator" />
 
         {/* OpenGraph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Mineral Water Plant Capacity & Profit ROI Calculator | Ion Recon" />
         <meta property="og:description" content="Calculate mineral water plant production capacity (30 BPM to 200 BPM), daily bottle output, power consumption, floor space requirements, and profit margins." />
-        <meta property="og:url" content="https://ionrecon.info/roi-calculator" />
-        <meta property="og:image" content="https://ionrecon.info/images/mineral_water_plant_40bpm.png" />
+        <meta property="og:url" content="https://ionrecon.online/roi-calculator" />
+        <meta property="og:image" content="https://ionrecon.online/images/mineral_water_plant_40bpm.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:title" content="Mineral Water Plant Capacity & Profit ROI Calculator | Ion Recon" />
         <meta property="twitter:description" content="Calculate mineral water plant production capacity (30 BPM to 200 BPM), daily bottle output, power consumption, floor space requirements, and profit margins." />
-        <meta property="twitter:image" content="https://ionrecon.info/images/mineral_water_plant_40bpm.png" />
+        <meta property="twitter:image" content="https://ionrecon.online/images/mineral_water_plant_40bpm.png" />
 
         {/* BreadcrumbList Schema */}
         <script type="application/ld+json">
@@ -45,13 +45,13 @@ export default function CapacityRoiCalculator({ onOpenQuoteModal, trackEvent, th
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://ionrecon.info/"
+                "item": "https://ionrecon.online/"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Capacity & ROI Calculator",
-                "item": "https://ionrecon.info/roi-calculator"
+                "item": "https://ionrecon.online/roi-calculator"
               }
             ]
           })}

@@ -21,8 +21,8 @@ export default function WhyChooseUs({ onOpenQuoteModal, trackEvent, theme }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <span className={`font-extrabold text-xs uppercase tracking-widest px-3 py-1 rounded-full border ${
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <span className={`font-bold text-xs tracking-wide px-3 py-1 rounded-full border ${
             isLight ? 'bg-cyan-100 text-cyan-800 border-cyan-300' : 'bg-cyan-950 text-cyan-400 border-cyan-500/30'
           }`}>
             Why Choose Ion Recon
@@ -42,7 +42,7 @@ export default function WhyChooseUs({ onOpenQuoteModal, trackEvent, theme }) {
             return (
               <div 
                 key={idx}
-                className={`p-6 rounded-3xl border relative group overflow-hidden transition-all ${
+                className={`p-6 rounded-2xl border relative group overflow-hidden transition-all ${
                   isLight 
                     ? 'bg-white border-slate-200 shadow-md hover:shadow-xl hover:border-cyan-500' 
                     : 'glass-card border-slate-800'
@@ -70,14 +70,14 @@ export default function WhyChooseUs({ onOpenQuoteModal, trackEvent, theme }) {
           })}
         </div>
 
-        {/* CTA Banner inside Why Choose Us */}
-        <div className="mt-12 text-center">
+        {/* CTA Banner inside Why Choose Us - Reduced Deadzone */}
+        <div className="mt-8 text-center">
           <button
             onClick={() => {
               trackEvent('Why Choose Us CTA Clicked', 'conversion_quote_open');
               onOpenQuoteModal('Why Choose Us Banner');
             }}
-            className="inline-flex items-center space-x-2 px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-sm shadow-xl shadow-cyan-600/25 hover:scale-105 transition-all"
+            className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-sm shadow-lg shadow-cyan-600/25 hover:scale-105 transition-all"
           >
             <span>Consult Senior Ion Recon Engineer</span>
           </button>

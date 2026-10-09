@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 const sitemapPath = path.join(rootDir, 'public', 'sitemap.xml');
 
-const DOMAIN = 'https://ionrecon.info';
+const DOMAIN = 'https://ionrecon.online';
 const TODAY = new Date().toISOString().split('T')[0];
 
 console.log('Generating fresh sitemap.xml for Ion Recon...');

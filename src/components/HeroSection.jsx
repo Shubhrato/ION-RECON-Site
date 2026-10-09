@@ -58,7 +58,7 @@ export default function HeroSection({ onOpenQuoteModal, onOpenVideoModal, trackE
             </div>
             <div className="flex flex-col justify-center pr-2">
               <span className="text-white font-black text-xl tracking-[0.25em] uppercase leading-none drop-shadow-md">ION RECON</span>
-              <span className="text-cyan-400 font-bold text-[10px] tracking-[0.2em] uppercase mt-1.5 opacity-90">{slide.title}</span>
+              <span className="text-cyan-400 font-bold text-xs tracking-normal mt-1 opacity-90">{slide.title}</span>
             </div>
           </div>
         </div>
@@ -104,71 +104,75 @@ export default function HeroSection({ onOpenQuoteModal, onOpenVideoModal, trackE
             ))}
           </div>
 
+          {/* Rating & B2B Trust Signal (Positioned Prominently Above CTAs) */}
+          <div className={`p-4 rounded-2xl border flex items-center space-x-4 backdrop-blur-md ${
+            isLight 
+              ? 'bg-white/80 border-slate-200 shadow-sm text-slate-800' 
+              : 'bg-slate-900/80 border-slate-800 text-slate-200'
+          }`}>
+            <div className="flex text-amber-400 drop-shadow-md flex-shrink-0">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+              ))}
+            </div>
+            <span className="text-xs sm:text-sm font-semibold">
+              <strong className={isLight ? 'text-slate-900 font-extrabold' : 'text-white font-extrabold'}>500+ Turnkey Plants Delivered</strong> Across UP, NCR & PAN India
+            </span>
+          </div>
+
           {/* Dual CTAs & Video Modal Trigger */}
-          <div className="pt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+          <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
             <button
               onClick={() => {
                 trackEvent('Hero Free Quotation Button Clicked', 'conversion_quote_open');
                 onOpenQuoteModal('Hero Primary CTA');
               }}
-              className="flex items-center justify-center space-x-3 px-8 py-4.5 rounded-2xl bg-gradient-to-r from-cyan-600 via-blue-600 to-cyan-600 hover:from-cyan-500 hover:to-blue-500 text-white font-black text-lg shadow-2xl shadow-cyan-600/40 hover:shadow-cyan-600/60 transition-all transform hover:-translate-y-1"
+              className="flex items-center justify-center space-x-3 px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-600 via-blue-600 to-cyan-600 hover:from-cyan-500 hover:to-blue-500 text-white font-black text-base shadow-xl shadow-cyan-600/30 hover:shadow-cyan-600/50 transition-all transform hover:-translate-y-0.5"
             >
-              <span>Get Free Quotation</span>
-              <ArrowRight className="w-6 h-6" />
+              <span>Get Free Quote</span>
+              <ArrowRight className="w-5 h-5" />
             </button>
 
             <button
               onClick={handleWhatsAppHero}
-              className="flex items-center justify-center space-x-2.5 px-7 py-4.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-lg shadow-xl shadow-emerald-600/30 transition-all transform hover:-translate-y-1"
+              className="flex items-center justify-center space-x-2.5 px-7 py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base shadow-lg shadow-emerald-600/30 transition-all transform hover:-translate-y-0.5"
             >
-              <MessageCircle className="w-6 h-6 fill-white text-emerald-600" />
+              <MessageCircle className="w-5 h-5 fill-white text-emerald-600" />
               <span>Talk on WhatsApp</span>
             </button>
-          </div>
-          
-          <div className="pt-2">
+
             <button
               onClick={() => {
                 trackEvent('Factory Video Preview Clicked', 'video_modal_opened');
                 onOpenVideoModal();
               }}
-              className={`flex items-center justify-center space-x-2 px-6 py-3 rounded-xl border-2 font-bold transition-all backdrop-blur-md ${
+              className={`flex items-center justify-center space-x-2 px-5 py-4 rounded-xl border font-bold text-sm transition-all backdrop-blur-md ${
                 isLight 
                   ? 'bg-white/50 border-slate-300 text-slate-800 hover:border-cyan-600 hover:text-cyan-700 hover:bg-white' 
                   : 'bg-slate-900/50 border-slate-600 text-white hover:border-cyan-500 hover:bg-slate-900'
               }`}
             >
-              <Factory className="w-5 h-5 text-cyan-500" />
-              <span>Watch Factory Video</span>
+              <Factory className="w-4 h-4 text-cyan-500" />
+              <span>Watch Video</span>
             </button>
-          </div>
-
-          {/* Rating & Trust Rating */}
-          <div className="pt-6 flex items-center space-x-4">
-            <div className="flex text-amber-400 drop-shadow-md">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 fill-amber-400" />
-              ))}
-            </div>
-            <span className={`text-base font-semibold ${isLight ? 'text-slate-800' : 'text-slate-200'}`}>
-              <span className={isLight ? 'text-slate-900 font-black' : 'text-white font-black'}>500+ Projects Delivered</span> Across UP, NCR & India
-            </span>
           </div>
 
         </div>
       </div>
       
-      {/* Slider Indicators */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
+      {/* Accessible Slider Touch Indicators */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center space-x-1 z-20">
         {sliderImages.map((_, idx) => (
           <button
             key={idx}
             onClick={() => setCurrentSlide(idx)}
-            className={`h-2.5 rounded-full transition-all ${
-              idx === currentSlide ? 'w-10 bg-cyan-500' : 'w-2.5 bg-white/50 hover:bg-white/80'
-            }`}
+            className="p-2 focus:outline-none"
             aria-label={`Go to slide ${idx + 1}`}
-          />
+          >
+            <span className={`block h-2.5 rounded-full transition-all duration-300 ${
+              idx === currentSlide ? 'w-8 bg-cyan-400 shadow-md shadow-cyan-500/50' : 'w-2.5 bg-white/40 hover:bg-white/70'
+            }`} />
+          </button>
         ))}
       </div>
     </section>

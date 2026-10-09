@@ -169,20 +169,20 @@ export default function ProductDetailPage({ product, onBack, onOpenQuoteModal, t
         <title>{product.metaTitle || `${product.title} Manufacturer | Ion Recon Ghaziabad`}</title>
         <meta name="description" content={product.seoContent || product.shortDesc} />
         <meta name="keywords" content={`${product.title}, ${product.title} Manufacturer, Ion Recon ${product.title}, ${product.category}`} />
-        <link rel="canonical" href={`https://ionrecon.info/${product.id}`} />
+        <link rel="canonical" href={`https://ionrecon.online/${product.id}`} />
 
         {/* OpenGraph */}
         <meta property="og:type" content="product" />
         <meta property="og:title" content={product.metaTitle || product.title} />
         <meta property="og:description" content={product.seoContent || product.shortDesc} />
-        <meta property="og:url" content={`https://ionrecon.info/${product.id}`} />
-        <meta property="og:image" content={product.image?.startsWith('http') ? product.image : `https://ionrecon.info${product.image || '/images/mineral_water_plant_40bpm.png'}`} />
+        <meta property="og:url" content={`https://ionrecon.online/${product.id}`} />
+        <meta property="og:image" content={product.image?.startsWith('http') ? product.image : `https://ionrecon.online${product.image || '/images/mineral_water_plant_40bpm.png'}`} />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:title" content={product.metaTitle || product.title} />
         <meta property="twitter:description" content={product.seoContent || product.shortDesc} />
-        <meta property="twitter:image" content={product.image?.startsWith('http') ? product.image : `https://ionrecon.info${product.image || '/images/mineral_water_plant_40bpm.png'}`} />
+        <meta property="twitter:image" content={product.image?.startsWith('http') ? product.image : `https://ionrecon.online${product.image || '/images/mineral_water_plant_40bpm.png'}`} />
 
         {/* Product Schema (Google Merchant & Search Console Fully Compliant) */}
         <script type="application/ld+json">
@@ -190,7 +190,7 @@ export default function ProductDetailPage({ product, onBack, onOpenQuoteModal, t
             "@context": "https://schema.org/",
             "@type": "Product",
             "name": product.title,
-            "image": product.image?.startsWith('http') ? product.image : `https://ionrecon.info${product.image || '/images/mineral_water_plant_40bpm.png'}`,
+            "image": product.image?.startsWith('http') ? product.image : `https://ionrecon.online${product.image || '/images/mineral_water_plant_40bpm.png'}`,
             "description": product.seoContent || product.shortDesc,
             "sku": `ION-${product.id.toUpperCase()}`,
             "mpn": `ION-${product.id.toUpperCase()}-2026`,
@@ -201,7 +201,7 @@ export default function ProductDetailPage({ product, onBack, onOpenQuoteModal, t
             "manufacturer": {
               "@type": "Organization",
               "name": "Ion Recon Industries",
-              "url": "https://ionrecon.info/"
+              "url": "https://ionrecon.online/"
             },
             "aggregateRating": {
               "@type": "AggregateRating",
@@ -221,7 +221,7 @@ export default function ProductDetailPage({ product, onBack, onOpenQuoteModal, t
                      product.id === 'bopp-labeling-machine' ? "850000.00" :
                      product.id === 'csd-project' ? "4200000.00" : "2500000.00",
               "priceValidUntil": "2027-12-31",
-              "url": `https://ionrecon.info/${product.id}`,
+              "url": `https://ionrecon.online/${product.id}`,
               "itemCondition": "https://schema.org/NewCondition",
               "availability": "https://schema.org/InStock",
               "seller": {
@@ -274,19 +274,19 @@ export default function ProductDetailPage({ product, onBack, onOpenQuoteModal, t
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://ionrecon.info/"
+                "item": "https://ionrecon.online/"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Products",
-                "item": "https://ionrecon.info/#products"
+                "item": "https://ionrecon.online/#products"
               },
               {
                 "@type": "ListItem",
                 "position": 3,
                 "name": product.title,
-                "item": `https://ionrecon.info/${product.id}`
+                "item": `https://ionrecon.online/${product.id}`
               }
             ]
           })}

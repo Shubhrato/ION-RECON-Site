@@ -27,8 +27,11 @@ export default function ProcessTimeline({ theme }) {
 
         {/* Timeline Grid / Flow */}
         <div className="grid grid-cols-1 md:grid-cols-7 gap-4 relative">
+          {/* Horizontal Connecting Line through the center Y-axis of 48px circles (top-6 = 24px) */}
+          <div className="hidden md:block absolute left-8 right-8 top-6 h-0.5 bg-cyan-200 dark:bg-cyan-950 z-0" aria-hidden="true"></div>
+
           {PLANT_DATA.processTimeline.map((item, idx) => (
-            <div key={idx} className="relative flex flex-col items-center text-center group">
+            <div key={idx} className="relative z-10 flex flex-col items-center text-center group">
               
               {/* Step Badge */}
               <div className={`w-12 h-12 rounded-2xl border-2 font-black text-lg shadow-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-all ${
@@ -45,7 +48,7 @@ export default function ProcessTimeline({ theme }) {
               }`}>
                 {item.title}
               </h3>
-              <p className={`text-[11px] leading-snug ${isLight ? 'text-slate-600' : 'text-slate-400'}`}>
+              <p className={`text-xs leading-relaxed ${isLight ? 'text-slate-600' : 'text-slate-400'}`}>
                 {item.desc}
               </p>
 

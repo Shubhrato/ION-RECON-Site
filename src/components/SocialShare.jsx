@@ -15,7 +15,7 @@ const InstagramIcon = ({ className = "w-4 h-4" }) => (
 );
 
 export default function SocialShare({
-  url = typeof window !== 'undefined' ? window.location.href : 'https://ionrecon.info/',
+  url = typeof window !== 'undefined' ? window.location.href : 'https://ionrecon.online/',
   title = "Ion Recon | Turnkey Mineral Water Plant Manufacturer & Bottling Lines",
   description = "Explore automatic mineral water bottling plants, 3-in-1 RFC Monoblocks, Commercial RO plants & PET blow molding machinery from Ion Recon, Ghaziabad.",
   variant = 'inline', // 'inline' | 'floating' | 'card'
@@ -76,8 +76,8 @@ export default function SocialShare({
   // Variant: Floating Sidebar
   if (variant === 'floating') {
     return (
-      <div className="fixed left-4 bottom-24 sm:bottom-6 z-40 hidden md:flex flex-col space-y-2 bg-slate-900/90 backdrop-blur-md p-2 rounded-2xl border border-slate-700/60 shadow-2xl">
-        <div className="text-[10px] font-bold uppercase tracking-wider text-center text-cyan-400 py-1 border-b border-slate-800">
+      <div className="fixed left-6 bottom-8 z-40 hidden xl:flex flex-col space-y-2 bg-slate-900/90 backdrop-blur-md p-2 rounded-2xl border border-slate-700/60 shadow-2xl">
+        <div className="text-xs font-bold uppercase tracking-wider text-center text-cyan-400 py-1 border-b border-slate-800">
           Connect
         </div>
         {shareLinks.map((item) => {
@@ -114,28 +114,18 @@ export default function SocialShare({
           ? 'bg-white border-slate-200 shadow-lg'
           : 'bg-slate-900 border-slate-800 shadow-xl'
       }`}>
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center">
-              <Share2 className="w-4 h-4 text-cyan-500" />
-            </div>
-            <div>
-              <h4 className={`font-bold text-sm ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                Ion Recon Social Links
-              </h4>
-              <p className={`text-xs ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>
-                Connect on WhatsApp, Instagram & Facebook
-              </p>
-            </div>
+        <div className="flex items-center space-x-2 mb-4">
+          <div className="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center">
+            <Share2 className="w-4 h-4 text-cyan-500" />
           </div>
-          {typeof navigator !== 'undefined' && navigator.share && (
-            <button
-              onClick={handleNativeShare}
-              className="px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold transition-all"
-            >
-              Share Page
-            </button>
-          )}
+          <div>
+            <h3 className={`font-bold text-sm ${isLight ? 'text-slate-900' : 'text-white'}`}>
+              Ion Recon Social Links
+            </h3>
+            <p className={`text-xs ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>
+              Connect on WhatsApp, Instagram & Facebook
+            </p>
+          </div>
         </div>
 
         <div className="flex flex-wrap gap-2.5 pt-1">
@@ -177,6 +167,16 @@ export default function SocialShare({
               </>
             )}
           </button>
+
+          {typeof navigator !== 'undefined' && navigator.share && (
+            <button
+              onClick={handleNativeShare}
+              className="px-4 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold transition-all shadow-md flex items-center space-x-1.5"
+            >
+              <Share2 className="w-4 h-4" />
+              <span>Share Page</span>
+            </button>
+          )}
         </div>
       </div>
     );

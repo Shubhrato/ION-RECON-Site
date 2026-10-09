@@ -4,6 +4,7 @@ import { PLANT_DATA } from '../data/plantData';
 
 export default function ProductsGrid({ onOpenQuoteModal, onSelectProduct, trackEvent, theme }) {
   const [activeCategory, setActiveCategory] = useState('all');
+  const [showAll, setShowAll] = useState(false);
 
   const isLight = theme === 'light';
 
@@ -23,6 +24,8 @@ export default function ProductsGrid({ onOpenQuoteModal, onSelectProduct, trackE
     if (activeCategory === 'packaging') return p.category === 'packaging';
     return true;
   });
+
+  const visibleProducts = showAll ? filteredProducts : filteredProducts.slice(0, 6);
 
   return (
     <section id="products-section" className={`py-16 lg:py-24 border-t relative transition-colors ${
@@ -52,6 +55,7 @@ export default function ProductsGrid({ onOpenQuoteModal, onSelectProduct, trackE
               key={cat.id}
               onClick={() => {
                 setActiveCategory(cat.id);
+                setShowAll(false);
                 trackEvent(`Filtered Products by ${cat.name}`, 'product_filter');
               }}
               className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
@@ -69,10 +73,10 @@ export default function ProductsGrid({ onOpenQuoteModal, onSelectProduct, trackE
 
         {/* Big Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProducts.map((product) => (
+          {visibleProducts.map((product) => (
             <div 
               key={product.id}
-              className={`rounded-3xl overflow-hidden border flex flex-col group transition-all ${
+              className={`rounded-2xl overflow-hidden border flex flex-col group transition-all ${
                 isLight 
                   ? 'bg-white border-slate-200 shadow-lg hover:shadow-2xl hover:border-cyan-500' 
                   : 'glass-card border-slate-800'
@@ -116,7 +120,7 @@ export default function ProductsGrid({ onOpenQuoteModal, onSelectProduct, trackE
                       onSelectProduct(product);
                       trackEvent(`Product Title Clicked: ${product.title}`, 'product_click');
                     }}
-                    className="block group/title"
+                    className="block group/title min-h-[3rem] flex items-center"
                   >
                     <h3 className={`text-xl font-bold group-hover/title:text-cyan-600 transition-colors ${
                       isLight ? 'text-slate-900' : 'text-white'
@@ -129,7 +133,7 @@ export default function ProductsGrid({ onOpenQuoteModal, onSelectProduct, trackE
                   </p>
 
                   {/* Specs Pill Box */}
-                  <div className={`my-4 grid grid-cols-2 gap-2 text-[11px] p-3 rounded-xl border ${
+                  <div className={`my-4 grid grid-cols-2 gap-2 text-xs p-3 rounded-xl border ${
                     isLight ? 'bg-slate-50 border-slate-200' : 'bg-slate-950/60 border-slate-800'
                   }`}>
                     <div>
@@ -153,8 +157,8 @@ export default function ProductsGrid({ onOpenQuoteModal, onSelectProduct, trackE
                   </ul>
                 </div>
 
-                {/* Card Action Buttons */}
-                <div className="grid grid-cols-2 gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+                {/* Card Action Section - Single Primary CTA */}
+                <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800">
                   <a
                     href={`/${product.id}`}
                     onClick={(e) => {
@@ -162,11 +166,11 @@ export default function ProductsGrid({ onOpenQuoteModal, onSelectProduct, trackE
                       onSelectProduct(product);
                       trackEvent(`Product Learn More: ${product.title}`, 'product_click');
                     }}
-                    className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all text-center block ${
-                      isLight ? 'bg-slate-100 hover:bg-slate-200 text-slate-800' : 'bg-slate-800 hover:bg-slate-700 text-slate-200'
+                    className={`text-xs font-semibold hover:text-cyan-600 transition-colors ${
+                      isLight ? 'text-slate-600' : 'text-slate-400'
                     }`}
                   >
-                    Learn More
+                    View Specs &rarr;
                   </a>
 
                   <button
@@ -174,9 +178,9 @@ export default function ProductsGrid({ onOpenQuoteModal, onSelectProduct, trackE
                       trackEvent(`Product Quote Requested: ${product.title}`, 'conversion_quote_open');
                       onOpenQuoteModal(`Product Card: ${product.title}`);
                     }}
-                    className="py-2.5 px-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-xs font-bold transition-all text-center shadow-lg shadow-cyan-600/20"
+                    className="py-2.5 px-4 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-xs font-bold transition-all shadow-md shadow-cyan-600/20 hover:scale-105"
                   >
-                    Request Quote
+                    Get Free Quote
                   </button>
                 </div>
 
@@ -184,6 +188,25 @@ export default function ProductsGrid({ onOpenQuoteModal, onSelectProduct, trackE
             </div>
           ))}
         </div>
+
+        {/* Load More Button for Choice Architecture */}
+        {!showAll && filteredProducts.length > 6 && (
+          <div className="mt-12 text-center">
+            <button
+              onClick={() => {
+                setShowAll(true);
+                trackEvent('View All Products Clicked', 'product_expand');
+              }}
+              className={`px-8 py-3.5 rounded-xl font-bold text-sm transition-all shadow-md ${
+                isLight 
+                  ? 'bg-slate-900 hover:bg-slate-800 text-white' 
+                  : 'bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-slate-700'
+              }`}
+            >
+              View All {filteredProducts.length} Machinery Models ({filteredProducts.length - 6} More)
+            </button>
+          </div>
+        )}
 
       </div>
     </section>
