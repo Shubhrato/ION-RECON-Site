@@ -172,7 +172,7 @@ export default function Navbar({ onOpenQuoteModal, currentTab, setCurrentTab, tr
                     {productsList.map((prod) => (
                       <a
                         key={prod.id}
-                        href={`/${prod.id}`}
+                        href={`/${prod.id}/`}
                         onClick={(e) => {
                           e.preventDefault();
                           setCurrentTab(prod.id);
@@ -207,7 +207,7 @@ export default function Navbar({ onOpenQuoteModal, currentTab, setCurrentTab, tr
             {mainNavLinks.slice(1).map((link) => (
               <a
                 key={link.id}
-                href={`/${link.id}`}
+                href={`/${link.id}/`}
                 onClick={(e) => {
                   e.preventDefault();
                   setCurrentTab(link.id);
@@ -332,7 +332,7 @@ export default function Navbar({ onOpenQuoteModal, currentTab, setCurrentTab, tr
                   {productsList.map((prod) => (
                     <a
                       key={prod.id}
-                      href={`/${prod.id}`}
+                      href={`/${prod.id}/`}
                       onClick={(e) => {
                         e.preventDefault();
                         setCurrentTab(prod.id);
@@ -355,7 +355,7 @@ export default function Navbar({ onOpenQuoteModal, currentTab, setCurrentTab, tr
             {mainNavLinks.slice(1).map((link) => (
               <a
                 key={link.id}
-                href={`/${link.id}`}
+                href={`/${link.id}/`}
                 onClick={(e) => {
                   e.preventDefault();
                   setCurrentTab(link.id);

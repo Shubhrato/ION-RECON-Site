@@ -1,4 +1,5 @@
-{
+﻿{
+  "trailingSlash": true,
   "headers": [
     {
       "source": "/sitemap.xml",
@@ -30,7 +31,8 @@
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
     { "source": "/robots.txt", "destination": "/robots.txt" },
+    { "source": "/llms.txt", "destination": "/llms.txt" },
+    { "source": "/llms-full.txt", "destination": "/llms-full.txt" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
-

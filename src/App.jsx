@@ -28,16 +28,32 @@ import AboutUsPage from './components/AboutUsPage';
 import ContactUsPage from './components/ContactUsPage';
 import PrivacyPolicyPage from './components/PrivacyPolicyPage';
 import TermsConditionsPage from './components/TermsConditionsPage';
+import NotFoundPage from './components/NotFoundPage';
 import Footer from './components/Footer';
 import { PLANT_DATA } from './data/plantData';
 import { getLocationBySlug } from './data/locationData';
 import { GOOGLE_APPS_SCRIPT_CODE, getSheetUrl, setCustomSheetUrl } from './utils/googleSheets';
 import { CheckCircle2, FileSpreadsheet, Copy, Check, Link } from 'lucide-react';
 
+const KNOWN_TABS = new Set([
+  'home',
+  'locations',
+  'blog',
+  'roi-calculator',
+  'faqs',
+  'about-us',
+  'about',
+  'contact-us',
+  'contact',
+  'privacy-policy',
+  'terms-and-conditions',
+  'terms'
+]);
+
 // Helper to parse URL path on initial load & popstate
 function parseUrlRoute() {
   if (typeof window === 'undefined') {
-    return { tab: 'home', product: null, location: null, blogSlug: null };
+    return { tab: 'home', product: null, location: null, blogSlug: null, isNotFound: false };
   }
 
   const hash = window.location.hash.replace('#/', '').replace('#', '');
@@ -47,24 +63,27 @@ function parseUrlRoute() {
 
   const slugToTest = locParam || hash || rawPath;
   if (!slugToTest || slugToTest === 'home') {
-    return { tab: 'home', product: null, location: null, blogSlug: null };
+    return { tab: 'home', product: null, location: null, blogSlug: null, isNotFound: false };
   }
 
   if (slugToTest.startsWith('blog')) {
     const parts = slugToTest.split('/');
     const blogSlug = parts.length > 1 && parts[1] ? parts[1] : null;
-    return { tab: 'blog', product: null, location: null, blogSlug };
+    return { tab: 'blog', product: null, location: null, blogSlug, isNotFound: false };
   }
 
   const locObj = getLocationBySlug(slugToTest);
   const prodMatch = PLANT_DATA.products.find(p => p.id === slugToTest);
 
   if (locObj) {
-    return { tab: locObj.slug, product: null, location: locObj, blogSlug: null };
+    return { tab: locObj.slug, product: null, location: locObj, blogSlug: null, isNotFound: false };
   } else if (prodMatch) {
-    return { tab: prodMatch.id, product: prodMatch, location: null, blogSlug: null };
+    return { tab: prodMatch.id, product: prodMatch, location: null, blogSlug: null, isNotFound: false };
+  } else if (KNOWN_TABS.has(slugToTest)) {
+    return { tab: slugToTest, product: null, location: null, blogSlug: null, isNotFound: false };
   } else {
-    return { tab: slugToTest, product: null, location: null, blogSlug: null };
+    // True 404 for any unrecognized path — stops Soft 404 penalties
+    return { tab: '404', product: null, location: null, blogSlug: null, isNotFound: true };
   }
 }
 
@@ -94,13 +113,13 @@ export default function App() {
   useEffect(() => {
     let targetPath = '/';
     if (selectedProduct) {
-      targetPath = `/${selectedProduct.id}`;
+      targetPath = `/${selectedProduct.id}/`;
     } else if (selectedLocation) {
-      targetPath = `/${selectedLocation.slug}`;
+      targetPath = `/${selectedLocation.slug}/`;
     } else if (currentTab === 'blog') {
-      targetPath = selectedBlogSlug ? `/blog/${selectedBlogSlug}` : '/blog';
+      targetPath = selectedBlogSlug ? `/blog/${selectedBlogSlug}/` : '/blog/';
     } else if (currentTab !== 'home') {
-      targetPath = `/${currentTab}`;
+      targetPath = `/${currentTab}/`;
     }
 
     if (window.location.pathname !== targetPath) {
@@ -199,14 +218,14 @@ export default function App() {
   };
 
   const canonicalUrl = selectedProduct
-    ? `https://ionrecon.online/${selectedProduct.id}`
+    ? `https://ionrecon.online/${selectedProduct.id}/`
     : selectedLocation
-    ? `https://ionrecon.online/${selectedLocation.slug}`
+    ? `https://ionrecon.online/${selectedLocation.slug}/`
     : currentTab === 'blog' && selectedBlogSlug
-    ? `https://ionrecon.online/blog/${selectedBlogSlug}`
+    ? `https://ionrecon.online/blog/${selectedBlogSlug}/`
     : currentTab === 'home'
     ? 'https://ionrecon.online/'
-    : `https://ionrecon.online/${currentTab}`;
+    : `https://ionrecon.online/${currentTab}/`;
 
   return (
     <div className={`min-h-screen flex flex-col font-sans relative selection:bg-cyan-500 selection:text-slate-950 transition-colors ${

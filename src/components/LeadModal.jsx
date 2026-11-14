@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { X, FileText, ArrowRight, FileSpreadsheet } from 'lucide-react';
-import { sendLeadToGoogleSheet } from '../utils/googleSheets';
+﻿import React, { useState } from 'react';
+import { X, ArrowRight, FileSpreadsheet, ShieldAlert } from 'lucide-react';
+import { sendLeadToGoogleSheet, isValidPhone } from '../utils/googleSheets';
 
 export default function LeadModal({ isOpen, onClose, triggerSource, trackEvent, onFormSuccess, theme }) {
   const [formData, setFormData] = useState({
@@ -12,10 +12,12 @@ export default function LeadModal({ isOpen, onClose, triggerSource, trackEvent, 
     businessType: 'Mineral Water Plant',
     budget: '₹34 Lakhs - ₹37 Lakhs',
     message: '',
-    source: triggerSource || 'Quotation Popup Modal'
+    source: triggerSource || 'Quotation Popup Modal',
+    company_website: '' // Anti-bot honeypot field
   });
 
   const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   if (!isOpen) return null;
 
@@ -23,18 +25,33 @@ export default function LeadModal({ isOpen, onClose, triggerSource, trackEvent, 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage('');
+
+    // Phone validation (10 digits Indian mobile)
+    if (!isValidPhone(formData.phone)) {
+      setErrorMessage('Please enter a valid 10-digit Indian mobile number.');
+      return;
+    }
+
     setSubmitting(true);
     trackEvent(`Modal Form submitting & syncing to Google Sheets (${triggerSource})...`, 'lead_form_submitted');
 
-    // Send lead to Google Sheets
-    await sendLeadToGoogleSheet({ ...formData, source: triggerSource || 'Quotation Popup Modal' });
+    // Send lead to Google Sheets with sanitization & rate-limit guards
+    const res = await sendLeadToGoogleSheet({ ...formData, source: triggerSource || 'Quotation Popup Modal' });
+
+    if (res.rateLimited) {
+      setErrorMessage('Please wait a few seconds before submitting another request.');
+      setSubmitting(false);
+      return;
+    }
+
     trackEvent(`Google Sheets Lead Synced: ${formData.name}`, 'google_sheets_post_success');
 
     setTimeout(() => {
       setSubmitting(false);
       onFormSuccess(formData);
       onClose();
-    }, 1000);
+    }, 800);
   };
 
   return (
@@ -64,12 +81,32 @@ export default function LeadModal({ isOpen, onClose, triggerSource, trackEvent, 
           <p className={`text-xs mt-1 ${isLight ? 'text-slate-600' : 'text-slate-400'}`}>Our technical team will call you back within 10 minutes with full project breakdown.</p>
         </div>
 
+        {errorMessage && (
+          <div className="mb-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-500 text-xs font-semibold flex items-center space-x-2">
+            <ShieldAlert className="w-4 h-4 flex-shrink-0" />
+            <span>{errorMessage}</span>
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="space-y-3.5">
+          {/* Anti-Bot Honeypot Field (Hidden from real users) */}
+          <input
+            type="text"
+            name="company_website"
+            value={formData.company_website}
+            onChange={(e) => setFormData({ ...formData, company_website: e.target.value })}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            style={{ display: 'none', position: 'absolute', left: '-9999px', opacity: 0 }}
+          />
+
           <div>
             <label className={`block text-xs font-bold mb-1 ${isLight ? 'text-slate-700' : 'text-slate-300'}`}>Full Name *</label>
             <input
               type="text"
               required
+              maxLength={80}
               placeholder="e.g. Vikram Sharma"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -85,9 +122,13 @@ export default function LeadModal({ isOpen, onClose, triggerSource, trackEvent, 
               <input
                 type="tel"
                 required
+                maxLength={15}
                 placeholder="+91 98109 20792"
                 value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                onChange={(e) => {
+                  setFormData({ ...formData, phone: e.target.value });
+                  if (errorMessage) setErrorMessage('');
+                }}
                 className={`w-full px-3.5 py-2.5 rounded-xl text-sm ${
                   isLight ? 'bg-slate-50 border border-slate-300 text-slate-900' : 'glass-input text-white'
                 }`}
@@ -97,6 +138,7 @@ export default function LeadModal({ isOpen, onClose, triggerSource, trackEvent, 
               <label className={`block text-xs font-bold mb-1.5 ${isLight ? 'text-slate-700' : 'text-slate-300'}`}>Email Address</label>
               <input
                 type="email"
+                maxLength={80}
                 placeholder="info@ionrecon.online"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -113,6 +155,7 @@ export default function LeadModal({ isOpen, onClose, triggerSource, trackEvent, 
               <input
                 type="text"
                 required
+                maxLength={50}
                 placeholder="e.g. Ghaziabad, UP"
                 value={formData.state}
                 onChange={(e) => setFormData({ ...formData, state: e.target.value })}
@@ -144,6 +187,7 @@ export default function LeadModal({ isOpen, onClose, triggerSource, trackEvent, 
             <label className={`block text-xs font-bold mb-1 ${isLight ? 'text-slate-700' : 'text-slate-300'}`}>Specific Requirement / Message</label>
             <textarea
               rows="2"
+              maxLength={500}
               placeholder="Mention any specific machine requirement, water source, or land availability..."
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -156,7 +200,7 @@ export default function LeadModal({ isOpen, onClose, triggerSource, trackEvent, 
           <button
             type="submit"
             disabled={submitting}
-            className="w-full py-4 px-4 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-extrabold text-base shadow-xl shadow-cyan-600/30 transition-all flex items-center justify-center space-x-2 mt-2"
+            className="w-full py-4 px-4 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-extrabold text-base shadow-xl shadow-cyan-600/30 transition-all flex items-center justify-center space-x-2 mt-2 disabled:opacity-50"
           >
             {submitting ? (
               <span>Syncing with Google Sheets...</span>

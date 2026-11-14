@@ -169,13 +169,13 @@ export default function ProductDetailPage({ product, onBack, onOpenQuoteModal, t
         <title>{product.metaTitle || `${product.title} Manufacturer | Ion Recon Ghaziabad`}</title>
         <meta name="description" content={product.seoContent || product.shortDesc} />
         <meta name="keywords" content={`${product.title}, ${product.title} Manufacturer, Ion Recon ${product.title}, ${product.category}`} />
-        <link rel="canonical" href={`https://ionrecon.online/${product.id}`} />
+        <link rel="canonical" href={`https://ionrecon.online/${product.id}/`} />
 
         {/* OpenGraph */}
         <meta property="og:type" content="product" />
         <meta property="og:title" content={product.metaTitle || product.title} />
         <meta property="og:description" content={product.seoContent || product.shortDesc} />
-        <meta property="og:url" content={`https://ionrecon.online/${product.id}`} />
+        <meta property="og:url" content={`https://ionrecon.online/${product.id}/`} />
         <meta property="og:image" content={product.image?.startsWith('http') ? product.image : `https://ionrecon.online${product.image || '/images/mineral_water_plant_40bpm.png'}`} />
 
         {/* Twitter */}
@@ -221,7 +221,7 @@ export default function ProductDetailPage({ product, onBack, onOpenQuoteModal, t
                      product.id === 'bopp-labeling-machine' ? "850000.00" :
                      product.id === 'csd-project' ? "4200000.00" : "2500000.00",
               "priceValidUntil": "2027-12-31",
-              "url": `https://ionrecon.online/${product.id}`,
+              "url": `https://ionrecon.online/${product.id}/`,
               "itemCondition": "https://schema.org/NewCondition",
               "availability": "https://schema.org/InStock",
               "seller": {

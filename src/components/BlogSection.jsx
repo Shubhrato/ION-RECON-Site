@@ -45,13 +45,13 @@ export default function BlogSection({ onOpenQuoteModal, trackEvent, theme, curre
         <Helmet>
           <title>{`${selectedArticle.title} | Ion Recon Setup Guides`}</title>
           <meta name="description" content={selectedArticle.summary} />
-          <link rel="canonical" href={`https://ionrecon.online/blog/${selectedArticle.slug}`} />
+          <link rel="canonical" href={`https://ionrecon.online/blog/${selectedArticle.slug}/`} />
 
           {/* OpenGraph */}
           <meta property="og:type" content="article" />
           <meta property="og:title" content={selectedArticle.title} />
           <meta property="og:description" content={selectedArticle.summary} />
-          <meta property="og:url" content={`https://ionrecon.online/blog/${selectedArticle.slug}`} />
+          <meta property="og:url" content={`https://ionrecon.online/blog/${selectedArticle.slug}/`} />
           <meta property="og:image" content={selectedArticle.image?.startsWith('http') ? selectedArticle.image : `https://ionrecon.online${selectedArticle.image || '/images/mineral_water_plant_40bpm.png'}`} />
 
           {/* Twitter */}
@@ -108,13 +108,13 @@ export default function BlogSection({ onOpenQuoteModal, trackEvent, theme, curre
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Blog & Machinery Setup Guides",
-                  "item": "https://ionrecon.online/blog"
+                  "item": "https://ionrecon.online/blog/"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": selectedArticle.title,
-                  "item": `https://ionrecon.online/blog/${selectedArticle.slug}`
+                  "item": `https://ionrecon.online/blog/${selectedArticle.slug}/`
                 }
               ]
             })}
@@ -122,15 +122,15 @@ export default function BlogSection({ onOpenQuoteModal, trackEvent, theme, curre
         </Helmet>
       ) : (
         <Helmet>
-          <title>Water Plant & Bottling Machine Setup Guides & Blueprints | Ion Recon</title>
+          <title>Mineral Water Bottling Plant Knowledge Hub & Setup Blog | Ion Recon</title>
           <meta name="description" content="Explore expert engineering blueprints, BIS IS 14543 licensing guides, packaged water plant cost calculations, and bottling line setup tutorials by Ion Recon." />
-          <link rel="canonical" href="https://ionrecon.online/blog" />
+          <link rel="canonical" href="https://ionrecon.online/blog/" />
 
           {/* OpenGraph */}
           <meta property="og:type" content="website" />
           <meta property="og:title" content="Water Plant & Bottling Machine Setup Guides & Blueprints | Ion Recon" />
           <meta property="og:description" content="Explore expert engineering blueprints, BIS IS 14543 licensing guides, packaged water plant cost calculations, and bottling line setup tutorials by Ion Recon." />
-          <meta property="og:url" content="https://ionrecon.online/blog" />
+          <meta property="og:url" content="https://ionrecon.online/blog/" />
           <meta property="og:image" content="https://ionrecon.online/images/mineral_water_plant_40bpm.png" />
 
           {/* Twitter */}

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { ShieldCheck, FileSpreadsheet, ArrowRight } from 'lucide-react';
-import { sendLeadToGoogleSheet } from '../utils/googleSheets';
+﻿import React, { useState } from 'react';
+import { ArrowRight, ShieldAlert } from 'lucide-react';
+import { sendLeadToGoogleSheet, isValidPhone } from '../utils/googleSheets';
 
 export default function ContactFormSection({ trackEvent, onFormSuccess, theme }) {
   const [formData, setFormData] = useState({
@@ -12,28 +12,46 @@ export default function ContactFormSection({ trackEvent, onFormSuccess, theme })
     businessStage: 'Planning to Start New Plant',
     budget: '₹34 Lakhs - ₹37 Lakhs',
     message: '',
-    source: 'Bottom Page Form'
+    source: 'Bottom Page Form',
+    company_website: '' // Anti-bot honeypot field
   });
 
   const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (errorMessage) setErrorMessage('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage('');
+
+    // Phone validation (10 digits Indian mobile)
+    if (!isValidPhone(formData.phone)) {
+      setErrorMessage('Please enter a valid 10-digit Indian mobile number.');
+      return;
+    }
+
     setSubmitting(true);
     trackEvent('Form submitting & pushing to Google Sheets...', 'lead_form_submitted');
 
-    // Send lead data to Google Sheet endpoint
-    await sendLeadToGoogleSheet(formData);
+    // Send lead data to Google Sheet endpoint with sanitization & rate-limit guards
+    const res = await sendLeadToGoogleSheet(formData);
+
+    if (res.rateLimited) {
+      setErrorMessage('Please wait a few seconds before submitting another request.');
+      setSubmitting(false);
+      return;
+    }
+
     trackEvent(`Data sent to Google Sheet for ${formData.name} (${formData.phone})`, 'google_sheets_post_success');
 
     setTimeout(() => {
       setSubmitting(false);
       onFormSuccess(formData);
-    }, 1000);
+    }, 800);
   };
 
   const isLight = theme === 'light';
@@ -49,18 +67,37 @@ export default function ContactFormSection({ trackEvent, onFormSuccess, theme })
             : 'glass-panel border-cyan-500/30 bg-slate-900/50'
         }`}>
 
-
           <div className="mb-6 pt-1 text-center">
             <h3 className={`text-2xl font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>Request Ion Recon Factory Quote</h3>
             <p className={`text-sm mt-2 ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>Get customized technical specs, 40 BPM plant layout & cost estimate in 10 mins.</p>
           </div>
 
+          {errorMessage && (
+            <div className="mb-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-500 text-xs font-semibold flex items-center space-x-2">
+              <ShieldAlert className="w-4 h-4 flex-shrink-0" />
+              <span>{errorMessage}</span>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Anti-Bot Honeypot Field (Hidden from real users) */}
+            <input
+              type="text"
+              name="company_website"
+              value={formData.company_website}
+              onChange={handleInputChange}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{ display: 'none', position: 'absolute', left: '-9999px', opacity: 0 }}
+            />
+
             <div>
               <label className={`block text-xs font-semibold mb-1 ${isLight ? 'text-slate-700' : 'text-slate-300'}`}>Your Full Name *</label>
               <input
                 type="text"
                 required
+                maxLength={80}
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
@@ -79,6 +116,7 @@ export default function ContactFormSection({ trackEvent, onFormSuccess, theme })
                 <input
                   type="tel"
                   required
+                  maxLength={15}
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
@@ -187,31 +225,19 @@ export default function ContactFormSection({ trackEvent, onFormSuccess, theme })
             <button
               type="submit"
               disabled={submitting}
-              className="w-full mt-2 py-4 px-4 rounded-xl bg-gradient-to-r from-cyan-600 via-blue-600 to-cyan-600 hover:from-cyan-500 hover:to-blue-500 text-white font-extrabold text-base shadow-lg shadow-cyan-600/30 transition-all flex items-center justify-center space-x-2"
+              className="w-full mt-2 py-4 px-4 rounded-xl bg-gradient-to-r from-cyan-600 via-blue-600 to-cyan-600 hover:from-cyan-500 hover:to-blue-500 text-white font-extrabold text-base shadow-lg shadow-cyan-600/30 transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
             >
               {submitting ? (
-                <span className="flex items-center space-x-2">
-                  <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  <span>Syncing with Google Sheets...</span>
-                </span>
+                <span>Sending to Factory Team...</span>
               ) : (
                 <>
-                  <span>Request Quote & Specs PDF</span>
-                  <ArrowRight className="w-5 h-5 ml-1" />
+                  <span>Get Detailed Machine Pricing & Project Breakdown</span>
+                  <ArrowRight className="w-5 h-5" />
                 </>
               )}
             </button>
           </form>
 
-          <div className={`mt-6 pt-4 border-t flex flex-col sm:flex-row items-center justify-between gap-2 text-[12px] ${
-            isLight ? 'border-slate-200 text-slate-500' : 'border-slate-800 text-slate-400'
-          }`}>
-            <span className="flex items-center text-emerald-600 dark:text-emerald-400 font-semibold">
-              <ShieldCheck className="w-4 h-4 mr-1.5" />
-              Direct Ion Recon Factory Guarantee
-            </span>
-            <span>🔒 GST 09AFSPV0532M1ZQ</span>
-          </div>
         </div>
       </div>
     </section>

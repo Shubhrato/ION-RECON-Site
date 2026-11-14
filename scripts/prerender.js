@@ -1,6 +1,10 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+
+import { PLANT_DATA } from '../src/data/plantData.js';
+import { BLOG_POSTS } from '../src/data/blogData.js';
+import { LOCATION_STATES } from '../src/data/locationData.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,7 +23,7 @@ const template = fs.readFileSync(templatePath, 'utf8');
 const sitemapContent = fs.readFileSync(sitemapPath, 'utf8');
 
 // Extract all <loc> URLs from sitemap.xml
-const locRegex = /<loc>(https:\/\/ionrecon\.info\/[^<]*)<\/loc>/g;
+const locRegex = /<loc>(https:\/\/[^<]+)<\/loc>/g;
 const urls = [];
 let match;
 while ((match = locRegex.exec(sitemapContent)) !== null) {
@@ -28,319 +32,48 @@ while ((match = locRegex.exec(sitemapContent)) !== null) {
 
 console.log(`Found ${urls.length} URLs in sitemap.xml for static pre-rendering.`);
 
-// Helper to generate dynamic title & description based on route
+// Build fast lookup maps
+const productMap = new Map();
+if (PLANT_DATA && Array.isArray(PLANT_DATA.products)) {
+  PLANT_DATA.products.forEach(p => productMap.set(p.id, p));
+}
+
+const blogMap = new Map();
+if (Array.isArray(BLOG_POSTS)) {
+  BLOG_POSTS.forEach(b => {
+    const slug = b.slug || b.id;
+    blogMap.set(slug, b);
+  });
+}
+
+const stateMap = new Map();
+if (Array.isArray(LOCATION_STATES)) {
+  LOCATION_STATES.forEach(s => stateMap.set(s.id, s));
+}
+
+// Helper to determine meta & semantic content for any route
 function getPageMeta(urlStr) {
   const url = new URL(urlStr);
   const cleanPath = url.pathname.replace(/^\/|\/$/g, '');
 
   if (!cleanPath) {
     return {
-      title: 'Ion Recon | No.1 Mineral Water Plant Manufacturer & Turnkey Solutions',
-      description: 'Ion Recon Ghaziabad: Leading Turnkey Mineral Water Plant Manufacturer in India. Setup 40 BPM 30 BPM 60 BPM packaged drinking water plant & SS RO machinery at best price.',
+      title: 'Mineral Water Bottling Plant Manufacturer - Ion Recon',
+      description: 'Ion Recon: Premier turnkey mineral water plant & bottling machine manufacturer in Ghaziabad. Custom automatic filling lines, commercial RO & CSD plants.',
       canonical: 'https://ionrecon.online/'
     };
   }
 
-  const canonical = `https://ionrecon.online/${cleanPath}`;
+  // Canonical ALWAYS has trailing slash for directory index
+  const canonical = `https://ionrecon.online/${cleanPath}/`;
 
-  // Product routes - Front-loaded non-branded target keywords + Brand Name
-  if (cleanPath === 'bopp-labeling-machine') {
+  // 1. Explicit Core Pages
+  if (cleanPath === 'blog') {
     return {
-      title: 'BOPP Hot-Melt Bottle Labeling Machine Manufacturer & Price | Roll-Fed PET Bottle Labeler - Ion Recon',
-      description: 'Automatic BOPP hot-melt bottle labeling machine manufacturer in Ghaziabad. High speed roll-fed PET bottle wraparound labelers (50 BPM to 250 BPM) with hot melt glue tank & optical eye sensor. Request free price quote.',
+      title: 'Mineral Water Bottling Plant Knowledge Hub & Setup Blog | Ion Recon',
+      description: 'Comprehensive engineering blueprints, packaged drinking water plant setup guides, BIS IS 14543 licensing requirements, and machinery cost guides by Ion Recon.',
       canonical,
-      productName: 'BOPP Hot-Melt Bottle Labeling Machine',
-      category: 'Packaging Machinery'
-    };
-  }
-  if (cleanPath === '40-bpm-mineral-water-plant') {
-    return {
-      title: '40 BPM Mineral Water Bottling Plant Manufacturer & Setup Cost | 2400 BPH Packaged Drinking Water Line - Ion Recon',
-      description: 'Custom 40 BPM (2,400 BPH) turnkey mineral water plant manufacturer in Ghaziabad. Complete automatic bottling line setup cost, 2000 LPH SS RO plant & BIS IS 14543 lab setup. Request free price quote.',
-      canonical,
-      productName: '40 BPM Packaged Drinking Water Plant',
-      category: 'Mineral Water Plants'
-    };
-  }
-  if (cleanPath === '60-bpm-mineral-water-plant') {
-    return {
-      title: '60 BPM Mineral Water Bottling Plant Manufacturer & Setup Cost | 3600 BPH High Speed Water Line - Ion Recon',
-      description: 'High-speed 60 BPM (3,600 BPH) automatic mineral water bottling plant manufacturer. Servo-driven 12-12-5 monoblock filling line, 2000 LPH RO plant & PET blow molding line. Request free price quote.',
-      canonical,
-      productName: '60 BPM Mineral Water Bottling Plant',
-      category: 'Mineral Water Plants'
-    };
-  }
-  if (cleanPath === 'bottle-filling-machine') {
-    return {
-      title: 'RFC Monoblock Bottle Filling Machine Manufacturer & Price | 3 in 1 Automatic PET Bottle Filler - Ion Recon',
-      description: '3-in-1 RFC Monoblock Bottle Filling Machine manufacturer. Precision zero-drip PET bottle rinser filler capper lines from 30 BPM to 240 BPM (1,800 to 14,400 BPH). Get technical datasheet & factory price quote.',
-      canonical,
-      productName: 'RFC Monoblock Bottle Filling Machine',
-      category: 'Filling Machinery'
-    };
-  }
-  if (cleanPath === 'ss-ro-plant') {
-    return {
-      title: 'Industrial SS RO Water Treatment Plant Manufacturer & Price | Commercial Reverse Osmosis Plant - Ion Recon',
-      description: 'Commercial & Industrial SS 304/316 RO water treatment plant manufacturer. High capacity reverse osmosis purification from 500 LPH to 50,000 LPH with Grundfos pumps & ozonator. Request free price quote.',
-      canonical,
-      productName: 'Industrial SS RO Water Treatment Plant',
-      category: 'Water Treatment Plants'
-    };
-  }
-  if (cleanPath === 'industrial-etp-plant') {
-    return {
-      title: 'Industrial Effluent Treatment Plant ETP Manufacturer & Setup Cost | Zero Liquid Discharge ZLD - Ion Recon',
-      description: 'Industrial Effluent Treatment Plant (ETP) setup & manufacturer in Ghaziabad. Custom ETP plants from 10 KLD to 1000 KLD with Zero Liquid Discharge (ZLD) Multi-Effect Evaporator for chemical, textile & pharma factories. Request free price quotation.',
-      canonical,
-      productName: 'Industrial Effluent Treatment Plant (ETP Setup)',
-      category: 'Wastewater Treatment Plants'
-    };
-  }
-  if (cleanPath === 'sewage-treatment-plant-stp') {
-    return {
-      title: 'Sewage Treatment Plant STP Manufacturer & Setup Cost | MBBR & MBR Membrane Systems - Ion Recon',
-      description: 'Sewage Treatment Plant (STP) manufacturer for residential housing societies, malls & commercial buildings. Advanced MBBR & MBR membrane STP plants meeting CPCB discharge standards. Request free price quotation.',
-      canonical,
-      productName: 'Sewage Treatment Plant (STP - MBBR / MBR)',
-      category: 'Wastewater Treatment Plants'
-    };
-  }
-  if (cleanPath === 'shrink-wrapping-machine') {
-    return {
-      title: 'Automatic Web Sealer Shrink Wrapping Machine Manufacturer & Price | Bottle Bundling Heating Tunnel - Ion Recon',
-      description: 'Automatic web sealer shrink wrapping machine & heating tunnel manufacturer. Heavy-duty trayless matrix bottle pack bundling line (10-25 packs/min) with PID digital thermal control. Request free price quote.',
-      canonical,
-      productName: 'Automatic Shrink Wrapping Heating Tunnel',
-      category: 'Packaging Machinery'
-    };
-  }
-  if (cleanPath === 'water-pouch-packing-machine') {
-    return {
-      title: 'Automatic Water Pouch Packing Machine Manufacturer & Price | Vertical FFS Liquid Pouch Packager - Ion Recon',
-      description: 'Automatic liquid water pouch packing machine manufacturer. Vertical Form-Fill-Seal (FFS) pouch packaging line (2,000-2,500 pouches/hr) with UV sterilization lamp & SS 304 contact parts. Request free price quote.',
-      canonical,
-      productName: 'Automatic Water Pouch Packing Machine',
-      category: 'Packaging Machinery'
-    };
-  }
-  if (cleanPath === 'csd-project') {
-    return {
-      title: 'Turnkey CSD Carbonated Soft Drink Plant Manufacturer & Cost | Beverage Bottling Line - Ion Recon',
-      description: 'Automatic CSD filling machine manufacturer for carbonated beverage processing plant setup & high-capacity soda bottling line from 30 BPM to 120 BPM with SS 316 beverage lines. Request project cost estimate.',
-      canonical,
-      productName: 'Carbonated Soft Drink (CSD) Plant',
-      category: 'Beverage Plants'
-    };
-  }
-  if (cleanPath === 'rts-juice-dairy-plant') {
-    return {
-      title: 'RTS Fruit Juice Line & Pasteurizer Manufacturer | Turnkey Juice Bottling Plant Setup - Ion Recon',
-      description: 'Turnkey fruit pulp processing machinery & juice bottling plant manufacturer. Plate heat exchanger pasteurizer and 85°C hot filling monoblock lines. Request direct factory quote.',
-      canonical,
-      productName: 'RTS Fruit Juice Line & Dairy Plant',
-      category: 'Beverage Plants'
-    };
-  }
-  if (cleanPath === 'pet-blowing-machine') {
-    return {
-      title: 'PET Bottle Stretch Blow Molding Machine Manufacturer & Price | Automatic Bottle Maker - Ion Recon',
-      description: 'Automatic & semi-automatic PET bottle stretch blow molding machine manufacturer. Production capacity from 1,200 BPH to 9,000 BPH with energy-saving infrared oven. Request free price quote.',
-      canonical,
-      productName: 'PET Bottle Stretch Blow Molding Machine',
-      category: 'Blowing Machinery'
-    };
-  }
-  if (cleanPath === 'jar-filling-machine') {
-    return {
-      title: 'Automatic 20 Litre Water Jar Filling Machine Manufacturer & Price | 20L Jar Plant Setup - Ion Recon',
-      description: 'Automatic 20 Litre water jar decapper, washer, filler, and capper monoblock machine manufacturer. High output from 100 to 600 jars per hour with SS 304 food grade construction. Request free price quote.',
-      canonical,
-      productName: 'Automatic 20 Litre Jar Filling Machine',
-      category: 'Filling Machinery'
-    };
-  }
-  if (cleanPath === 'sticker-labeling-machine') {
-    return {
-      title: 'Automatic Sticker Labeling Machine Manufacturer & Price | PET Bottle Sticker Labeler - Ion Recon',
-      description: 'Automatic self-adhesive sticker labeling machine manufacturer. High-speed bottle sticker labeler for round & flat PET bottles (50 BPM to 200 BPM) with stepper/servo drive. Request price quote.',
-      canonical,
-      productName: 'Automatic Sticker Labeling Machine',
-      category: 'Packaging Machinery'
-    };
-  }
-  if (cleanPath === 'semi-auto-shrink-wrapping-machine') {
-    return {
-      title: 'Semi Automatic Shrink Wrapping Machine Manufacturer & Price | L-Sealer Heating Tunnel - Ion Recon',
-      description: 'Semi-automatic shrink wrapping machine manufacturer in Ghaziabad. Pneumatic pusher L-sealer with shrink heating tunnel (5 to 12 packs/min) for PET bottle pack bundling. Request free price quote.',
-      canonical,
-      productName: 'Semi-Automatic Shrink Wrapping Machine',
-      category: 'Packaging Machinery'
-    };
-  }
-  if (cleanPath === 'fully-auto-shrink-wrapping-machine') {
-    return {
-      title: 'Fully Automatic Shrink Wrapping Machine Manufacturer & Price | Web Sealer Tunnel - Ion Recon',
-      description: 'Fully automatic web sealer shrink wrapping machine & heating tunnel manufacturer. High-speed trayless matrix bottle bundling line (15 to 28 packs/min) with PID digital heating. Request factory price quote.',
-      canonical,
-      productName: 'Fully Automatic Shrink Wrapping Machine',
-      category: 'Packaging Machinery'
-    };
-  }
-  if (cleanPath === 'water-testing-lab-equipment') {
-    return {
-      title: 'Water Testing Lab Equipment & Glassware Manufacturer | BIS IS 14543 Setup Cost - Ion Recon',
-      description: 'Complete packaged drinking water testing lab equipment setup manufacturer for BIS IS 14543 & FSSAI compliance. Includes chemical instruments, autoclave, laminar air flow & borosilicate glassware. Request quote.',
-      canonical,
-      productName: 'Water Testing Lab Equipment & Glassware Setup',
-      category: 'Testing Laboratory'
-    };
-  }
-  if (cleanPath === 'tij-batch-coding-machine') {
-    return {
-      title: 'TIJ Batch Coding Machine Manufacturer & Price | Thermal Inkjet Bottle Printer - Ion Recon',
-      description: 'High-speed TIJ thermal inkjet batch coding machine manufacturer. Online MRP date printer for PET bottles, caps & pouches (600 DPI, zero maintenance) with fast-dry solvent ink. Request price quote.',
-      canonical,
-      productName: 'TIJ Batch Coding Machine (Thermal Inkjet)',
-      category: 'Coding Printers'
-    };
-  }
-  if (cleanPath === 'cij-batch-coding-machine-neelkamal') {
-    return {
-      title: 'Neelkamal CIJ Batch Coding Machine Price & Supplier | Continuous Inkjet Printer - Ion Recon',
-      description: 'Industrial Neelkamal CIJ continuous inkjet batch coding machine supplier. High-speed 5-line non-contact MRP date printer for PET bottle lines up to 500 bottles/min. Request price quote.',
-      canonical,
-      productName: 'CIJ Batch Coding Machine (Neelkamal)',
-      category: 'Coding Printers'
-    };
-  }
-  if (cleanPath === 'pet-blowing-machine-handfeed-2-cavity') {
-    return {
-      title: 'PET Blow Molding Machine Handfeed 2 Cavity Price ₹15 Lakhs | 2300 BPH Bottle Maker - Ion Recon',
-      description: 'Semi-automatic handfeed 2 cavity PET bottle stretch blow molding machine manufacturer. Output 2,300 BPH with 18 kW power oven at factory price ₹15 Lakhs. Request direct quote.',
-      canonical,
-      productName: 'PET Blow Molding Machine Handfeed 2 Cavity',
-      category: 'Blowing Machinery'
-    };
-  }
-  if (cleanPath === 'pet-blowing-machine-handfeed-4-cavity') {
-    return {
-      title: 'PET Blow Molding Machine Handfeed 4 Cavity Manufacturer & Price | 3600-5600 BPH - Ion Recon',
-      description: 'Semi-automatic 4 cavity PET bottle stretch blow molding machine manufacturer. Output 3,600 to 5,600 BPH with 32 kW power infrared oven. Request price quotation.',
-      canonical,
-      productName: 'PET Blow Molding Machine Handfeed 4 Cavity',
-      category: 'Blowing Machinery'
-    };
-  }
-  if (cleanPath === 'pet-blowing-machine-fully-auto-4-cavity') {
-    return {
-      title: 'Fully Automatic 4 Cavity PET Blow Molding Machine Manufacturer & Price | 5600 BPH - Ion Recon',
-      description: '100% Fully automatic 4 cavity PET bottle stretch blow molding machine manufacturer. Output 5,600 BPH with auto preform elevator & 48 kW servo drive. Request quote.',
-      canonical,
-      productName: 'PET Blow Molding Machine Fully Automatic 4 Cavity',
-      category: 'Blowing Machinery'
-    };
-  }
-  if (cleanPath === 'pet-blowing-machine-fully-auto-6-cavity') {
-    return {
-      title: 'Fully Automatic 6 Cavity PET Blow Molding Machine Manufacturer & Price | 6200 BPH - Ion Recon',
-      description: 'Ultra high speed fully automatic 6 cavity PET bottle blow molding machine manufacturer. Output 6,200 to 7,200 BPH with full servo drive & 68 kW power oven. Request price quote.',
-      canonical,
-      productName: 'PET Blow Molding Machine Fully Automatic 6 Cavity',
-      category: 'Blowing Machinery'
-    };
-  }
-
-  if (cleanPath === 'locations') {
-    return {
-      title: 'Mineral Water Plant Setup & Machinery Supplier Directory | Ion Recon PAN India',
-      description: 'Find turnkey mineral water plant setup, commercial RO plant manufacturers & bottling line suppliers in Uttar Pradesh, Delhi NCR, Rajasthan, Bihar, MP & PAN India.',
-      canonical
-    };
-  }
-  if (cleanPath === 'roi-calculator') {
-    return {
-      title: 'Mineral Water Plant Setup Cost & ROI Profit Calculator | Bottling Project Estimation - Ion Recon',
-      description: 'Calculate mineral water plant setup cost, daily profit margins, payback period & power requirements for 30 BPM, 40 BPM, 60 BPM & 90 BPM bottling lines.',
-      canonical
-    };
-  }
-  if (cleanPath === 'faqs') {
-    return {
-      title: 'Mineral Water Plant Setup FAQs | BIS ISI IS 14543 License & Machinery Guide - Ion Recon',
-      description: 'Frequently Asked Questions on packaged drinking water plant setup cost, BIS ISI certification, FSSAI licensing, floor area plan, power requirements & RO purification.',
-      canonical
-    };
-  }
-
-  if (cleanPath.includes('stp') || cleanPath.includes('effluent') || cleanPath.includes('sewage')) {
-    return {
-      title: 'Industrial STP Plant Setup Cost & Effluent Treatment Manufacturer | MBBR Sewage Treatment - Ion Recon',
-      description: 'Check industrial STP plant setup cost & MBBR STP plant design. Leading effluent and sewage treatment plant manufacturer for zero liquid discharge. Request a free quote.',
-      canonical
-    };
-  }
-
-  // Location routes
-  if (cleanPath.startsWith('mineral-water-plant-manufacturer-in-')) {
-    const rawSlug = cleanPath.replace('mineral-water-plant-manufacturer-in-', '');
-    
-    // Guard: If rawSlug matches a machine slug or product ID, map it to the proper product route!
-    const productRoutes = [
-      '40-bpm-mineral-water-plant', '60-bpm-mineral-water-plant',
-      'bottle-filling-machine', 'pet-blowing-machine', 'ss-ro-plant',
-      'jar-filling-machine', 'bopp-labeling-machine', 'shrink-wrapping-machine',
-      'csd-project', 'rts-juice-dairy-plant', 'water-pouch-packing-machine',
-      'sticker-labeling-machine', 'semi-auto-shrink-wrapping-machine', 'fully-auto-shrink-wrapping-machine',
-      'water-testing-lab-equipment', 'tij-batch-coding-machine', 'cij-batch-coding-machine-neelkamal',
-      'pet-blowing-machine-handfeed-2-cavity', 'pet-blowing-machine-handfeed-4-cavity',
-      'pet-blowing-machine-fully-auto-4-cavity', 'pet-blowing-machine-fully-auto-6-cavity'
-    ];
-
-    if (productRoutes.includes(rawSlug)) {
-      return getPageMeta(`https://ionrecon.online/${rawSlug}`);
-    }
-
-    const locName = rawSlug
-      .split('-')
-      .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-      .join(' ');
-    
-    return {
-      title: `Turnkey Mineral Water Plant Manufacturer in ${locName} | Packaged Water Setup - Ion Recon`,
-      description: `Ion Recon: Turnkey packaged drinking water project & commercial RO plant manufacturer in ${locName}. Automatic bottling line setup & direct factory price quote.`,
-      canonical: `https://ionrecon.online/mineral-water-plant-manufacturer-in-${rawSlug}`
-    };
-  }
-
-  // Blog routes
-  if (cleanPath.startsWith('blog/')) {
-    const blogTitle = cleanPath
-      .replace('blog/', '')
-      .split('-')
-      .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-      .join(' ');
-
-    if (cleanPath.includes('csd')) {
-      return {
-        title: 'Carbonated Beverage Processing Plant & CSD Bottling Line Guide | Ion Recon',
-        description: 'Learn automatic CSD filling machine manufacturer specs, high-capacity CSD bottling line setup cost & carbonated beverage processing plant layout.',
-        canonical
-      };
-    }
-    if (cleanPath.includes('stp')) {
-      return {
-        title: 'Industrial STP Plant Setup Cost & MBBR STP Plant Design Guide | Ion Recon',
-        description: 'Complete guide on industrial STP plant setup cost, effluent and sewage treatment plant manufacturer comparison & MBBR STP plant design calculations.',
-        canonical
-      };
-    }
-
-    return {
-      title: `${blogTitle} | Ion Recon Setup Guide`,
-      description: `Detailed guide and engineering blueprint on ${blogTitle}. Learn machinery selection, BIS ISI licensing, floor plan layout & profit calculations.`,
-      canonical
+      type: 'blog-index'
     };
   }
 
@@ -348,28 +81,114 @@ function getPageMeta(urlStr) {
     return {
       title: 'About Ion Recon Industries | Mineral Water Plant Manufacturer Ghaziabad',
       description: 'Learn about Ion Recon Industries: Premier turnkey mineral water plant manufacturer & bottling machinery supplier in Sahibabad Industrial Area Site 4, Ghaziabad. 15+ years experience & 500+ projects installed.',
-      canonical
+      canonical,
+      type: 'about'
     };
   }
+
   if (cleanPath === 'contact-us' || cleanPath === 'contact') {
     return {
       title: 'Contact Ion Recon Industries | Factory Address & Sales Phone Ghaziabad',
       description: 'Contact Ion Recon Industries in Sahibabad Industrial Area Site 4, Ghaziabad. Phone: +91 98109 20792. Get free quotation, machinery catalog & factory location map directions.',
-      canonical
+      canonical,
+      type: 'contact'
     };
   }
+
+  if (cleanPath === 'roi-calculator') {
+    return {
+      title: 'Mineral Water Plant Setup Cost & ROI Profit Calculator | Bottling Project Estimation - Ion Recon',
+      description: 'Calculate mineral water plant setup cost, daily profit margins, payback period & power requirements for 30 BPM, 40 BPM, 60 BPM & 90 BPM bottling lines.',
+      canonical,
+      type: 'roi-calculator'
+    };
+  }
+
+  if (cleanPath === 'faqs') {
+    return {
+      title: 'Mineral Water Plant Setup FAQs | BIS ISI IS 14543 License & Machinery Guide - Ion Recon',
+      description: 'Frequently Asked Questions on packaged drinking water plant setup cost, BIS ISI certification, FSSAI licensing, floor area plan, power requirements & RO purification.',
+      canonical,
+      type: 'faqs'
+    };
+  }
+
+  if (cleanPath === 'locations') {
+    return {
+      title: 'Mineral Water Plant Setup & Machinery Supplier Directory | Ion Recon PAN India',
+      description: 'Find turnkey mineral water plant setup, commercial RO plant manufacturers & bottling line suppliers in Uttar Pradesh, Delhi NCR, Rajasthan, Bihar, MP & PAN India.',
+      canonical,
+      type: 'locations-index'
+    };
+  }
+
   if (cleanPath === 'privacy-policy') {
     return {
       title: 'Privacy Policy | Ion Recon Industries Ghaziabad',
       description: 'Official Privacy Policy of Ion Recon Industries. Learn how we handle lead information, quotation requests, cookies, and data security.',
-      canonical
+      canonical,
+      type: 'privacy'
     };
   }
+
   if (cleanPath === 'terms-and-conditions' || cleanPath === 'terms') {
     return {
       title: 'Terms & Conditions | Ion Recon Industries Ghaziabad',
       description: 'Official Terms & Conditions for machinery supply, installation, 12-month warranty, and sales policies by Ion Recon Industries.',
-      canonical
+      canonical,
+      type: 'terms'
+    };
+  }
+
+  // 2. Product Routes
+  const prod = productMap.get(cleanPath);
+  if (prod) {
+    return {
+      title: prod.metaTitle || `${prod.title} Manufacturer & Price | Ion Recon Ghaziabad`,
+      description: prod.seoContent || prod.shortDesc,
+      canonical,
+      productName: prod.title,
+      product: prod,
+      image: prod.image?.startsWith('http') ? prod.image : `https://ionrecon.online${prod.image || '/images/mineral_water_plant_40bpm.png'}`,
+      type: 'product'
+    };
+  }
+
+  // 3. Blog Article Routes
+  if (cleanPath.startsWith('blog/')) {
+    const slug = cleanPath.replace('blog/', '');
+    const post = blogMap.get(slug);
+    if (post) {
+      return {
+        title: `${post.title} | Ion Recon Knowledge Hub`,
+        description: post.summary,
+        canonical,
+        blogPost: post,
+        image: post.image?.startsWith('http') ? post.image : `https://ionrecon.online${post.image || '/images/mineral_water_plant_40bpm.png'}`,
+        type: 'blog-post'
+      };
+    }
+  }
+
+  // 4. Location Routes (State Hubs or Metro Cities)
+  if (cleanPath.startsWith('mineral-water-plant-manufacturer-in-')) {
+    const rawSlug = cleanPath.replace('mineral-water-plant-manufacturer-in-', '');
+    const stateObj = stateMap.get(rawSlug);
+
+    const locName = stateObj
+      ? stateObj.name
+      : rawSlug
+          .split('-')
+          .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+          .join(' ');
+
+    return {
+      title: `Turnkey Mineral Water Plant Manufacturer in ${locName} | Packaged Water Setup - Ion Recon`,
+      description: `Ion Recon: Turnkey packaged drinking water project & commercial RO plant manufacturer in ${locName}. Automatic bottling line setup & direct factory price quote.`,
+      canonical,
+      locName,
+      stateObj,
+      type: 'location'
     };
   }
 
@@ -380,10 +199,222 @@ function getPageMeta(urlStr) {
     .join(' ');
 
   return {
-    title: `${humanized} Manufacturer & Supplier | Ion Recon Ghaziabad`,
+    title: `${humanized} | Ion Recon Industries Ghaziabad`,
     description: `Ion Recon Ghaziabad - Manufacturer of ${humanized}, Mineral Water Plants & Bottling Machinery. Get free consultation and direct factory price quote.`,
-    canonical
+    canonical,
+    type: 'default'
   };
+}
+
+// Generate tailored semantic HTML body for <noscript>
+function generateNoscriptBody(meta, cleanPath) {
+  const navHtml = `      <header>
+        <nav aria-label="Main Navigation">
+          <a href="/">Ion Recon Home</a> | 
+          <a href="/40-bpm-mineral-water-plant/">40 BPM Mineral Water Plant</a> | 
+          <a href="/bottle-filling-machine/">RFC Monoblock Filling Machine</a> | 
+          <a href="/ss-ro-plant/">Industrial SS RO Plant</a> | 
+          <a href="/jar-filling-machine/">20L Jar Plant</a> | 
+          <a href="/pet-blowing-machine/">PET Blow Molding Machine</a> | 
+          <a href="/locations/">PAN India Setup Locations</a> | 
+          <a href="/blog/">Water Plant Setup Blog</a> | 
+          <a href="/roi-calculator/">Capacity &amp; Profit ROI Calculator</a>
+        </nav>
+      </header>`;
+
+  const footerHtml = `      <footer>
+        <nav aria-label="Trust and Legal Navigation">
+          <p>
+            <a href="/about-us/">About Ion Recon</a> | 
+            <a href="/contact-us/">Contact Us</a> | 
+            <a href="/privacy-policy/">Privacy Policy</a> | 
+            <a href="/terms-and-conditions/">Terms &amp; Conditions</a> | 
+            <a href="/faqs/">Frequently Asked Questions</a>
+          </p>
+          <p>&copy; 2026 Ion Recon Industries. All rights reserved. GST: 09AFSPV0532M1ZQ. Factory: Sahibabad Site 4, Ghaziabad.</p>
+        </nav>
+      </footer>`;
+
+  let mainHtml = '';
+
+  if (meta.type === 'product' && meta.product) {
+    const p = meta.product;
+    mainHtml = `      <main>
+        <article>
+          <nav aria-label="Breadcrumb">
+            <p><a href="/">Home</a> &raquo; <a href="/#products">Machinery Lines</a> &raquo; <strong>${p.title}</strong></p>
+          </nav>
+          <h1>${p.title} Manufacturer &amp; Setup Cost - Ion Recon</h1>
+          <p>
+            ${p.seoContent || p.shortDesc}
+          </p>
+
+          <figure>
+            <img src="${meta.image}" alt="${p.title} Turnkey Mineral Water Bottling Machinery" width="800" height="450" loading="lazy" />
+            <figcaption>${p.title} - Food Grade SS 304/316 Manufacturing by Ion Recon Industries, Ghaziabad</figcaption>
+          </figure>
+
+          <h2>Technical Specifications &amp; Operational Parameters</h2>
+          <table border="1" cellpadding="8" style="border-collapse: collapse; width: 100%; max-width: 750px; margin: 16px 0;">
+            <tbody>
+              <tr><th align="left">Rated Production Capacity</th><td>${p.capacityRange || 'Custom Capacity'}</td></tr>
+              <tr><th align="left">Automation Grade</th><td>${p.automation || 'Fully Automatic PLC Controlled'}</td></tr>
+              <tr><th align="left">Material of Construction</th><td>${p.material || 'SS 304 Food Grade (SS 316 Contact Parts)'}</td></tr>
+              <tr><th align="left">Power Requirement</th><td>${p.powerConsumption || '415V 3-Phase 50Hz'}</td></tr>
+              ${p.techSpecsTable?.fillingAccuracy ? `<tr><th align="left">Filling Accuracy</th><td>${p.techSpecsTable.fillingAccuracy}</td></tr>` : ''}
+              ${p.techSpecsTable?.bottleSizes ? `<tr><th align="left">Supported Bottle Sizes</th><td>${p.techSpecsTable.bottleSizes}</td></tr>` : ''}
+              ${p.techSpecsTable?.warranty ? `<tr><th align="left">Standard Warranty</th><td>${p.techSpecsTable.warranty}</td></tr>` : ''}
+            </tbody>
+          </table>
+
+          <h2>Key Engineering Features &amp; Machinery Highlights</h2>
+          <ul>
+            ${Array.isArray(p.keyFeatures) ? p.keyFeatures.map(f => `<li><strong>${f}</strong></li>`).join('\n            ') : `<li>Heavy-duty SS 304 stainless steel base and framework.</li><li>Advanced PLC with intuitive touch-screen HMI control.</li><li>BIS IS 14543 and FSSAI compliant design for packaged drinking water.</li>`}
+          </ul>
+
+          <h2>Factory Direct Supply &amp; Turnkey Commissioning</h2>
+          <p>
+            Ion Recon manufactures, tests, and commissions all machinery at our Sahibabad Industrial Area Site 4 facility in Ghaziabad. We provide complete factory floor layout planning, piping schematics, on-site installation, and operator training across India.
+          </p>
+
+          <h2>Direct Quotation &amp; Technical Consultation</h2>
+          <p>
+            For factory pricing, engineering drawings, and customized machinery quotes:<br />
+            <strong>Phone / WhatsApp:</strong> <a href="tel:+919810920792">+91 98109 20792</a> / <a href="tel:+918447509269">+91 84475 09269</a><br />
+            <strong>Email:</strong> <a href="mailto:info@ionrecon.online">info@ionrecon.online</a><br />
+            <strong>Factory Address:</strong> 57/1/9, Sahibabad Industrial Area Site 4, Ghaziabad 201010, Uttar Pradesh, India.
+          </p>
+        </article>
+      </main>`;
+  } else if (meta.type === 'blog-post' && meta.blogPost) {
+    const post = meta.blogPost;
+    mainHtml = `      <main>
+        <article>
+          <nav aria-label="Breadcrumb">
+            <p><a href="/">Home</a> &raquo; <a href="/blog/">Knowledge Hub</a> &raquo; <strong>${post.title}</strong></p>
+          </nav>
+          <h1>${post.title}</h1>
+          <p><em>Published: ${post.date || 'September 2026'} | By: ${post.author || 'Ion Recon Engineering Team'} | ${post.readTime || '8 min read'}</em></p>
+          <p><strong>Summary:</strong> ${post.summary}</p>
+
+          <figure>
+            <img src="${meta.image}" alt="${post.title}" width="800" height="420" loading="lazy" />
+            <figcaption>${post.title} - Technical Guide by Ion Recon Industries</figcaption>
+          </figure>
+
+          ${Array.isArray(post.sections) ? post.sections.map(s => `
+          <h2>${s.heading}</h2>
+          <p>${s.content}</p>`).join('\n') : ''}
+
+          <h2>Consult Our Engineering Specialists</h2>
+          <p>
+            Planning a new mineral water plant or upgrading existing bottling capacity? Contact Ion Recon Industries for expert consultation, BIS layout design, and turnkey machinery pricing.<br />
+            <strong>Phone:</strong> <a href="tel:+919810920792">+91 98109 20792</a> | <strong>Email:</strong> <a href="mailto:info@ionrecon.online">info@ionrecon.online</a>
+          </p>
+        </article>
+      </main>`;
+  } else if (meta.type === 'location') {
+    const locName = meta.locName;
+    mainHtml = `      <main>
+        <article>
+          <nav aria-label="Breadcrumb">
+            <p><a href="/">Home</a> &raquo; <a href="/locations/">PAN India Setup</a> &raquo; <strong>${locName}</strong></p>
+          </nav>
+          <h1>Turnkey Mineral Water Bottling Plant Manufacturer in ${locName}</h1>
+          <p>
+            Looking to establish a profitable packaged drinking water business in <strong>${locName}</strong>? Ion Recon Industries delivers complete turnkey mineral water plants, automatic 3-in-1 RFC monoblock bottle filling machines, commercial SS RO water treatment systems, and PET blow molders with doorstep installation in ${locName}.
+          </p>
+
+          <figure>
+            <img src="/images/mineral_water_plant_40bpm.png" alt="Turnkey Mineral Water Plant Machinery in ${locName}" width="800" height="420" loading="lazy" />
+            <figcaption>Ion Recon Turnkey 40 BPM Bottling Plant Commissioning in ${locName}</figcaption>
+          </figure>
+
+          <h2>Complete Machinery &amp; Turnkey Solutions for ${locName}</h2>
+          <p>
+            Ground water chemistry across ${locName} varies with different Total Dissolved Solids (TDS), hardness, and mineral content. Ion Recon engineers custom multi-stage RO purification plants tailored specifically to local raw water sources, ensuring full compliance with BIS IS 14543 standards.
+          </p>
+
+          <h3>Available Production Lines &amp; Capacities:</h3>
+          <ul>
+            <li><a href="/40-bpm-mineral-water-plant/"><strong>40 BPM Turnkey Plant (2,400 Bottles/Hr):</strong></a> India's most popular commercial water bottling line.</li>
+            <li><a href="/60-bpm-mineral-water-plant/"><strong>60 BPM High-Speed Line (3,600 Bottles/Hr):</strong></a> Designed for growing commercial distribution networks.</li>
+            <li><a href="/bottle-filling-machine/"><strong>3-in-1 RFC Monoblock Machine:</strong></a> Automatic rinsing, filling, and capping for PET bottles.</li>
+            <li><a href="/ss-ro-plant/"><strong>Commercial Stainless Steel RO Plants:</strong></a> High recovery filtration from 1,000 LPH to 20,000 LPH.</li>
+            <li><a href="/jar-filling-machine/"><strong>20 Litre Water Jar Lines:</strong></a> Automatic washing, filling, and capping for commercial jar supply.</li>
+          </ul>
+
+          <h2>BIS IS 14543 Licensing &amp; Laboratory Assistance in ${locName}</h2>
+          <p>
+            Starting a packaged drinking water plant requires mandatory Bureau of Indian Standards (BIS ISI) certification and FSSAI approval. Ion Recon provides turnkey project consultancy in ${locName}, including factory floor drawings, cleanroom partitions, stainless steel piping, and in-house chemical &amp; microbiological testing laboratory equipment.
+          </p>
+
+          <h2>Request Free Project Estimation &amp; Quotation</h2>
+          <p>
+            Connect directly with Ion Recon factory engineers for site inspection, capacity sizing, and factory-direct pricing for your project in ${locName}:<br />
+            <strong>Direct Sales:</strong> <a href="tel:+919810920792">+91 98109 20792</a> / <a href="tel:+918447509269">+91 84475 09269</a><br />
+            <strong>Email:</strong> <a href="mailto:info@ionrecon.online">info@ionrecon.online</a><br />
+            <strong>Headquarters &amp; Factory:</strong> 57/1/9, Sahibabad Industrial Area Site 4, Ghaziabad 201010, Uttar Pradesh.
+          </p>
+        </article>
+      </main>`;
+  } else if (meta.type === 'blog-index') {
+    mainHtml = `      <main>
+        <article>
+          <nav aria-label="Breadcrumb">
+            <p><a href="/">Home</a> &raquo; <strong>Water Plant Setup Knowledge Hub &amp; Blog</strong></p>
+          </nav>
+          <h1>Mineral Water Bottling Plant Knowledge Hub &amp; Setup Blog - Ion Recon</h1>
+          <p>
+            Welcome to the Ion Recon technical knowledge center. Explore in-depth engineering blueprints, capital cost estimations, civil floor plan designs, BIS IS 14543 regulatory compliance guides, and machinery maintenance tutorials authored by our experienced plant engineers.
+          </p>
+
+          <h2>Featured Technical Blueprints &amp; Project Guides</h2>
+          <ul>
+            ${Array.isArray(BLOG_POSTS) ? BLOG_POSTS.slice(0, 15).map(b => `
+            <li>
+              <a href="/blog/${b.slug || b.id}/"><strong>${b.title}</strong></a>
+              <p>${b.summary}</p>
+            </li>`).join('') : ''}
+          </ul>
+
+          <h2>Have Specific Engineering Questions?</h2>
+          <p>
+            Our project engineering division in Sahibabad, Ghaziabad is ready to help you plan your packaged drinking water venture.<br />
+            <strong>Contact:</strong> <a href="tel:+919810920792">+91 98109 20792</a> | <a href="mailto:info@ionrecon.online">info@ionrecon.online</a>
+          </p>
+        </article>
+      </main>`;
+  } else {
+    // Other pages: keep clean, semantic fallback
+    mainHtml = `      <main>
+        <article>
+          <nav aria-label="Breadcrumb">
+            <p><a href="/">Home</a> &raquo; <strong>${meta.title.split('|')[0].trim()}</strong></p>
+          </nav>
+          <h1>${meta.title.split('|')[0].trim()}</h1>
+          <p>${meta.description}</p>
+          
+          <h2>Turnkey Packaged Drinking Water Solutions by Ion Recon</h2>
+          <p>
+            Ion Recon Industries is a premier manufacturer and supplier of mineral water bottling machinery, commercial reverse osmosis systems, and automatic packaging lines based in Sahibabad Industrial Area Site 4, Ghaziabad, Uttar Pradesh.
+          </p>
+
+          <h2>Factory Contact Information</h2>
+          <p>
+            <strong>Factory Address:</strong> 57/1/9, Sahibabad Industrial Area Site 4, Ghaziabad 201010, Uttar Pradesh, India.<br />
+            <strong>Phone:</strong> <a href="tel:+919810920792">+91 98109 20792</a> | <strong>Email:</strong> <a href="mailto:info@ionrecon.online">info@ionrecon.online</a>
+          </p>
+        </article>
+      </main>`;
+  }
+
+  return `    <noscript>
+      <!-- Pre-rendered Static HTML Fallback for SEO Crawlers & Non-JS Bots -->
+${navHtml}
+${mainHtml}
+${footerHtml}
+    </noscript>`;
 }
 
 let count = 0;
@@ -396,7 +427,7 @@ urls.forEach((fullUrl) => {
 
   const meta = getPageMeta(fullUrl);
 
-  // Replace Title & Description & Canonical Tags in HTML Template
+  // Start with template
   let pageHtml = template;
 
   // Title tag replacement
@@ -457,7 +488,7 @@ urls.forEach((fullUrl) => {
     );
   }
 
-  // Inject or replace canonical link tag before </head>
+  // Canonical link tag replacement
   if (pageHtml.includes('<link rel="canonical"')) {
     pageHtml = pageHtml.replace(
       /<link rel="canonical" href=".*?" \/>/s,
@@ -470,12 +501,80 @@ urls.forEach((fullUrl) => {
     );
   }
 
-  // Inject Product Schema JSON-LD if productName is present
-  if (meta.productName) {
+  // Build BreadcrumbList Schema JSON-LD
+  let breadcrumbItems = [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ionrecon.online/"
+    }
+  ];
+
+  if (meta.type === 'product' && meta.product) {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Machinery Lines",
+      "item": "https://ionrecon.online/#products"
+    });
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      "position": 3,
+      "name": meta.product.title,
+      "item": meta.canonical
+    });
+  } else if (meta.type === 'blog-post' && meta.blogPost) {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Knowledge Hub",
+      "item": "https://ionrecon.online/blog/"
+    });
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      "position": 3,
+      "name": meta.blogPost.title,
+      "item": meta.canonical
+    });
+  } else if (meta.type === 'location') {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Locations Directory",
+      "item": "https://ionrecon.online/locations/"
+    });
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      "position": 3,
+      "name": meta.locName,
+      "item": meta.canonical
+    });
+  } else {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      "position": 2,
+      "name": meta.title.split('|')[0].trim(),
+      "item": meta.canonical
+    });
+  }
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbItems
+  };
+
+  const breadcrumbScript = `\n  <script type="application/ld+json">\n  ${JSON.stringify(breadcrumbSchema, null, 2)}\n  </script>`;
+  pageHtml = pageHtml.replace('</head>', `${breadcrumbScript}\n  </head>`);
+
+  // Inject Product Schema JSON-LD if product is present
+  if (meta.type === 'product' && meta.product) {
+    const prod = meta.product;
     const productSchema = {
       "@context": "https://schema.org/",
       "@type": "Product",
-      "name": meta.productName,
+      "name": prod.title,
       "image": meta.image || "https://ionrecon.online/images/mineral_water_plant_40bpm.png",
       "description": meta.description,
       "sku": `ION-${cleanPath.toUpperCase()}`,
@@ -507,7 +606,7 @@ urls.forEach((fullUrl) => {
                cleanPath === 'bopp-labeling-machine' ? "850000.00" :
                cleanPath === 'csd-project' ? "4200000.00" : "2500000.00",
         "priceValidUntil": "2027-12-31",
-        "url": `https://ionrecon.online/${cleanPath}`,
+        "url": meta.canonical,
         "itemCondition": "https://schema.org/NewCondition",
         "availability": "https://schema.org/InStock",
         "seller": {
@@ -553,7 +652,11 @@ urls.forEach((fullUrl) => {
     pageHtml = pageHtml.replace('</head>', `${schemaScript}\n  </head>`);
   }
 
-  // Create directory structure in dist/<cleanPath>/index.html
+  // Replace <noscript> with tailored semantic HTML body (Fixes 0 <img> and 100% duplicate raw HTML!)
+  const customNoscript = generateNoscriptBody(meta, cleanPath);
+  pageHtml = pageHtml.replace(/<noscript>[\s\S]*?<\/noscript>/, customNoscript);
+
+  // Write to dist/<cleanPath>/index.html
   const targetDir = path.join(distDir, cleanPath);
   fs.mkdirSync(targetDir, { recursive: true });
   fs.writeFileSync(path.join(targetDir, 'index.html'), pageHtml, 'utf8');
@@ -561,4 +664,4 @@ urls.forEach((fullUrl) => {
   count++;
 });
 
-console.log(`✅ Pre-rendered static HTML entrypoints generated for ${count} URLs in dist/!`);
+console.log(`Pre-rendered static HTML with native <img> & unique content generated for ${count} URLs in dist/!`);

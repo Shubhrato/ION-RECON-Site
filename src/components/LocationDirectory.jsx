@@ -17,13 +17,13 @@ export default function LocationDirectory({ onSelectLocation, theme }) {
       <Helmet>
         <title>PAN India Mineral Water Plant Setup Locations | Ion Recon</title>
         <meta name="description" content="Explore mineral water plant manufacturing and turnkey setup availability across Uttar Pradesh, Delhi NCR, Rajasthan, Madhya Pradesh, Bihar, Punjab, Gujarat & PAN India by Ion Recon." />
-        <link rel="canonical" href="https://ionrecon.online/locations" />
+        <link rel="canonical" href="https://ionrecon.online/locations/" />
 
         {/* OpenGraph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="PAN India Mineral Water Plant Setup Locations | Ion Recon" />
         <meta property="og:description" content="Explore mineral water plant manufacturing and turnkey setup availability across Uttar Pradesh, Delhi NCR, Rajasthan, Madhya Pradesh, Bihar, Punjab, Gujarat & PAN India by Ion Recon." />
-        <meta property="og:url" content="https://ionrecon.online/locations" />
+        <meta property="og:url" content="https://ionrecon.online/locations/" />
         <meta property="og:image" content="https://ionrecon.online/images/mineral_water_plant_40bpm.png" />
 
         {/* Twitter */}

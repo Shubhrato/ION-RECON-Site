@@ -33,13 +33,13 @@ export default function FAQSection({ onOpenQuoteModal, trackEvent, theme }) {
       <Helmet>
         <title>Mineral Water Plant Setup FAQs & Machinery Licensing Guide | Ion Recon</title>
         <meta name="description" content="Get expert answers to frequently asked questions regarding packaged drinking water plant setup cost, BIS IS 14543 approval, space & power requirements, and machinery selection." />
-        <link rel="canonical" href="https://ionrecon.online/faqs" />
+        <link rel="canonical" href="https://ionrecon.online/faqs/" />
 
         {/* OpenGraph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Mineral Water Plant Setup FAQs & Machinery Licensing Guide | Ion Recon" />
         <meta property="og:description" content="Get expert answers to frequently asked questions regarding packaged drinking water plant setup cost, BIS IS 14543 approval, space & power requirements, and machinery selection." />
-        <meta property="og:url" content="https://ionrecon.online/faqs" />
+        <meta property="og:url" content="https://ionrecon.online/faqs/" />
         <meta property="og:image" content="https://ionrecon.online/images/mineral_water_plant_40bpm.png" />
 
         {/* Twitter */}

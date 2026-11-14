@@ -14,13 +14,13 @@ export default function ContactUsPage({ trackEvent, theme, onFormSuccess }) {
         <title>Contact Ion Recon Industries | Factory Address & Sales Phone Ghaziabad</title>
         <meta name="description" content="Contact Ion Recon Industries in Sahibabad Industrial Area Site 4, Ghaziabad. Phone: +91 98109 20792. Get free quotation, machinery catalog & factory location map directions." />
         <meta name="keywords" content="Contact Ion Recon, Ion Recon Phone Number, Ion Recon Address, Ion Recon Ghaziabad Factory, Mineral Water Plant Quote" />
-        <link rel="canonical" href="https://ionrecon.online/contact-us" />
+        <link rel="canonical" href="https://ionrecon.online/contact-us/" />
 
         {/* OpenGraph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Contact Ion Recon Industries | Factory Address & Sales Phone Ghaziabad" />
         <meta property="og:description" content="Contact Ion Recon Industries in Sahibabad Industrial Area Site 4, Ghaziabad. Phone: +91 98109 20792. Get free quotation & factory directions." />
-        <meta property="og:url" content="https://ionrecon.online/contact-us" />
+        <meta property="og:url" content="https://ionrecon.online/contact-us/" />
         <meta property="og:image" content="https://ionrecon.online/images/mineral_water_plant_40bpm.png" />
 
         {/* Twitter */}

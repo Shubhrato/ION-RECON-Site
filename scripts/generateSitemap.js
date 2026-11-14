@@ -1,4 +1,4 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -14,7 +14,7 @@ const sitemapPath = path.join(rootDir, 'public', 'sitemap.xml');
 const DOMAIN = 'https://ionrecon.online';
 const TODAY = new Date().toISOString().split('T')[0];
 
-console.log('Generating fresh sitemap.xml for Ion Recon...');
+console.log('Generating fresh, standardized sitemap.xml for Ion Recon (with trailing slashes)...');
 
 const urls = [];
 
@@ -32,7 +32,7 @@ const staticPages = [
 ];
 
 staticPages.forEach(page => {
-  const loc = page.path ? `${DOMAIN}/${page.path}` : `${DOMAIN}/`;
+  const loc = page.path ? `${DOMAIN}/${page.path}/` : `${DOMAIN}/`;
   urls.push({ loc, lastmod: TODAY, changefreq: page.changefreq, priority: page.priority });
 });
 
@@ -41,7 +41,7 @@ if (PLANT_DATA && Array.isArray(PLANT_DATA.products)) {
   PLANT_DATA.products.forEach(prod => {
     if (prod.id) {
       urls.push({
-        loc: `${DOMAIN}/${prod.id}`,
+        loc: `${DOMAIN}/${prod.id}/`,
         lastmod: TODAY,
         changefreq: 'weekly',
         priority: '0.9'
@@ -56,7 +56,7 @@ if (Array.isArray(BLOG_POSTS)) {
     const slug = post.slug || post.id;
     if (slug) {
       urls.push({
-        loc: `${DOMAIN}/blog/${slug}`,
+        loc: `${DOMAIN}/blog/${slug}/`,
         lastmod: TODAY,
         changefreq: 'weekly',
         priority: '0.85'
@@ -65,17 +65,47 @@ if (Array.isArray(BLOG_POSTS)) {
   });
 }
 
-// 4. Programmatic Location Pages from locationData.js
+// 4. Curated High-Value Regional & State Hubs (Consolidating thin doorway pages)
+// As recommended by SEO Audit to eliminate Doorway Page risks:
+const PRIORITY_METRO_CITIES = new Set([
+  'delhi', 'new-delhi', 'noida', 'greater-noida', 'gurugram', 'faridabad', 'ghaziabad',
+  'lucknow', 'kanpur', 'agra', 'varanasi', 'prayagraj', 'meerut',
+  'jaipur', 'jodhpur', 'kota',
+  'patna', 'gaya', 'muzaffarpur',
+  'bhopal', 'indore', 'gwalior',
+  'ahmedabad', 'surat', 'vadodara', 'rajkot',
+  'mumbai', 'pune', 'nagpur', 'nashik',
+  'kolkata', 'howrah', 'siliguri',
+  'bhubaneswar', 'cuttack',
+  'raipur', 'bhilai',
+  'ludhiana', 'amritsar', 'jalandhar',
+  'dehradun', 'haridwar',
+  'guwahati'
+]);
+
 if (Array.isArray(LOCATION_STATES)) {
-  const citySet = new Set();
+  // A. Add All 16 State / Regional Hub Pages (High Value Hubs)
+  LOCATION_STATES.forEach(st => {
+    if (st.id) {
+      urls.push({
+        loc: `${DOMAIN}/mineral-water-plant-manufacturer-in-${st.id}/`,
+        lastmod: TODAY,
+        changefreq: 'weekly',
+        priority: '0.9'
+      });
+    }
+  });
+
+  // B. Add High-Intent Metro & Tier-1 Industrial Cities Only
+  const addedCities = new Set();
   LOCATION_STATES.forEach(st => {
     if (Array.isArray(st.cities)) {
       st.cities.forEach(city => {
         const slug = city.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-        if (slug && !citySet.has(slug)) {
-          citySet.add(slug);
+        if (PRIORITY_METRO_CITIES.has(slug) && !addedCities.has(slug)) {
+          addedCities.add(slug);
           urls.push({
-            loc: `${DOMAIN}/mineral-water-plant-manufacturer-in-${slug}`,
+            loc: `${DOMAIN}/mineral-water-plant-manufacturer-in-${slug}/`,
             lastmod: TODAY,
             changefreq: 'weekly',
             priority: '0.85'
@@ -104,8 +134,7 @@ xml += `</urlset>\n`;
 // Delete old sitemap if exists and write fresh
 if (fs.existsSync(sitemapPath)) {
   fs.unlinkSync(sitemapPath);
-  console.log('Old sitemap.xml deleted.');
 }
 
 fs.writeFileSync(sitemapPath, xml, 'utf8');
-console.log(`✅ Fresh sitemap.xml generated with ${urls.length} URLs!`);
+console.log(`Fresh sitemap.xml generated with ${urls.length} high-authority URLs (all trailing slashes)!`);

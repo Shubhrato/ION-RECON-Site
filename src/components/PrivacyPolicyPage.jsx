@@ -11,13 +11,13 @@ export default function PrivacyPolicyPage({ theme }) {
       <Helmet>
         <title>Privacy Policy | Ion Recon Industries Ghaziabad</title>
         <meta name="description" content="Official Privacy Policy of Ion Recon Industries. Learn how we handle lead information, quotation requests, cookies, and data security." />
-        <link rel="canonical" href="https://ionrecon.online/privacy-policy" />
+        <link rel="canonical" href="https://ionrecon.online/privacy-policy/" />
 
         {/* OpenGraph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Privacy Policy | Ion Recon Industries Ghaziabad" />
         <meta property="og:description" content="Official Privacy Policy of Ion Recon Industries." />
-        <meta property="og:url" content="https://ionrecon.online/privacy-policy" />
+        <meta property="og:url" content="https://ionrecon.online/privacy-policy/" />
         <meta property="og:image" content="https://ionrecon.online/images/mineral_water_plant_40bpm.png" />
 
         {/* Twitter */}

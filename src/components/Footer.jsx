@@ -40,52 +40,52 @@ export default function Footer({ setCurrentTab, onOpenQuoteModal, theme }) {
             <h3 className="text-sm font-bold text-white tracking-wide">Turnkey Solutions</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/40-bpm-mineral-water-plant" onClick={(e) => { e.preventDefault(); setCurrentTab('40-bpm-mineral-water-plant'); }} className="hover:text-cyan-400 transition-colors">
+                <a href="/40-bpm-mineral-water-plant/" onClick={(e) => { e.preventDefault(); setCurrentTab('40-bpm-mineral-water-plant'); }} className="hover:text-cyan-400 transition-colors">
                   40 BPM Mineral Water Plant (Bestseller)
                 </a>
               </li>
               <li>
-                <a href="/bottle-filling-machine" onClick={(e) => { e.preventDefault(); setCurrentTab('bottle-filling-machine'); }} className="hover:text-cyan-400 transition-colors">
+                <a href="/bottle-filling-machine/" onClick={(e) => { e.preventDefault(); setCurrentTab('bottle-filling-machine'); }} className="hover:text-cyan-400 transition-colors">
                   RFC Monoblock Filling Machine
                 </a>
               </li>
               <li>
-                <a href="/ss-ro-plant" onClick={(e) => { e.preventDefault(); setCurrentTab('ss-ro-plant'); }} className="hover:text-cyan-400 transition-colors">
+                <a href="/ss-ro-plant/" onClick={(e) => { e.preventDefault(); setCurrentTab('ss-ro-plant'); }} className="hover:text-cyan-400 transition-colors">
                   Industrial SS RO Water Plant
                 </a>
               </li>
               <li>
-                <a href="/jar-filling-machine" onClick={(e) => { e.preventDefault(); setCurrentTab('jar-filling-machine'); }} className="hover:text-cyan-400 transition-colors">
+                <a href="/jar-filling-machine/" onClick={(e) => { e.preventDefault(); setCurrentTab('jar-filling-machine'); }} className="hover:text-cyan-400 transition-colors">
                   Automatic 20 Litre Jar Plant
                 </a>
               </li>
               <li>
-                <a href="/pet-blowing-machine" onClick={(e) => { e.preventDefault(); setCurrentTab('pet-blowing-machine'); }} className="hover:text-cyan-400 transition-colors">
+                <a href="/pet-blowing-machine/" onClick={(e) => { e.preventDefault(); setCurrentTab('pet-blowing-machine'); }} className="hover:text-cyan-400 transition-colors">
                   PET Blow Molding Machine
                 </a>
               </li>
               <li>
-                <a href="/about-us" onClick={(e) => { e.preventDefault(); setCurrentTab('about-us'); }} className="hover:text-cyan-400 font-semibold transition-colors">
+                <a href="/about-us/" onClick={(e) => { e.preventDefault(); setCurrentTab('about-us'); }} className="hover:text-cyan-400 font-semibold transition-colors">
                   About Ion Recon
                 </a>
               </li>
               <li>
-                <a href="/contact-us" onClick={(e) => { e.preventDefault(); setCurrentTab('contact-us'); }} className="hover:text-cyan-400 font-semibold transition-colors">
+                <a href="/contact-us/" onClick={(e) => { e.preventDefault(); setCurrentTab('contact-us'); }} className="hover:text-cyan-400 font-semibold transition-colors">
                   Contact Factory & Sales
                 </a>
               </li>
               <li>
-                <a href="/blog" onClick={(e) => { e.preventDefault(); setCurrentTab('blog'); }} className="hover:text-cyan-400 font-bold text-cyan-400 transition-colors">
+                <a href="/blog/" onClick={(e) => { e.preventDefault(); setCurrentTab('blog'); }} className="hover:text-cyan-400 font-bold text-cyan-400 transition-colors">
                   Blog & Industrial Setup Guides
                 </a>
               </li>
               <li>
-                <a href="/roi-calculator" onClick={(e) => { e.preventDefault(); setCurrentTab('roi-calculator'); }} className="hover:text-cyan-400 transition-colors">
+                <a href="/roi-calculator/" onClick={(e) => { e.preventDefault(); setCurrentTab('roi-calculator'); }} className="hover:text-cyan-400 transition-colors">
                   Plant Capacity & ROI Simulator
                 </a>
               </li>
               <li>
-                <a href="/faqs" onClick={(e) => { e.preventDefault(); setCurrentTab('faqs'); }} className="hover:text-cyan-400 transition-colors">
+                <a href="/faqs/" onClick={(e) => { e.preventDefault(); setCurrentTab('faqs'); }} className="hover:text-cyan-400 transition-colors">
                   Frequently Asked Questions (FAQs)
                 </a>
               </li>
@@ -156,7 +156,7 @@ export default function Footer({ setCurrentTab, onOpenQuoteModal, theme }) {
               ].map((loc, i) => (
                 <a 
                   key={i} 
-                  href={`/${loc.slug}`}
+                  href={`/${loc.slug}/`}
                   onClick={(e) => { e.preventDefault(); setCurrentTab(loc.slug); }}
                   className="text-slate-400 hover:text-cyan-400 transition-colors"
                 >
@@ -171,13 +171,13 @@ export default function Footer({ setCurrentTab, onOpenQuoteModal, theme }) {
         <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center text-slate-400 text-xs gap-4">
           <p>© 2026 {PLANT_DATA.company.fullName}. All Rights Reserved. Turnkey Mineral Water Plants & Bottling Machinery.</p>
           <div className="flex space-x-4">
-            <a href="/about-us" onClick={(e) => { e.preventDefault(); setCurrentTab('about-us'); }} className="hover:text-cyan-400 transition-colors">About Us</a>
+            <a href="/about-us/" onClick={(e) => { e.preventDefault(); setCurrentTab('about-us'); }} className="hover:text-cyan-400 transition-colors">About Us</a>
             <span>•</span>
-            <a href="/contact-us" onClick={(e) => { e.preventDefault(); setCurrentTab('contact-us'); }} className="hover:text-cyan-400 transition-colors">Contact Us</a>
+            <a href="/contact-us/" onClick={(e) => { e.preventDefault(); setCurrentTab('contact-us'); }} className="hover:text-cyan-400 transition-colors">Contact Us</a>
             <span>•</span>
-            <a href="/privacy-policy" onClick={(e) => { e.preventDefault(); setCurrentTab('privacy-policy'); }} className="hover:text-cyan-400 transition-colors">Privacy Policy</a>
+            <a href="/privacy-policy/" onClick={(e) => { e.preventDefault(); setCurrentTab('privacy-policy'); }} className="hover:text-cyan-400 transition-colors">Privacy Policy</a>
             <span>•</span>
-            <a href="/terms-and-conditions" onClick={(e) => { e.preventDefault(); setCurrentTab('terms-and-conditions'); }} className="hover:text-cyan-400 transition-colors">Terms & Conditions</a>
+            <a href="/terms-and-conditions/" onClick={(e) => { e.preventDefault(); setCurrentTab('terms-and-conditions'); }} className="hover:text-cyan-400 transition-colors">Terms & Conditions</a>
             <span>•</span>
             <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">XML Sitemap</a>
           </div>
