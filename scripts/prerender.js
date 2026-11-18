@@ -206,8 +206,8 @@ function getPageMeta(urlStr) {
   };
 }
 
-// Generate tailored semantic HTML body for <noscript>
-function generateNoscriptBody(meta, cleanPath) {
+// Generate tailored semantic HTML body for primary DOM (<div id="root">)
+function generateStaticBody(meta, cleanPath) {
   const navHtml = `      <header>
         <nav aria-label="Main Navigation">
           <a href="/">Ion Recon Home</a> | 
@@ -409,12 +409,7 @@ function generateNoscriptBody(meta, cleanPath) {
       </main>`;
   }
 
-  return `    <noscript>
-      <!-- Pre-rendered Static HTML Fallback for SEO Crawlers & Non-JS Bots -->
-${navHtml}
-${mainHtml}
-${footerHtml}
-    </noscript>`;
+  return `${navHtml}\n${mainHtml}\n${footerHtml}`;
 }
 
 let count = 0;
@@ -652,9 +647,11 @@ urls.forEach((fullUrl) => {
     pageHtml = pageHtml.replace('</head>', `${schemaScript}\n  </head>`);
   }
 
-  // Replace <noscript> with tailored semantic HTML body (Fixes 0 <img> and 100% duplicate raw HTML!)
-  const customNoscript = generateNoscriptBody(meta, cleanPath);
-  pageHtml = pageHtml.replace(/<noscript>[\s\S]*?<\/noscript>/, customNoscript);
+  // Replace <div id="root">...</div> with tailored semantic HTML body for 100% Googlebot visibility
+  const staticBody = generateStaticBody(meta, cleanPath);
+  pageHtml = pageHtml.replace(/<div id="root">[\s\S]*?<\/div>/, `<div id="root">\n${staticBody}\n    </div>`);
+  // Remove any legacy noscript tags so there is zero hidden-text penalty
+  pageHtml = pageHtml.replace(/<noscript>[\s\S]*?<\/noscript>\s*/gi, '');
 
   // Write to dist/<cleanPath>/index.html
   const targetDir = path.join(distDir, cleanPath);
